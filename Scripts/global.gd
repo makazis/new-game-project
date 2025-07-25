@@ -28,7 +28,7 @@ func add_item_to_inv(added_item):
 	var item_is_in_inventory=false
 	for iter_item in Player_Inventory:
 		if iter_item.ID==added_item.ID:
-			iter_item.item_count+=added_item.item_count
+			iter_item.count+=added_item.count
 			item_is_in_inventory=true
 	if not item_is_in_inventory:
 		Player_Inventory.append(added_item)

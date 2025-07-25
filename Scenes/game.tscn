@@ -53,9 +53,6 @@ anchor_top = 1.0
 anchor_right = 0.5
 grow_vertical = 0
 
-[node name="Inventory" parent="CanvasLayer" instance=ExtResource("5_i6g32")]
-visible = false
-
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("4_1l0tm")
 
