@@ -6,7 +6,7 @@ func update_item(new_item):
 	item=new_item
 	if item==null:
 		return
-	texture_normal=item.item_texture
+	texture_normal=load(item.item_texture)
 	label.text=str(item.item_count)
 
 func clear_item():

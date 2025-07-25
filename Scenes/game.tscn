@@ -52,6 +52,7 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 grow_vertical = 0
+script = null
 
 [node name="Inventory" parent="CanvasLayer" instance=ExtResource("5_i6g32")]
 visible = false

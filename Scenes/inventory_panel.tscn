@@ -10,6 +10,7 @@ offset_top = -2.0
 offset_right = 61.0
 offset_bottom = 62.0
 size_flags_vertical = 12
+mouse_filter = 1
 script = ExtResource("1_as1yr")
 
 [node name="TextureButton" parent="." instance=ExtResource("1_4ij40")]
