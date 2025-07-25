@@ -1,12 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://blepxop8lj8vt"]
+[gd_scene load_steps=3 format=3 uid="uid://dtadk33ruesdt"]
 
-<<<<<<< HEAD:Item_holder.tscn
-[ext_resource type="Texture2D" uid="uid://4pii5pr8840a" path="res://Tiles/collector.png" id="1_nljdm"]
-[ext_resource type="Script" uid="uid://drpww8l23nlo" path="res://item_holder.gd" id="2_x40c7"]
-=======
-[ext_resource type="Texture2D" uid="uid://4pii5pr8840a" path="res://Assets/collector.png" id="1_nljdm"]
-[ext_resource type="Script" uid="uid://drpww8l23nlo" path="res://Scripts/item_holder.gd" id="2_x40c7"]
->>>>>>> 3b263237ecc527c7d1367d4db410cb2dedf9d33d:Scenes/Item_holder.tscn
+[ext_resource type="Texture2D" uid="uid://0q5nx8sc5i1u" path="res://Tiles/collector.png" id="1_nljdm"]
+[ext_resource type="Script" path="res://item_holder.gd" id="2_x40c7"]
 
 [node name="TextureButton" type="TextureButton"]
 texture_filter = 1

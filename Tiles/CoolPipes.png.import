@@ -2,25 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqs4st6lk6lcp"
-<<<<<<<< HEAD:Tiles/CoolPipes.png.import
+uid="uid://cnmkllsbmnkjx"
 path="res://.godot/imported/CoolPipes.png-c294e0bfa3d93e2d64c836c1a865d06b.ctex"
-========
-path="res://.godot/imported/CoolPipes.png-057ea6950ac47c49569b1d9f0b5e8b23.ctex"
->>>>>>>> 3b263237ecc527c7d1367d4db410cb2dedf9d33d:Assets/CoolPipes.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-<<<<<<<< HEAD:Tiles/CoolPipes.png.import
 source_file="res://Tiles/CoolPipes.png"
 dest_files=["res://.godot/imported/CoolPipes.png-c294e0bfa3d93e2d64c836c1a865d06b.ctex"]
-========
-source_file="res://Assets/CoolPipes.png"
-dest_files=["res://.godot/imported/CoolPipes.png-057ea6950ac47c49569b1d9f0b5e8b23.ctex"]
->>>>>>>> 3b263237ecc527c7d1367d4db410cb2dedf9d33d:Assets/CoolPipes.png.import
 
 [params]
 
