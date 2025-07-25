@@ -43,14 +43,14 @@ texture = ExtResource("3_i6g32")
 expand_mode = 1
 stretch_mode = 1
 
-[node name="Camera2D" type="Camera2D" parent="."]
-script = ExtResource("4_1l0tm")
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="GUI" parent="Camera2D" instance=ExtResource("5_wowpa")]
+[node name="GUI" parent="CanvasLayer" instance=ExtResource("5_wowpa")]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
-offset_top = 160.0
-offset_bottom = 160.0
 grow_vertical = 0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("4_1l0tm")
