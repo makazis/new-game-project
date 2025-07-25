@@ -19,7 +19,7 @@ class building:
 	
 	func rotate(in_direction) -> void:
 		direction = in_direction % 4
-		print(direction)
+		# print(direction)
 		#Don't question this line it is perfect and shouldn't be tuched (mkaestexture right dir)
 		object.get_node("Sprite2D").region_rect = Rect2(direction*16,object.get_node("Sprite2D").region_rect.position.y,object.get_node("Sprite2D").region_rect.size.x,object.get_node("Sprite2D").region_rect.size.y)
 
