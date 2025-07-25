@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dtadk33ruesdt"]
 
-[ext_resource type="Texture2D" uid="uid://0q5nx8sc5i1u" path="res://Tiles/collector.png" id="1_fm414"]
-[ext_resource type="Script" path="res://item_holder.gd" id="2_h1uhs"]
+[ext_resource type="Texture2D" uid="uid://bbp3ubh6k4c26" path="res://Assets/collector.png" id="1_nljdm"]
+[ext_resource type="Script" uid="uid://drpww8l23nlo" path="res://Scripts/item_holder.gd" id="2_x40c7"]
 
 [node name="TextureButton" type="TextureButton"]
 texture_filter = 1
