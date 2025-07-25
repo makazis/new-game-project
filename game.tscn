@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://qrfenrabb2fy"]
+[gd_scene load_steps=6 format=3 uid="uid://qrfenrabb2fy"]
 
 [ext_resource type="Texture2D" uid="uid://bg40u2tynrt06" path="res://tileset.png" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://lygfmdulrdk1" path="res://game.gd" id="1_e2o6t"]
+[ext_resource type="Texture2D" uid="uid://csm1s33jktb0m" path="res://background_grid.png" id="3_feb5d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e2o6t"]
 texture = ExtResource("1_80nbo")
@@ -28,10 +29,14 @@ script = ExtResource("1_e2o6t")
 texture_filter = 1
 tile_set = SubResource("TileSet_feb5d")
 format = 2
-layer_0/tile_data = PackedInt32Array(131071, 65536, 0, 65535, 65536, 0, -1, 65536, 0, -65537, 0, 2, -65538, 0, 0, -65539, 0, 0, -65540, 0, 0, -65541, 196608, 2, -5, 131072, 2, -4, 131072, 1, 196607, 196608, 1)
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-
-[node name="TileMapLayer" type="TileMapLayer" parent="ParallaxBackground/ParallaxLayer"]
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -2
+offset_left = -128.0
+offset_top = -80.0
+offset_right = 9472.0
+offset_bottom = 9520.0
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("3_feb5d")
+expand_mode = 1
+stretch_mode = 1
