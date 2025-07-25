@@ -1,11 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://qrfenrabb2fy"]
+[gd_scene load_steps=7 format=3 uid="uid://hy17qk6hroyd"]
 
+<<<<<<< HEAD:game.tscn
 [ext_resource type="Texture2D" uid="uid://bg40u2tynrt06" path="res://Tiles/tileset.png" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://lygfmdulrdk1" path="res://game.gd" id="1_e2o6t"]
 [ext_resource type="Texture2D" uid="uid://csm1s33jktb0m" path="res://Tiles/background_grid.png" id="3_feb5d"]
+=======
+[ext_resource type="Script" uid="uid://lygfmdulrdk1" path="res://Scripts/game.gd" id="1_3dryh"]
+[ext_resource type="Texture2D" uid="uid://bg40u2tynrt06" path="res://Assets/tileset.png" id="2_wowpa"]
+[ext_resource type="Texture2D" uid="uid://csm1s33jktb0m" path="res://Assets/background_grid.png" id="3_i6g32"]
+[ext_resource type="Script" uid="uid://d207fq8s0pwfs" path="res://Scripts/Movement.gd" id="4_1l0tm"]
+>>>>>>> 3b263237ecc527c7d1367d4db410cb2dedf9d33d:Scenes/game.tscn
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e2o6t"]
-texture = ExtResource("1_80nbo")
+texture = ExtResource("2_wowpa")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -23,7 +30,7 @@ texture = ExtResource("1_80nbo")
 sources/0 = SubResource("TileSetAtlasSource_e2o6t")
 
 [node name="Base" type="Node2D"]
-script = ExtResource("1_e2o6t")
+script = ExtResource("1_3dryh")
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
@@ -37,6 +44,9 @@ offset_top = -80.0
 offset_right = 9472.0
 offset_bottom = 9520.0
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("3_feb5d")
+texture = ExtResource("3_i6g32")
 expand_mode = 1
 stretch_mode = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("4_1l0tm")
