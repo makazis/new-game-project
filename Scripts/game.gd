@@ -7,3 +7,4 @@ func _input(event):
 		$CanvasLayer/GUI.visible=inv_open
 		$CanvasLayer/Inventory.visible=not inv_open
 		Global.drag_locked=not inv_open
+		$CanvasLayer/Inventory.demiload()
