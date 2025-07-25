@@ -1,6 +1,6 @@
 extends Node2D
 
-var inv_open=false
+var inv_open=true
 func _input(event):
 	if event.is_action_pressed("inventory"):
 		inv_open=not inv_open

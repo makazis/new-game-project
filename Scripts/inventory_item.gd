@@ -18,3 +18,4 @@ func assign(new_ID):
 	]
 	item_texture.load(item_data[new_ID]["Texture Path"])
 	item_name=item_data[new_ID]["Name"]
+	ID=new_ID
