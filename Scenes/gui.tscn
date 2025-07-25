@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dfh277eii8aw0"]
 
 [ext_resource type="PackedScene" uid="uid://cj2qoo17ml7cw" path="res://Scenes/inventory_panel.tscn" id="1_80edf"]
-[ext_resource type="Script" uid="uid://dq3dygxp04k61" path="res://Scripts/gui.gd" id="1_bm56d"]
+[ext_resource type="Script" uid="uid://dq3dygxp04k61" path="res://Scripts/InvScripts/gui.gd" id="1_bm56d"]
 
 [node name="GUI" type="Control"]
 layout_mode = 3
@@ -10,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_bm56d")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]

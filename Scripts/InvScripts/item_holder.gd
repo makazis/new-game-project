@@ -4,8 +4,11 @@ extends TextureButton
 var item
 func update_item(new_item):
 	item=new_item
-	texture_normal=item.item_texture
-	label.text=item.item_count
+	if item==null:
+		clear_item()
+		return
+	texture_normal=load(item.item_texture)
+	label.text=str(item.item_count)
 
 func clear_item():
 	item=null

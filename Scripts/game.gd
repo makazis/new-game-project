@@ -35,7 +35,7 @@ func _process(delta: float) -> void:
 		delay = 0
 		temp_building.rotate(temp_building.direction + 1)
 
-var inv_open=false
+var inv_open=true
 func _input(event):
 	if event.is_action_pressed("inventory"):
 		inv_open=not inv_open
@@ -43,3 +43,4 @@ func _input(event):
 		$CanvasLayer/Inventory.visible=not inv_open
 		Global.drag_locked=not inv_open
 		$CanvasLayer/Inventory.demiload()
+		$CanvasLayer/GUI.demiload()
