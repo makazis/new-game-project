@@ -1,4 +1,6 @@
-[gd_scene load_steps=0 format=3 uid="uid://dfh277eii8aw0"]
+[gd_scene load_steps=2 format=3 uid="uid://dfh277eii8aw0"]
+
+[ext_resource type="PackedScene" uid="uid://blql8ihg3cc6j" path="res://inventory_panel.tscn" id="1_80edf"]
 
 [node name="GUI" type="Control"]
 layout_mode = 3
@@ -7,3 +9,47 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -415.5
+offset_top = -64.0
+offset_right = 415.5
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Panel" parent="HBoxContainer" instance=ExtResource("1_80edf")]
+layout_mode = 2
+
+[node name="Panel2" parent="HBoxContainer" instance=ExtResource("1_80edf")]
+layout_mode = 2
+
+[node name="Panel3" parent="HBoxContainer" instance=ExtResource("1_80edf")]
+layout_mode = 2
+
+[node name="Panel4" parent="HBoxContainer" instance=ExtResource("1_80edf")]
+layout_mode = 2
+
+[node name="Panel5" parent="HBoxContainer" instance=ExtResource("1_80edf")]
+layout_mode = 2
+
+[node name="Panel6" parent="HBoxContainer" instance=ExtResource("1_80edf")]
+layout_mode = 2
+
+[node name="Panel7" parent="HBoxContainer" instance=ExtResource("1_80edf")]
+layout_mode = 2
+
+[node name="Panel8" parent="HBoxContainer" instance=ExtResource("1_80edf")]
+layout_mode = 2
+
+[node name="Panel9" parent="HBoxContainer" instance=ExtResource("1_80edf")]
+layout_mode = 2
+
+[node name="Panel10" parent="HBoxContainer" instance=ExtResource("1_80edf")]
+layout_mode = 2
