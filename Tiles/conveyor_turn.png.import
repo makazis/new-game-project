@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqs4st6lk6lcp"
-path="res://.godot/imported/CoolPipes.png-3af8001168922cae123281f7a3475f1f.ctex"
+uid="uid://dies1yf7bnnyu"
+path="res://.godot/imported/conveyor_turn.png-531c8a7a139eec2723662a1093a1414f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CoolPipes.png"
-dest_files=["res://.godot/imported/CoolPipes.png-3af8001168922cae123281f7a3475f1f.ctex"]
+source_file="res://Tiles/conveyor_turn.png"
+dest_files=["res://.godot/imported/conveyor_turn.png-531c8a7a139eec2723662a1093a1414f.ctex"]
 
 [params]
 
