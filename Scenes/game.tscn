@@ -1,11 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://hy17qk6hroyd"]
+[gd_scene load_steps=10 format=3 uid="uid://hy17qk6hroyd"]
 
 [ext_resource type="Script" uid="uid://lygfmdulrdk1" path="res://Scripts/game.gd" id="1_3dryh"]
 [ext_resource type="Texture2D" uid="uid://csvh0xos1tpk8" path="res://Tiles/tileset.png" id="2_wowpa"]
 [ext_resource type="Texture2D" uid="uid://beeo6en1qgiok" path="res://Tiles/background_grid.png" id="3_i6g32"]
 [ext_resource type="Script" uid="uid://d207fq8s0pwfs" path="res://Scripts/Movement.gd" id="4_1l0tm"]
-[ext_resource type="PackedScene" uid="uid://7usknxgjwvtg" path="res://Scenes/inventory.tscn" id="5_i6g32"]
-[ext_resource type="PackedScene" uid="uid://lc7hlv56k2uu" path="res://Scenes/nb_inventory.tscn" id="5_wowpa"]
+[ext_resource type="PackedScene" uid="uid://c40uy6qtedf84" path="res://Scenes/inventory.tscn" id="5_i6g32"]
+[ext_resource type="PackedScene" uid="uid://dfh277eii8aw0" path="res://Scenes/gui.tscn" id="5_wowpa"]
+[ext_resource type="PackedScene" uid="uid://bcxyspvl86xxn" path="res://Scenes/nb_inventory.tscn" id="7_1l0tm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e2o6t"]
 texture = ExtResource("2_wowpa")
@@ -46,13 +47,15 @@ stretch_mode = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="GUI" parent="CanvasLayer" instance=ExtResource("5_wowpa")]
+
 [node name="Inventory" parent="CanvasLayer" instance=ExtResource("5_i6g32")]
 visible = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("4_1l0tm")
 
-[node name="NbInventory" parent="Camera2D" instance=ExtResource("5_wowpa")]
+[node name="NbInventory" parent="Camera2D" instance=ExtResource("7_1l0tm")]
 offset_left = -257.51
 offset_top = 434.5
 offset_right = -257.51

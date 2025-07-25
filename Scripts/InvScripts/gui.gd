@@ -10,7 +10,7 @@ func _process(delta):
 				#print(panel.button.item.item_name)
 
 func demiload():
-	for i in Global.Player_hotbar:
+	for i in Global.Player_hotbar.size():
 		$HBoxContainer.get_child(i).button.clear_item()
 		if Global.Player_hotbar[i]==null:
 			continue
