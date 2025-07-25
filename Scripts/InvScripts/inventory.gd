@@ -1,7 +1,7 @@
 extends Control
 @onready var Tbutton=$TextureButton
 func demiload():
-	for i in Global.Player_Inventory:
+	for i in Global.Player_Inventory.size():
 		if Global.Player_Inventory[i]==null:
 			continue
 		if i<9:
@@ -11,7 +11,7 @@ func demiload():
 		else:
 			$"BoxContainer/Inv Row 3".get_child(i-18).button.update_item(Global.Player_Inventory[i])
 	
-	for i in Global.Player_hotbar:
+	for i in Global.Player_hotbar.size():
 		if Global.Player_hotbar[i]==null:
 			continue
 		$BoxContainer/Hotbar.get_child(i).button.update_item(Global.Player_hotbar[i])
