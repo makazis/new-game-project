@@ -13,6 +13,7 @@ func _input(event):
 
 func _process(delta: float) -> void:
 	zoom = Vector2.ONE * camera_zoom
+	scale = Vector2.ONE / camera_zoom
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		if just_pressed:
 			just_pressed = false
