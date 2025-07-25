@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dies1yf7bnnyu"
-path="res://.godot/imported/conveyor_turn.png-2f7b9bb8fdcfa96a8e5ada63655c40dd.ctex"
+uid="uid://bg40u2tynrt06"
+path="res://.godot/imported/tileset.png-06023f60f54ec986b75003a8d422612f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://conveyor_turn.png"
-dest_files=["res://.godot/imported/conveyor_turn.png-2f7b9bb8fdcfa96a8e5ada63655c40dd.ctex"]
+source_file="res://Assets/tileset.png"
+dest_files=["res://.godot/imported/tileset.png-06023f60f54ec986b75003a8d422612f.ctex"]
 
 [params]
 

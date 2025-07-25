@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqs4st6lk6lcp"
-path="res://.godot/imported/CoolPipes.png-3af8001168922cae123281f7a3475f1f.ctex"
+uid="uid://csm1s33jktb0m"
+path="res://.godot/imported/background_grid.png-799704ada370d2a212d17685c21d3774.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://CoolPipes.png"
-dest_files=["res://.godot/imported/CoolPipes.png-3af8001168922cae123281f7a3475f1f.ctex"]
+source_file="res://Assets/background_grid.png"
+dest_files=["res://.godot/imported/background_grid.png-799704ada370d2a212d17685c21d3774.ctex"]
 
 [params]
 
