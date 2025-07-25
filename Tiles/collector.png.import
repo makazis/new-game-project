@@ -2,25 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4pii5pr8840a"
-<<<<<<<< HEAD:Tiles/collector.png.import
+uid="uid://0skpgq1r3l4b"
 path="res://.godot/imported/collector.png-f5e38d29ac0913654b1ab90112c780c2.ctex"
-========
-path="res://.godot/imported/collector.png-e956a210c6589db4c34bd4bef94f63cc.ctex"
->>>>>>>> 3b263237ecc527c7d1367d4db410cb2dedf9d33d:Assets/collector.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-<<<<<<<< HEAD:Tiles/collector.png.import
 source_file="res://Tiles/collector.png"
 dest_files=["res://.godot/imported/collector.png-f5e38d29ac0913654b1ab90112c780c2.ctex"]
-========
-source_file="res://Assets/collector.png"
-dest_files=["res://.godot/imported/collector.png-e956a210c6589db4c34bd4bef94f63cc.ctex"]
->>>>>>>> 3b263237ecc527c7d1367d4db410cb2dedf9d33d:Assets/collector.png.import
 
 [params]
 

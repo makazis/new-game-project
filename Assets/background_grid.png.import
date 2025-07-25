@@ -2,25 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csm1s33jktb0m"
-<<<<<<<< HEAD:Tiles/background_grid.png.import
-path="res://.godot/imported/background_grid.png-079eae9d0a0a7d339d12b20de6d1dcd5.ctex"
-========
+uid="uid://dkr7flura767r"
 path="res://.godot/imported/background_grid.png-799704ada370d2a212d17685c21d3774.ctex"
->>>>>>>> 3b263237ecc527c7d1367d4db410cb2dedf9d33d:Assets/background_grid.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-<<<<<<<< HEAD:Tiles/background_grid.png.import
-source_file="res://Tiles/background_grid.png"
-dest_files=["res://.godot/imported/background_grid.png-079eae9d0a0a7d339d12b20de6d1dcd5.ctex"]
-========
 source_file="res://Assets/background_grid.png"
 dest_files=["res://.godot/imported/background_grid.png-799704ada370d2a212d17685c21d3774.ctex"]
->>>>>>>> 3b263237ecc527c7d1367d4db410cb2dedf9d33d:Assets/background_grid.png.import
 
 [params]
 
