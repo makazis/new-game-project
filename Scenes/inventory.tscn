@@ -1,0 +1,213 @@
+[gd_scene load_steps=3 format=3 uid="uid://c40uy6qtedf84"]
+
+[ext_resource type="Script" uid="uid://dhk6jkftqbt6s" path="res://Scripts/inventory.gd" id="1_k5gp2"]
+[ext_resource type="PackedScene" uid="uid://cj2qoo17ml7cw" path="res://Scenes/inventory_panel.tscn" id="2_yxepq"]
+
+[node name="Inventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k5gp2")
+
+[node name="BoxContainer" type="BoxContainer" parent="."]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 20.0
+offset_right = 619.0
+offset_bottom = 340.0
+vertical = true
+
+[node name="Inv Row 1" type="HBoxContainer" parent="BoxContainer"]
+layout_mode = 2
+
+[node name="Panel" parent="BoxContainer/Inv Row 1" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel2" parent="BoxContainer/Inv Row 1" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel3" parent="BoxContainer/Inv Row 1" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel4" parent="BoxContainer/Inv Row 1" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel5" parent="BoxContainer/Inv Row 1" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel6" parent="BoxContainer/Inv Row 1" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel7" parent="BoxContainer/Inv Row 1" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel8" parent="BoxContainer/Inv Row 1" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel9" parent="BoxContainer/Inv Row 1" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Inv Row 2" type="HBoxContainer" parent="BoxContainer"]
+layout_mode = 2
+
+[node name="Panel" parent="BoxContainer/Inv Row 2" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel2" parent="BoxContainer/Inv Row 2" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel3" parent="BoxContainer/Inv Row 2" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel4" parent="BoxContainer/Inv Row 2" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel5" parent="BoxContainer/Inv Row 2" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel6" parent="BoxContainer/Inv Row 2" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel7" parent="BoxContainer/Inv Row 2" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel8" parent="BoxContainer/Inv Row 2" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel9" parent="BoxContainer/Inv Row 2" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Inv Row 3" type="HBoxContainer" parent="BoxContainer"]
+layout_mode = 2
+
+[node name="Panel" parent="BoxContainer/Inv Row 3" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel2" parent="BoxContainer/Inv Row 3" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel3" parent="BoxContainer/Inv Row 3" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel4" parent="BoxContainer/Inv Row 3" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel5" parent="BoxContainer/Inv Row 3" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel6" parent="BoxContainer/Inv Row 3" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel7" parent="BoxContainer/Inv Row 3" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel8" parent="BoxContainer/Inv Row 3" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel9" parent="BoxContainer/Inv Row 3" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Hotbar" type="HBoxContainer" parent="BoxContainer"]
+layout_mode = 2
+
+[node name="Panel" parent="BoxContainer/Hotbar" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel2" parent="BoxContainer/Hotbar" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel3" parent="BoxContainer/Hotbar" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel4" parent="BoxContainer/Hotbar" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel5" parent="BoxContainer/Hotbar" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel6" parent="BoxContainer/Hotbar" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel7" parent="BoxContainer/Hotbar" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel8" parent="BoxContainer/Hotbar" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+
+[node name="Panel9" parent="BoxContainer/Hotbar" instance=ExtResource("2_yxepq")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
