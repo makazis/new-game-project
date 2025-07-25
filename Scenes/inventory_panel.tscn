@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://blql8ihg3cc6j"]
 
-[ext_resource type="PackedScene" uid="uid://blepxop8lj8vt" path="res://Item_holder.tscn" id="1_lk1ls"]
+[ext_resource type="PackedScene" uid="uid://blepxop8lj8vt" path="res://Scenes/Item_holder.tscn" id="1_lk1ls"]
 
 [node name="Panel" type="Panel"]
 custom_minimum_size = Vector2(64, 64)
