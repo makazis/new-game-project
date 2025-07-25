@@ -5,6 +5,8 @@ var mouse_previous_position = Vector2(0,0)
 var just_pressed = false
 
 func _input(event):
+	if Global.drag_locked:
+		return
 	if event is InputEventMouseButton and event.is_pressed():
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			camera_zoom *= 1.1
@@ -12,6 +14,8 @@ func _input(event):
 			camera_zoom *= 0.9
 
 func _process(delta: float) -> void:
+	if Global.drag_locked:
+		return
 	zoom = Vector2.ONE * camera_zoom
 	scale = Vector2.ONE / camera_zoom
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
