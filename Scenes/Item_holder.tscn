@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dtadk33ruesdt"]
 
-[ext_resource type="Texture2D" uid="uid://0q5nx8sc5i1u" path="res://Tiles/collector.png" id="1_nljdm"]
-[ext_resource type="Script" path="res://item_holder.gd" id="2_x40c7"]
+[ext_resource type="Texture2D" uid="uid://0q5nx8sc5i1u" path="res://Tiles/collector.png" id="1_fm414"]
+[ext_resource type="Script" path="res://item_holder.gd" id="2_h1uhs"]
 
 [node name="TextureButton" type="TextureButton"]
 texture_filter = 1
@@ -10,9 +10,9 @@ offset_top = 12.0
 offset_right = 52.0
 offset_bottom = 52.0
 action_mode = 0
-texture_normal = ExtResource("1_nljdm")
+texture_normal = ExtResource("1_fm414")
 stretch_mode = 0
-script = ExtResource("2_x40c7")
+script = ExtResource("2_h1uhs")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0

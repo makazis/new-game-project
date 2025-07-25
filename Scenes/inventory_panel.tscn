@@ -4,7 +4,11 @@
 
 [node name="Panel" type="Panel"]
 custom_minimum_size = Vector2(64, 64)
-size_flags_vertical = 0
+offset_left = -3.0
+offset_top = -2.0
+offset_right = 61.0
+offset_bottom = 62.0
+size_flags_vertical = 12
 
 [node name="TextureButton" parent="." instance=ExtResource("1_4ij40")]
 layout_mode = 1
