@@ -161,9 +161,6 @@ class building:
 		Global.buildings_2.append(new_building)
 		Global.taken_squares[pos]=new_building
 func _ready() -> void:
-	Global.game = self
-	
-
 	var new_particle=liquid.instantiate()
 	add_child(new_particle)
 	new_particle.assign(8)
