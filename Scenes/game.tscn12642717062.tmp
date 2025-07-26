@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://hy17qk6hroyd"]
+[gd_scene load_steps=11 format=3 uid="uid://hy17qk6hroyd"]
 
 [ext_resource type="Script" uid="uid://lygfmdulrdk1" path="res://Scripts/game.gd" id="1_3dryh"]
 [ext_resource type="Texture2D" uid="uid://csvh0xos1tpk8" path="res://Tiles/tileset.png" id="2_wowpa"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://c40uy6qtedf84" path="res://Scenes/inventory.tscn" id="5_i6g32"]
 [ext_resource type="PackedScene" uid="uid://dfh277eii8aw0" path="res://Scenes/gui.tscn" id="5_wowpa"]
 [ext_resource type="PackedScene" path="res://Scenes/menu/inspector.tscn" id="8_v158k"]
-[ext_resource type="PackedScene" uid="uid://3tsboa5llafg" path="res://Scenes/menu/quick_menu.tscn" id="10_ldgsr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e2o6t"]
 texture = ExtResource("2_wowpa")
@@ -67,21 +66,7 @@ script = ExtResource("4_1l0tm")
 [node name="Inspector" parent="Camera2D" instance=ExtResource("8_v158k")]
 visible = false
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
-layer = 2
-
-[node name="JuiceLoader" parent="Camera2D/CanvasLayer" instance=ExtResource("9_h4fw4")]
-
-[node name="CanvasLayer2" type="CanvasLayer" parent="Camera2D"]
-layer = 3
-
-[node name="CanvasLayer3" type="CanvasLayer" parent="Camera2D"]
-layer = 4
-
-[node name="QuickMenu" parent="Camera2D/CanvasLayer3" instance=ExtResource("10_ldgsr")]
-
 [node name="Buildings" type="Node2D" parent="."]
 modulate = Color(0.796131, 0.881554, 0.876849, 1)
-z_index = -1
 
 [editable path="Camera2D/Inspector"]

@@ -19,7 +19,11 @@ var liquid_data=[
 		"Name":"Holy Water", #Created by adding neothol to neothol, more reactive, but not overly so
 		"Color":Color.from_hsv(0.7,0.5,0.5),
 		"Friction":0.2,
-		"Bouncy":0.8
+		"Bouncy":1.1,
+		"Accelerating":{
+			"Speed Needed":40,
+			"To":9
+		}
 	},
 	{ #We just have a way to buy human blood in crates from a shop, and we have some customers that want something else added to it
 		"Name":"Human Blood",
@@ -40,6 +44,10 @@ var liquid_data=[
 		"Aging":{
 			"In":30,
 			"To":6
+		},
+		"Accelerating":{
+			"Speed Needed":40,
+			"To":10
 		}
 	},{ # can be bought in the store #7th element
 		"Name":"Evil Milk",
@@ -56,15 +64,23 @@ var liquid_data=[
 		"Color":Color(0.796, 0.882, 0.877),
 		"Bouncy":0.9,
 		"Friction":0.1
-	},
+	},{ #Created when holy water is accelerated to the maximum
+		"Name":"Arionite",
+		"Color":Color(0.543, 0.66, 0.781),
+		"Bouncy":1,
+		"Friction":0
+	},{ #Created when milk is accelerated enough (can be achieved through a particle accelerator)
+		"Name":"Cheese",
+		"Color":Color(0.841, 0.594, 0.0),
+		"Bouncy":0.6,
+		"Friction":0.6
+	}
 ]
 func _ready() -> void:
 	if Global.liquid_map_id_to_name.size()==0:
 		for i in liquid_data.size():
 			Global.liquid_map_id_to_name[i]=liquid_data[i]["Name"]
 			Global.liquid_map_name_to_id[liquid_data[i]["Name"]]=i
-			
-			
 var cached_assigned_ID=0
 func assign(new_ID):
 	ID=new_ID
@@ -89,3 +105,9 @@ func _physics_process(delta: float) -> void:
 		if global_mouse_pos.distance_to(global_position)<75:
 			var aangle=atan2(global_mouse_pos.y-global_position.y,global_mouse_pos.x-global_position.x)
 			apply_force(Vector2(-cos(aangle),-sin(aangle))*delta*1200)
+	if "Accelerating" in liquid_data[ID]:
+		if linear_velocity.distance_to(Vector2(0,0))>liquid_data[ID]["Accelerating"]["Speed Needed"]:
+			assign(liquid_data[ID]["Accelerating"]["To"])
+	#if ID==9:
+	#	linear_velocity*=1+delta*30
+			

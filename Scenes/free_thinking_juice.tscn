@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://d2a82k7koo4qs" path="res://Scripts/free_thinking_juice.gd" id="1_y6tui"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_y6tui"]
+resource_local_to_scene = true
 friction = 0.0
 bounce = 0.1
 
@@ -24,6 +25,7 @@ fill_to = Vector2(0, 0)
 radius = 2.0
 
 [node name="Free Thinker Juice" type="RigidBody2D" groups=["Liquid"]]
+z_index = 4
 physics_material_override = SubResource("PhysicsMaterial_y6tui")
 gravity_scale = 0.0
 linear_damp = 0.1

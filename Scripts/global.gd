@@ -105,8 +105,6 @@ var liquid_map_id_to_name={}
 var Player_Inventory = []
 var Player_hotbar = [] #Epic inventory management system
 
-var transition_instance = null
-
 func getBuildingFromPos(in_position):
 	if taken_squares.has(floor(in_position/16)):
 		return taken_squares[floor(in_position/16)]
@@ -122,7 +120,7 @@ func _ready():
 			Player_hotbar.append(null)
 
 	#gives 100 items?
-	for i in range(100):
+	for i in range(1000):
 		var new_item= item_loaded.instantiate()
 		new_item.assign(randi_range(0,3))
 		add_item_to_inv(new_item)
@@ -133,6 +131,19 @@ func _ready():
 	new_item.assign(6)
 	add_item_to_inv(new_item)
 func add_item_to_inv(added_item):
+	var item_is_in_hotbar=false
+	
+	#check if item exists
+	for iter_item_key in Player_hotbar.size():
+		var iter_item=Player_hotbar[iter_item_key]
+		#Checks if item exists
+		if iter_item==null:
+			continue
+		#Stacks items
+		if iter_item.ID==added_item.ID:
+			iter_item.item_count+=added_item.item_count
+			item_is_in_hotbar=true
+			return
 	var item_is_in_inventory=false
 	#check if item exists
 	for iter_item_key in Player_Inventory.size():
@@ -145,9 +156,46 @@ func add_item_to_inv(added_item):
 			iter_item.item_count+=added_item.item_count
 			item_is_in_inventory=true
 			return
+	if not item_is_in_hotbar:
+		for iter_item_key in Player_hotbar.size():
+			if Player_hotbar[iter_item_key]==null:
+				Player_hotbar[iter_item_key]=added_item
+				return
 	#Adds item to inventory
 	if not item_is_in_inventory:
+		
 		for iter_item_key in Player_Inventory.size():
 			if Player_Inventory[iter_item_key]==null:
 				Player_Inventory[iter_item_key]=added_item
 				return
+func remove_from_inventory(item_ID,count):
+	for iter_item_key in Player_hotbar.size():
+		if Player_hotbar[iter_item_key]==null:
+			continue
+		if Player_hotbar[iter_item_key].ID==item_ID:
+			Player_hotbar[iter_item_key].item_count-=count
+			if Player_hotbar[iter_item_key].item_count<=0:
+				Player_hotbar[iter_item_key]=null
+			return
+	for iter_item_key in Player_Inventory.size():
+		if Player_Inventory[iter_item_key]==null:
+			continue
+		if Player_Inventory[iter_item_key].ID==item_ID:
+			Player_Inventory[iter_item_key].item_count-=count
+			if Player_Inventory[iter_item_key].item_count<=0:
+				Player_Inventory[iter_item_key]=null
+			return
+	print("Fuck, something's wrong if you see this")
+func has_item_in_inventory(item_ID):
+	for iter_item_key in Player_hotbar.size():
+		if Player_hotbar[iter_item_key]==null:
+			continue
+		if Player_hotbar[iter_item_key].ID==item_ID:
+			return true
+	for iter_item_key in Player_Inventory.size():
+		if Player_Inventory[iter_item_key]==null:
+			continue
+		if Player_Inventory[iter_item_key].ID==item_ID:
+			return true
+	return false
+	
