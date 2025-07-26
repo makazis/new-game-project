@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bftqjhe27e7sx"]
+[gd_scene load_steps=9 format=3 uid="uid://bftqjhe27e7sx"]
 
+[ext_resource type="Script" uid="uid://cc2mrbfawwsfb" path="res://Scripts/MenuScripts/MainScript.gd" id="1_kwgaw"]
 [ext_resource type="Texture2D" uid="uid://beeo6en1qgiok" path="res://Tiles/background_grid.png" id="1_ufr4i"]
 [ext_resource type="Script" uid="uid://dq813cc3q24ms" path="res://Scripts/MenuScripts/MoveBg.gd" id="2_ufr4i"]
 [ext_resource type="FontFile" uid="uid://cejt8mcsnyqw7" path="res://FONTS/VT323.tres" id="3_uffod"]
+[ext_resource type="Script" uid="uid://bubtwrlj54u3n" path="res://Scripts/MenuScripts/scroll.gd" id="5_u7oun"]
+[ext_resource type="Script" uid="uid://dcqvmduo2aj0l" path="res://Scripts/MenuScripts/PlayerMenu.gd" id="6_0jlf4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ufr4i"]
 bg_color = Color(0, 0, 0, 0.462745)
@@ -19,6 +22,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_kwgaw")
 
 [node name="BgScroll" type="Control" parent="."]
 anchors_preset = 0
@@ -32,7 +36,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 880.0
+offset_right = 1680.0
 offset_bottom = 600.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -41,14 +45,14 @@ expand_mode = 1
 stretch_mode = 1
 script = ExtResource("2_ufr4i")
 
-[node name="Options2" type="Panel" parent="."]
+[node name="Heading" type="Panel" parent="."]
 layout_mode = 1
 offset_top = 5.0
 offset_right = 220.0
 offset_bottom = 65.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_ufr4i")
 
-[node name="Label" type="Label" parent="Options2"]
+[node name="Label" type="Label" parent="Heading"]
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 4
@@ -105,3 +109,92 @@ theme_override_fonts/font = ExtResource("3_uffod")
 theme_override_font_sizes/font_size = 40
 text = "Exit
 "
+
+[node name="Menu_container" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -400.0
+offset_top = 360.0
+offset_right = -10.0
+offset_bottom = 1028.0
+alignment = 1
+script = ExtResource("5_u7oun")
+
+[node name="Play" type="Control" parent="Menu_container"]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+script = ExtResource("6_0jlf4")
+
+[node name="Panel" type="Panel" parent="Menu_container/Play"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 0
+offset_right = 390.0
+offset_bottom = 200.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu_container/Play/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LabelHolder" type="Panel" parent="Menu_container/Play/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Menu_container/Play/Panel/VBoxContainer/LabelHolder"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_uffod")
+theme_override_font_sizes/font_size = 50
+text = "PLAY"
+horizontal_alignment = 1
+
+[node name="Options" type="Control" parent="Menu_container"]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Menu_container/Options"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 0
+offset_right = 390.0
+offset_bottom = 200.0
+
+[node name="Options" type="Button" parent="Menu_container/Options/Panel"]
+texture_filter = 1
+theme_override_fonts/font = ExtResource("3_uffod")
+theme_override_font_sizes/font_size = 40
+text = "Options"
+
+[node name="Exit" type="Control" parent="Menu_container"]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Menu_container/Exit"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 0
+offset_right = 390.0
+offset_bottom = 200.0
+
+[node name="Exit" type="Button" parent="Menu_container/Exit/Panel"]
+texture_filter = 1
+theme_override_fonts/font = ExtResource("3_uffod")
+theme_override_font_sizes/font_size = 40
+text = "Exit
+"
+
+[connection signal="button_down" from="Options/VBoxContainer/Play" to="." method="_on_play_button_down"]
+[connection signal="button_down" from="Options/VBoxContainer/Options" to="." method="_on_options_button_down"]
+[connection signal="button_down" from="Options/VBoxContainer/Exit" to="." method="_on_exit_button_down"]
