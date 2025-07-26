@@ -1,0 +1,107 @@
+[gd_scene load_steps=6 format=3 uid="uid://bftqjhe27e7sx"]
+
+[ext_resource type="Texture2D" uid="uid://beeo6en1qgiok" path="res://Tiles/background_grid.png" id="1_ufr4i"]
+[ext_resource type="Script" uid="uid://dq813cc3q24ms" path="res://Scripts/MenuScripts/MoveBg.gd" id="2_ufr4i"]
+[ext_resource type="FontFile" uid="uid://cejt8mcsnyqw7" path="res://FONTS/VT323.tres" id="3_uffod"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ufr4i"]
+bg_color = Color(0, 0, 0, 0.462745)
+corner_radius_top_right = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ygw4n"]
+bg_color = Color(0, 0, 0, 0.462745)
+corner_radius_bottom_right = 10
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BgScroll" type="Control" parent="."]
+anchors_preset = 0
+offset_top = -240.0
+offset_bottom = -240.0
+rotation = 0.261799
+
+[node name="TextureRect" type="TextureRect" parent="BgScroll"]
+z_index = -2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 880.0
+offset_bottom = 600.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ufr4i")
+expand_mode = 1
+stretch_mode = 1
+script = ExtResource("2_ufr4i")
+
+[node name="Options2" type="Panel" parent="."]
+layout_mode = 1
+offset_top = 5.0
+offset_right = 220.0
+offset_bottom = 65.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ufr4i")
+
+[node name="Label" type="Label" parent="Options2"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -35.0
+offset_right = 206.0
+offset_bottom = 35.0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_uffod")
+theme_override_font_sizes/font_size = 70
+text = "Overflow"
+
+[node name="Options" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_top = 70.0
+offset_right = 150.0
+offset_bottom = -5.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ygw4n")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Options"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_right = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Play" type="Button" parent="Options/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_uffod")
+theme_override_font_sizes/font_size = 40
+text = "Play"
+
+[node name="Options" type="Button" parent="Options/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_uffod")
+theme_override_font_sizes/font_size = 40
+text = "Options"
+
+[node name="Exit" type="Button" parent="Options/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_uffod")
+theme_override_font_sizes/font_size = 40
+text = "Exit
+"

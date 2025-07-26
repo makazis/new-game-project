@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="New Game Project"
-run/main_scene="uid://hy17qk6hroyd"
+run/main_scene="uid://bftqjhe27e7sx"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -28,7 +28,8 @@ window/stretch/mode="canvas_items"
 [file_customization]
 
 folder_colors={
-"res://Scripts/InvScripts/": "orange"
+"res://Scripts/InvScripts/": "orange",
+"res://Scripts/MenuScripts/": "yellow"
 }
 
 [input]

@@ -73,10 +73,9 @@ class building:
 	func die():
 		if self in Global.buildings:
 			Global.buildings_2.erase(self)
-var temp_building : building
+			
 func _ready() -> void:
 	Global.game = self
-	temp_building = building.new(0, 0, $Buildings, Vector2(0,0))
 
 var delay = 0
 func _process(delta: float) -> void:
