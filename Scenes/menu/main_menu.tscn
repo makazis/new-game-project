@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://dq813cc3q24ms" path="res://Scripts/MenuScripts/MoveBg.gd" id="2_ufr4i"]
 [ext_resource type="FontFile" uid="uid://cejt8mcsnyqw7" path="res://FONTS/VT323.tres" id="3_uffod"]
 [ext_resource type="Script" uid="uid://bubtwrlj54u3n" path="res://Scripts/MenuScripts/scroll.gd" id="5_u7oun"]
-[ext_resource type="Script" uid="uid://dcqvmduo2aj0l" path="res://Scripts/MenuScripts/PlayerMenu.gd" id="6_0jlf4"]
+[ext_resource type="FontFile" uid="uid://ca2t6g7c3o17f" path="res://FONTS/VT323/VT323-Regular.ttf" id="6_kwgaw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ufr4i"]
 bg_color = Color(0, 0, 0, 0.462745)
@@ -125,7 +125,6 @@ script = ExtResource("5_u7oun")
 [node name="Play" type="Control" parent="Menu_container"]
 custom_minimum_size = Vector2(0, 220)
 layout_mode = 2
-script = ExtResource("6_0jlf4")
 
 [node name="Panel" type="Panel" parent="Menu_container/Play"]
 custom_minimum_size = Vector2(0, 200)
@@ -144,23 +143,17 @@ offset_right = -5.0
 offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
+alignment = 1
 
-[node name="LabelHolder" type="Panel" parent="Menu_container/Play/Panel/VBoxContainer"]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Menu_container/Play/Panel/VBoxContainer/LabelHolder"]
+[node name="StartANewGame" type="Button" parent="Menu_container/Play/Panel/VBoxContainer"]
 texture_filter = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_uffod")
-theme_override_font_sizes/font_size = 50
-text = "PLAY"
-horizontal_alignment = 1
+custom_minimum_size = Vector2(380, 190)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_kwgaw")
+theme_override_font_sizes/font_size = 54
+text = "START
+A NEW
+GAME"
 
 [node name="Options" type="Control" parent="Menu_container"]
 custom_minimum_size = Vector2(0, 220)
@@ -172,11 +165,59 @@ layout_mode = 0
 offset_right = 390.0
 offset_bottom = 200.0
 
-[node name="Options" type="Button" parent="Menu_container/Options/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu_container/Options/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LabelHolder" type="Panel" parent="Menu_container/Options/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Menu_container/Options/Panel/VBoxContainer/LabelHolder"]
 texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_uffod")
-theme_override_font_sizes/font_size = 40
+theme_override_font_sizes/font_size = 50
 text = "Options"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu_container/Options/Panel/VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+
+[node name="LabelHolder" type="Panel" parent="Menu_container/Options/Panel/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Menu_container/Options/Panel/VBoxContainer/HBoxContainer/LabelHolder"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_uffod")
+theme_override_font_sizes/font_size = 50
+text = "Master"
+horizontal_alignment = 1
+
+[node name="HSlider" type="HSlider" parent="Menu_container/Options/Panel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
 
 [node name="Exit" type="Control" parent="Menu_container"]
 custom_minimum_size = Vector2(0, 220)
@@ -188,13 +229,74 @@ layout_mode = 0
 offset_right = 390.0
 offset_bottom = 200.0
 
-[node name="Exit" type="Button" parent="Menu_container/Exit/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu_container/Exit/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LabelHolder2" type="Panel" parent="Menu_container/Exit/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Menu_container/Exit/Panel/VBoxContainer/LabelHolder2"]
 texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_uffod")
-theme_override_font_sizes/font_size = 40
-text = "Exit
-"
+theme_override_font_sizes/font_size = 50
+text = "Exit"
+horizontal_alignment = 1
+
+[node name="LabelHolder" type="Panel" parent="Menu_container/Exit/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Menu_container/Exit/Panel/VBoxContainer/LabelHolder"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_uffod")
+theme_override_font_sizes/font_size = 25
+text = "Are you sure jvj"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu_container/Exit/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Menu_container/Exit/Panel/VBoxContainer/HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(187.5, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_kwgaw")
+theme_override_font_sizes/font_size = 70
+text = "YES"
+
+[node name="Button2" type="Button" parent="Menu_container/Exit/Panel/VBoxContainer/HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(187.5, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_kwgaw")
+theme_override_font_sizes/font_size = 70
+text = "NO"
 
 [connection signal="button_down" from="Options/VBoxContainer/Play" to="." method="_on_play_button_down"]
 [connection signal="button_down" from="Options/VBoxContainer/Options" to="." method="_on_options_button_down"]
 [connection signal="button_down" from="Options/VBoxContainer/Exit" to="." method="_on_exit_button_down"]
+[connection signal="button_up" from="Menu_container/Play/Panel/VBoxContainer/StartANewGame" to="Menu_container" method="_on_start_a_new_game_button_up"]
+[connection signal="button_up" from="Menu_container/Exit/Panel/VBoxContainer/HBoxContainer/Button" to="Menu_container" method="_on_button_button_up"]
