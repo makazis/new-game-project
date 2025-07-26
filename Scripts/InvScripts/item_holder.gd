@@ -17,6 +17,9 @@ func clear_item():
 func _ready():
 	clear_item()
 
+func _process(delta: float) -> void:
+	if label.text=="1":
+		label.text=""
 #func _on_button_down() -> void:
 #	is_pressed=true
 

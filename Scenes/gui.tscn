@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dfh277eii8aw0"]
+[gd_scene load_steps=5 format=3 uid="uid://dfh277eii8aw0"]
 
 [ext_resource type="PackedScene" uid="uid://cj2qoo17ml7cw" path="res://Scenes/inventory_panel.tscn" id="1_80edf"]
 [ext_resource type="Script" uid="uid://dq3dygxp04k61" path="res://Scripts/InvScripts/gui.gd" id="1_bm56d"]
+[ext_resource type="Texture2D" uid="uid://ds6tw41h78rqa" path="res://Assets/Icons/Delete.png" id="3_m6o0h"]
 [ext_resource type="PackedScene" uid="uid://dtadk33ruesdt" path="res://Scenes/Item_holder.tscn" id="3_n5m23"]
 
 [node name="GUI" type="Control"]
@@ -52,8 +53,11 @@ layout_mode = 2
 [node name="Panel8" parent="HBoxContainer" instance=ExtResource("1_80edf")]
 layout_mode = 2
 
-[node name="Panel9" parent="HBoxContainer" instance=ExtResource("1_80edf")]
+[node name="Deletor" parent="HBoxContainer" instance=ExtResource("1_80edf")]
 layout_mode = 2
+
+[node name="TextureButton" parent="HBoxContainer/Deletor" index="0"]
+texture_normal = ExtResource("3_m6o0h")
 
 [node name="TextureButton" parent="." instance=ExtResource("3_n5m23")]
 visible = false
@@ -67,4 +71,5 @@ offset_bottom = -320.0
 visible = false
 
 [editable path="HBoxContainer/Panel"]
+[editable path="HBoxContainer/Deletor"]
 [editable path="TextureButton"]

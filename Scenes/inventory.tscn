@@ -209,11 +209,6 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 1
 
-[node name="Panel9" parent="BoxContainer/Hotbar" instance=ExtResource("2_yxepq")]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 1
-
 [node name="TextureButton" parent="." instance=ExtResource("3_yxepq")]
 visible = false
 layout_mode = 0

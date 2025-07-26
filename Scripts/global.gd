@@ -27,11 +27,13 @@ var buildings = [
 		"Name" = "Emmiter",
 		"ToolTip" = "Emmits Extractium",
 		"ModelPath" = "res://Assets/Models/Emiter.tscn",
-	}
+	},{}, #Saved for the delete item
+	
 ]
 var camera_zoom=1
 var camera_pos=Vector2(0,0)
 var taken_squares={}
+var buildings_2=[]
 @onready var item_loaded=preload("res://Scenes/inventory_item.tscn")
 
 var Player_Inventory = []
@@ -41,7 +43,7 @@ func _ready():
 	#initilises inv slots
 	for i in range(27):
 		Player_Inventory.append(null)
-		if i<9:
+		if i<8:
 			Player_hotbar.append(null)
 
 	#gives 100 items?

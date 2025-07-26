@@ -2,7 +2,9 @@ extends Control
 
 @onready var box_container=$HBoxContainer
 @onready var Tbutton=$TextureButton
+@onready var deletor=$HBoxContainer/Deletor/TextureButton
 
+@onready var item_class=preload("res://Scenes/inventory_item.tscn")
 var selected_item=null
 var mouse_timer = 0
 var i_pulled_this_from=null
@@ -12,7 +14,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Rotate Building"):
 		selected_rotation=(selected_rotation+1)%4
 		Tbutton.rotation_degrees=selected_rotation*90
-		print(selected_rotation,"  ",Tbutton.rotation)
+		#print(selected_rotation,"  ",Tbutton.rotation)
 func _process(delta):
 	var global_mouse_pos=get_viewport().get_camera_2d().get_global_mouse_position()
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
@@ -30,7 +32,7 @@ func _process(delta):
 					i_pulled_this_from.update_item(Tbutton.item)
 					Tbutton.clear_item()
 					Tbutton.visible=false
-				else:
+				else:	
 					if not Tbutton.visible:
 						if panel.button.item==null:
 							continue
@@ -44,7 +46,13 @@ func _process(delta):
 					pass
 		if (not selecting_hotbar) and not Global.drag_locked:
 			if Tbutton.visible:
-				if not (global_mouse_pos/16).floor() in Global.taken_squares:
+				if Tbutton.item.ID==4:
+					if (global_mouse_pos/16).floor() in Global.taken_squares:
+						Global.taken_squares[(global_mouse_pos/16).floor()].object.queue_free()
+						Global.taken_squares[(global_mouse_pos/16).floor()].die()
+						Global.taken_squares.erase((global_mouse_pos/16).floor())
+						
+				elif not (global_mouse_pos/16).floor() in Global.taken_squares:	
 				#This line disproves the existance of god
 				#why, WHY
 				#I prayed, and god answered, this line is fixed now
@@ -58,3 +66,8 @@ func demiload():
 			continue
 		
 		$HBoxContainer.get_child(i).button.update_item(Global.Player_hotbar[i])
+	var deletor_item=item_class.instantiate()
+	deletor_item.assign(4)
+	deletor.update_item(deletor_item)
+func _ready() -> void:
+	demiload()
