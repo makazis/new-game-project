@@ -22,12 +22,12 @@ func _process(delta):
 	else:
 		mouse_timer=0
 	if mouse_timer==2:
-		var selecting_hotbar=false
+		Global.selecting_hotbar=false
 		for panel in box_container.get_children():
 			if panel.button.is_pressed():
 				
 				#THX kazimir
-				selecting_hotbar=true
+				Global.selecting_hotbar=true
 				if Tbutton.visible:
 					i_pulled_this_from.update_item(Tbutton.item)
 					Tbutton.clear_item()
@@ -44,7 +44,7 @@ func _process(delta):
 				if panel.button.item!=null:
 					selected_item=panel.button.item
 					pass
-		if (not selecting_hotbar) and not Global.drag_locked:
+		if (not Global.selecting_hotbar) and not Global.drag_locked:
 			if Tbutton.visible:
 				if Tbutton.item.ID==4:
 					if (global_mouse_pos/16).floor() in Global.taken_squares:

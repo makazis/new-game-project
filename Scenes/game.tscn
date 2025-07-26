@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://hy17qk6hroyd"]
+[gd_scene load_steps=11 format=3 uid="uid://hy17qk6hroyd"]
 
 [ext_resource type="Script" uid="uid://lygfmdulrdk1" path="res://Scripts/game.gd" id="1_3dryh"]
 [ext_resource type="Texture2D" uid="uid://csvh0xos1tpk8" path="res://Tiles/tileset.png" id="2_wowpa"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bbdux4myeagsv" path="res://Scripts/follow.gd" id="4_v158k"]
 [ext_resource type="PackedScene" uid="uid://c40uy6qtedf84" path="res://Scenes/inventory.tscn" id="5_i6g32"]
 [ext_resource type="PackedScene" uid="uid://dfh277eii8aw0" path="res://Scenes/gui.tscn" id="5_wowpa"]
+[ext_resource type="PackedScene" uid="uid://yjpghm7e7nno" path="res://Scenes/menu/inspector.tscn" id="8_v158k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e2o6t"]
 texture = ExtResource("2_wowpa")
@@ -61,5 +62,8 @@ visible = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 script = ExtResource("4_1l0tm")
+
+[node name="Inspector" parent="Camera2D" instance=ExtResource("8_v158k")]
+visible = false
 
 [node name="Buildings" type="Node2D" parent="."]

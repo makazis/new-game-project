@@ -87,6 +87,13 @@ var game=null
 var Player_Inventory = []
 var Player_hotbar = [] #Epic inventory management system
 
+func getBuildingFromPos(in_position):
+	if taken_squares.has(floor(in_position/16)):
+		return taken_squares[floor(in_position/16)]
+	return null
+
+var selecting_hotbar = false
+
 func _ready():
 	#initilises inv slots
 	for i in range(27):

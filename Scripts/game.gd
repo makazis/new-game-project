@@ -31,6 +31,7 @@ class building:
 	var storage: Dictionary
 	var item_timers : Array
 	var direction_vector : Vector2
+	#stores as position/16
 	var pos : Vector2
 	var can_intake_liquid : bool
 	var inputs=[]
@@ -70,7 +71,7 @@ class building:
 	func per_frame(delta):
 		if classification_id == 3: #Emitter 
 			if item_timers[0].is_finished:
-				create_liquid(5)
+				create_liquid(0)
 				item_timers[0].reset()
 	#func get_adjacent_building(to_direction):
 	#
@@ -127,9 +128,28 @@ func _ready() -> void:
 	Global.game = self
 
 var delay = 0
+var last_mouse_position = Vector2(0,0)
+var inspect_open = false
 func _process(delta: float) -> void:
 	for i in Global.buildings_2:
 		i.per_frame(delta)
+	if inspect_open:
+		if last_mouse_position == get_global_mouse_position():
+			$Camera2D/Inspector.position = $Camera2D.get_local_mouse_position()
+		else:
+			inspect_open = false
+			$Camera2D/Inspector.visible = false
+	else:
+		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+			if not Global.selecting_hotbar:
+				var gotten_building = Global.getBuildingFromPos(get_global_mouse_position())
+				if gotten_building:
+					$Camera2D/Inspector.visible = true
+					$Camera2D/Inspector.position = $Camera2D.get_local_mouse_position()
+					last_mouse_position = get_global_mouse_position()
+					inspect_open = true
+	
+	
 var inv_open=true
 func _input(event):
 	if event.is_action_pressed("inventory"):

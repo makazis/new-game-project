@@ -1,8 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://yjpghm7e7nno"]
 
-[ext_resource type="FontFile" uid="uid://cejt8mcsnyqw7" path="res://FONTS/VT323.tres" id="1_8r50e"]
+[ext_resource type="FontFile" uid="uid://cejt8mcsnyqw7" path="res://FONTS/VT323.tres" id="1_5msmv"]
 
-[node name="Indpector" type="Control"]
+[node name="Inspector" type="Control"]
+z_index = 10
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,9 +12,9 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="."]
+layout_mode = 0
 offset_right = 200.0
 offset_bottom = 100.0
-tooltip_text = "TEST TEST"
 
 [node name="Label" type="Label" parent="Panel"]
 texture_filter = 1
@@ -27,6 +28,6 @@ offset_right = -5.0
 offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("1_8r50e")
+theme_override_fonts/font = ExtResource("1_5msmv")
 theme_override_font_sizes/font_size = 20
 text = "Test"
