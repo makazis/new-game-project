@@ -10,4 +10,4 @@ script = ExtResource("1_tlg0o")
 texture_filter = 1
 texture = ExtResource("2_cax51")
 region_enabled = true
-region_rect = Rect2(0, 32, 16, 16)
+region_rect = Rect2(0, 96, 16, 16)
