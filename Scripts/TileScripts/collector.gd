@@ -22,11 +22,15 @@ func _physics_process(delta: float) -> void:
 				total_in_storage+=1
 				i.queue_free()
 				if building.has_building(direction):
-					if not i.liquid_name in building.get_building(direction).storage :
-						building.get_building(direction).storage[i.liquid_name]=1
-					else:
-						building.get_building(direction).storage[i.liquid_name]+=1
-					building.get_building(direction).Update()
+					if building.get_building(direction).can_intake_liquid:
+						#print((direction+2)," ",building.get_building(direction).object.direction," ",building.get_building(direction).inputs)
+						if ((direction+2)-building.get_building(direction).object.direction)%4 in building.get_building(direction).inputs:
+							
+							if not i.liquid_name in building.get_building(direction).storage :
+								building.get_building(direction).storage[i.liquid_name]=1
+							else:
+								building.get_building(direction).storage[i.liquid_name]+=1
+							building.get_building(direction).Update()
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Liquid"):
 		colliding_bodies.append(body)
