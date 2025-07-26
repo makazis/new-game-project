@@ -101,7 +101,7 @@ var taken_squares={}
 var buildings_2=[]
 var directional_vectors=[Vector2(-1,0),Vector2(0,-1),Vector2(1,0),Vector2(0,1)]
 var game=null 
-
+var transition_instance = null
 var liquid_map_name_to_id={} 
 var liquid_map_id_to_name={}
 @onready var item_loaded=preload("res://Scenes/inventory_item.tscn")
