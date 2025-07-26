@@ -1,39 +1,28 @@
 extends Node2D
 
-class building:
-	var id : int
-	var classification_id : int
-	var name : String
-	var tool_tip : String
-	var object : Node2D
-	var direction : int
-	func _init(in_buildings_id, in_direction, parent, position) -> void:
-		id = Global.getNewId()
-		classification_id = in_buildings_id
-		name = Global.buildings[in_buildings_id]["Name"]
-		tool_tip = Global.buildings[in_buildings_id]["ToolTip"]
-		object = load(Global.buildings[in_buildings_id]["ModelPath"]).instantiate()
-		parent.add_child(object)
-		rotate(in_direction)
-		object.position = position
-	
-	func rotate(in_direction) -> void:
-		direction = in_direction % 4
-		# print(direction)
-		#Don't question this line it is perfect and shouldn't be tuched (mkaestexture right dir)
-		object.get_node("Sprite2D").region_rect = Rect2(direction*16,object.get_node("Sprite2D").region_rect.position.y,object.get_node("Sprite2D").region_rect.size.x,object.get_node("Sprite2D").region_rect.size.y)
 
+func creatBuilding(in_buildings_id, in_direction, in_position) -> Node2D:
+	var object = load(Global.buildings[in_buildings_id]["ModelPath"]).instantiate()
+	$Buildings.add_child(object)
+	object.position = in_position
+	object.setBuildingParams(in_buildings_id, in_direction)
+	return object
 
-var temp_building : building
+var temp_building = []
 func _ready() -> void:
-	temp_building = building.new(0, 0, $Buildings, Vector2(0,0))
+	temp_building.append(creatBuilding(0, 0, Vector2(0,0)))
+	temp_building.append(creatBuilding(0, 0, Vector2(10,0)))
+	temp_building.append(creatBuilding(0, 0, Vector2(0,10)))
+	temp_building.append(creatBuilding(0, 0, Vector2(10,10)))
+
 
 var delay = 0
 func _process(delta: float) -> void:
 	delay += delta
 	if delay > 1:
 		delay = 0
-		temp_building.rotate(temp_building.direction + 1)
+		for iter_building in temp_building:
+			iter_building.rotateNb(iter_building.direction + 1)
 
 var inv_open=true
 func _input(event):
