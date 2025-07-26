@@ -51,8 +51,18 @@ var liquid_data=[
 		"Color":Color(0.66, 0.0, 0.011),
 		"Bouncy":0.9,
 		"Friction":0.1
+	},{ #Starts somewhere on the map, needs to be transported into your factory, combining this with water makes 1 Lythosine and 1 milk (converts water to milk)
+		"Name":"Lythosine",
+		"Color":Color(0.796, 0.882, 0.877),
+		"Bouncy":0.9,
+		"Friction":0.1
 	},
 ]
+func _ready() -> void:
+	if Global.liquid_map_id_to_name.size()==0:
+		for i in liquid_data.size():
+			Global.liquid_map_id_to_name
+			
 var cached_assigned_ID=0
 func assign(new_ID):
 	ID=new_ID
@@ -66,7 +76,7 @@ func assign(new_ID):
 	if "Aging" in liquid_data[new_ID]:
 		var my_timer=Timer.new()
 		add_child(my_timer)
-		my_timer.start(liquid_data[new_ID]["Aging"]["In"])
+		my_timer.start(liquid_data[new_ID]["Aging"]["In"]*randf_range(0.5,1.3))
 		cached_assigned_ID=liquid_data[new_ID]["Aging"]["To"]
 		my_timer.timeout.connect(cached_assign)
 func cached_assign():

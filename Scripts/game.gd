@@ -1,5 +1,6 @@
 extends Node2D
-
+var liquid=preload("res://Scenes/free_thinking_juice.tscn")
+	
 
 
 #This is only for the buildings that require actual 
@@ -35,6 +36,8 @@ class building:
 	var pos : Vector2
 	var can_intake_liquid : bool
 	var inputs=[]
+	var _parent
+	var max_storage: int
 	func _init(in_buildings_id, in_direction, parent, position) -> void:
 		id = Global.getNewId()
 		classification_id = in_buildings_id
@@ -42,7 +45,7 @@ class building:
 		tool_tip = Global.buildings[in_buildings_id]["ToolTip"]
 		object = load(Global.buildings[in_buildings_id]["ModelPath"]).instantiate()
 		
-			
+		direction=in_direction
 		direction_vector=[Vector2(-1,0),Vector2(0,-1),Vector2(1,0),Vector2(0,1)][in_direction]	
 		object.direction=in_direction
 		object.direction_vector=direction_vector
@@ -51,6 +54,7 @@ class building:
 		rotate(in_direction)
 		storage={}
 		pos=position
+		_parent=parent
 		object.position = position*16+Vector2(8,8)
 		if not position in Global.taken_squares:
 			Global.taken_squares[position]=self
@@ -60,9 +64,10 @@ class building:
 			can_intake_liquid=true
 		if classification_id==5: 
 			inputs=[1,3]
+			max_storage=50
 		if classification_id==6: 
 			inputs=[1]
-		
+			max_storage=1000
 	func rotate(in_direction) -> void:
 		direction = in_direction % 4
 		# print(direction)
@@ -73,6 +78,10 @@ class building:
 			if item_timers[0].is_finished:
 				create_liquid(0)
 				item_timers[0].reset()
+		if classification_id==5:
+			if item_timers[1].is_finished:
+				slow_Update()
+				item_timers[1].reset()
 	#func get_adjacent_building(to_direction):
 	#
 	func create_liquid(liquid_ID):
@@ -89,13 +98,16 @@ class building:
 	func die():
 		if self in Global.buildings_2:
 			Global.buildings_2.erase(self)
-	
+		if pos in Global.taken_squares:
+			Global.taken_squares.erase(pos)
+		self.object.queue_free()
 	func has_building(_direction):
 		return pos+Global.directional_vectors[_direction] in Global.taken_squares
 	func get_building(_direction):
 		return Global.taken_squares[pos+Global.directional_vectors[_direction]]
-	func Update():
+	func slow_Update():
 		if classification_id == 5: #Merger
+			print(storage)
 			var did_something=false
 			for i in Global.crafting_tree:
 				if not did_something:
@@ -115,7 +127,9 @@ class building:
 							for ii in range(i["Result"][result]):
 								create_liquid(result)
 						did_something=true
-		elif classification_id ==6:
+	func Update():
+		
+		if classification_id ==6:
 			
 			for i in storage:
 				if not i in Global.in_storage_items:
@@ -124,9 +138,31 @@ class building:
 					Global.in_storage_items[i]+=storage[i]
 			storage={}
 			print(Global.in_storage_items)
+	func explode():
+		for liquid_name in storage:
+			for liquid_instance in storage[liquid_name]:
+				var new_particle=liquid.instantiate()
+				_parent.add_child(new_particle)
+				new_particle.assign(Global.liquid_map_name_to_id[liquid_name])
+				new_particle.position=object.position
+				var aangle=randf_range(0,PI*2)
+				new_particle.linear_velocity.x=cos(aangle)*20
+				new_particle.linear_velocity.y=sin(aangle)*20
+				
+
+					
+		die()
+		var new_building=building.new(7,direction,_parent,pos)
+		Global.buildings_2.append(new_building)
+		Global.taken_squares[pos]=new_building
 func _ready() -> void:
 	Global.game = self
+	
 
+	var new_particle=liquid.instantiate()
+	add_child(new_particle)
+	new_particle.assign(8)
+	new_particle.position=Vector2(200,200)
 var delay = 0
 var last_mouse_position = Vector2(0,0)
 var inspect_open = false
