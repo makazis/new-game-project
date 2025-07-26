@@ -32,6 +32,8 @@ class building:
 	var item_timers : Array
 	var direction_vector : Vector2
 	var pos : Vector2
+	var can_intake_liquid : bool
+	var inputs=[]
 	func _init(in_buildings_id, in_direction, parent, position) -> void:
 		id = Global.getNewId()
 		classification_id = in_buildings_id
@@ -53,6 +55,13 @@ class building:
 			Global.taken_squares[position]=self
 		item_timers=[Local_Timer.new(1.5),Local_Timer.new(1)]
 		Global.buildings_2.append(self)
+		if classification_id in [5,6]:
+			can_intake_liquid=true
+		if classification_id==5: 
+			inputs=[1,3]
+		if classification_id==6: 
+			inputs=[1]
+		
 	func rotate(in_direction) -> void:
 		direction = in_direction % 4
 		# print(direction)
@@ -86,7 +95,6 @@ class building:
 		return Global.taken_squares[pos+Global.directional_vectors[_direction]]
 	func Update():
 		if classification_id == 5: #Merger
-			print(storage)
 			var did_something=false
 			for i in Global.crafting_tree:
 				if not did_something:
@@ -105,8 +113,16 @@ class building:
 						for result in i["Result"]:
 							for ii in range(i["Result"][result]):
 								create_liquid(result)
-						print(i)
 						did_something=true
+		elif classification_id ==6:
+			
+			for i in storage:
+				if not i in Global.in_storage_items:
+					Global.in_storage_items[i]=storage[i]
+				else:
+					Global.in_storage_items[i]+=storage[i]
+			storage={}
+			print(Global.in_storage_items)
 func _ready() -> void:
 	Global.game = self
 

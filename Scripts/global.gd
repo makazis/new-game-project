@@ -32,19 +32,32 @@ var buildings = [
 		"Name" = "Fuser",
 		"ToolTip" = "Fuses liquids together into new ones",
 		"ModelPath" = "res://Assets/Models/Merger.tscn",
+	},
+	{
+		"Name" = "Storer",
+		"ToolTip" = "Puts Liquids into production",
+		"ModelPath" = "res://Assets/Models/Storer.tscn",
 	}
 ]
 var crafting_tree=[
 	{ #This is cursed, but oh well
 		"Req":{
-			"Neothol":4
+			"Neothol":6
 		},
 		"Result":{
-			1:1,
-			0:1
+			1:1
+		}
+	},
+	{ 
+		"Req":{
+			"Compressed Neothol":6
+		},
+		"Result":{
+			2:1
 		}
 	}
 ]
+var in_storage_items={}
 var camera_zoom=1
 var camera_pos=Vector2(0,0)
 var taken_squares={}
@@ -70,6 +83,9 @@ func _ready():
 		add_item_to_inv(new_item)
 	var new_item= item_loaded.instantiate()
 	new_item.assign(5)
+	add_item_to_inv(new_item)
+	new_item= item_loaded.instantiate()
+	new_item.assign(6)
 	add_item_to_inv(new_item)
 func add_item_to_inv(added_item):
 	var item_is_in_inventory=false
