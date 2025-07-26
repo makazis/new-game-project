@@ -166,22 +166,39 @@ func _ready() -> void:
 var delay = 0
 var last_mouse_position = Vector2(0,0)
 var inspect_open = false
+var inspect_gotten_building = null
+var inspect_last_storage_keys = {}
 func _process(delta: float) -> void:
 	for i in Global.buildings_2:
 		i.per_frame(delta)
 	if inspect_open:
 		if last_mouse_position == get_global_mouse_position():
-			$Camera2D/Inspector.position = $Camera2D.get_local_mouse_position()
+			if inspect_last_storage_keys == inspect_gotten_building.storage:
+				inspect_last_storage_keys = inspect_gotten_building.storage
+				var finalText = ""
+				finalText += inspect_gotten_building.name + "\n"
+				for iter_storage in inspect_gotten_building.storage.keys():
+					finalText += iter_storage + " (" + str(inspect_gotten_building.storage[iter_storage]) + ")\n"
+				$Camera2D/Inspector/Panel/Label.text = finalText
 		else:
+			inspect_gotten_building = null
 			inspect_open = false
 			$Camera2D/Inspector.visible = false
-	else:
+	#this isn't else and don't change it or else it will filcker ;/
+	if not inspect_open:
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 			if not Global.selecting_hotbar:
 				var gotten_building = Global.getBuildingFromPos(get_global_mouse_position())
 				if gotten_building:
 					$Camera2D/Inspector.visible = true
 					$Camera2D/Inspector.position = $Camera2D.get_local_mouse_position()
+					var finalText = ""
+					finalText += gotten_building.name + "\n"
+					for iter_storage in gotten_building.storage.keys():
+						finalText += iter_storage + " (" + str(gotten_building.storage[iter_storage]) + ")\n"
+					$Camera2D/Inspector/Panel/Label.text = finalText
+					inspect_gotten_building = gotten_building
+					inspect_last_storage_keys = gotten_building.storage
 					last_mouse_position = get_global_mouse_position()
 					inspect_open = true
 	
