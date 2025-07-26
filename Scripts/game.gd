@@ -37,7 +37,11 @@ class building:
 		name = Global.buildings[in_buildings_id]["Name"]
 		tool_tip = Global.buildings[in_buildings_id]["ToolTip"]
 		object = load(Global.buildings[in_buildings_id]["ModelPath"]).instantiate()
+		
+			
 		direction_vector=[Vector2(-1,0),Vector2(0,-1),Vector2(1,0),Vector2(0,1)][in_direction]	
+		object.direction=in_direction
+		object.direction_vector=direction_vector
 		parent.add_child(object)
 		rotate(in_direction)
 		storage={}
@@ -54,7 +58,6 @@ class building:
 	func per_frame(delta):
 		if classification_id == 3: #Emitter 
 			if item_timers[0].is_finished:
-				#print("Ā")
 				create_liquid(0)
 				item_timers[0].reset()
 	#func get_adjacent_building(to_direction):

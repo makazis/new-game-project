@@ -28,9 +28,14 @@ window/stretch/mode="canvas_items"
 [file_customization]
 
 folder_colors={
+"res://Scenes/": "red",
 "res://Scripts/InvScripts/": "orange",
-"res://Scripts/MenuScripts/": "yellow"
+"res://Scripts/TileScripts/": "yellow"
 }
+
+[global_group]
+
+Liquid="The blue balls that fly around and stuff"
 
 [input]
 
