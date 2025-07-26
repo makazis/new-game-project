@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://dwcvl8jam6yo8"]
+[gd_scene load_steps=3 format=3 uid="uid://dwcvl8jam6yo8"]
 
 [ext_resource type="Texture2D" uid="uid://bn7jbmdexof1c" path="res://Assets/tileset.png" id="1_pyyhs"]
+[ext_resource type="Script" uid="uid://p36nrfpb03kf" path="res://Scripts/TileScripts/default_script.gd" id="1_uf0k2"]
 
-[node name="Collector" type="Node2D"]
+[node name="Turn" type="Node2D"]
+script = ExtResource("1_uf0k2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1

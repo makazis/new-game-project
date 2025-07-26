@@ -23,5 +23,5 @@ func assign(new_ID):
 	if "Bouncy" in liquid_data[new_ID]:
 		physics_material_override.bounce=liquid_data[new_ID]["Bouncy"]
 	if "Friction" in liquid_data[new_ID]:
-		physics_material_override.bounce=liquid_data[new_ID]["Friction"]
-	
+		#physics_material_override.bounce=liquid_data[new_ID]["Friction"]
+		linear_damp=0.1*(1-liquid_data[new_ID]["Friction"])

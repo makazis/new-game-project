@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://coafhl214v3dj"]
+[gd_scene load_steps=3 format=3 uid="uid://coafhl214v3dj"]
 
 [ext_resource type="Texture2D" uid="uid://bn7jbmdexof1c" path="res://Assets/tileset.png" id="1_1hl2o"]
+[ext_resource type="Script" uid="uid://p36nrfpb03kf" path="res://Scripts/TileScripts/default_script.gd" id="1_n2kfg"]
 
 [node name="Emiter" type="Node2D"]
+script = ExtResource("1_n2kfg")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
