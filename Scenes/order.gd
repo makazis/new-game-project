@@ -17,7 +17,7 @@ func weighted_choice(weights=[]):
 
 var orders_completed=0
 var money=0
-
+var offered_requests=[]
 class Need:
 	# Min obtaining level, how hard is it to obtain in bulk, 
 	var liquid_distrib=[
@@ -56,3 +56,5 @@ class Need:
 	func complete():
 		Order.money+=money_for_this
 		Order.orders_completed+=1
+func _ready():
+	offered_requests.append(Need.new())
