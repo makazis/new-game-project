@@ -70,7 +70,7 @@ class building:
 	func per_frame(delta):
 		if classification_id == 3: #Emitter 
 			if item_timers[0].is_finished:
-				create_liquid(0)
+				create_liquid(5)
 				item_timers[0].reset()
 	#func get_adjacent_building(to_direction):
 	#

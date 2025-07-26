@@ -10,6 +10,7 @@ size = Vector2(16, 12)
 script = ExtResource("1_0s0p2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.693607, 0.605028, 0.452584, 1)
 texture_filter = 1
 texture = ExtResource("1_ioukh")
 region_enabled = true
