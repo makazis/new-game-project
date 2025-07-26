@@ -12,7 +12,7 @@ func _input(event):
 			camera_zoom *= 1.1
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			camera_zoom *= 0.9
-
+	Global.camera_zoom=camera_zoom
 func _process(delta: float) -> void:
 	if Global.drag_locked:
 		return
@@ -23,6 +23,7 @@ func _process(delta: float) -> void:
 			just_pressed = false
 			mouse_previous_position = get_viewport().get_mouse_position()
 		position += (mouse_previous_position - get_viewport().get_mouse_position()) / camera_zoom
+		Global.camera_pos=position
 		mouse_previous_position = get_viewport().get_mouse_position()
 	else:
 		just_pressed = true

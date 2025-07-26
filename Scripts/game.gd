@@ -1,5 +1,6 @@
 extends Node2D
 
+#This is only for the buildings that require actual 
 class building:
 	var id : int
 	var classification_id : int
@@ -15,8 +16,9 @@ class building:
 		object = load(Global.buildings[in_buildings_id]["ModelPath"]).instantiate()
 		parent.add_child(object)
 		rotate(in_direction)
-		object.position = position
-	
+		object.position = position*16+Vector2(8,8)
+		if not position in Global.taken_squares:
+			Global.taken_squares[position]=classification_id
 	func rotate(in_direction) -> void:
 		direction = in_direction % 4
 		# print(direction)

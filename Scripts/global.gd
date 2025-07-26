@@ -9,12 +9,29 @@ func getNewId() -> int:
 
 var buildings = [
 	{
+		"Name" = "Conveyor",
+		"ToolTip" = "Transports Items",
+		"ModelPath" = "res://Assets/Models/Conveyor.tscn",
+	},
+	{
+		"Name" = "Collector",
+		"ToolTip" = "Collects Items",
+		"ModelPath" = "res://Assets/Models/Collector.tscn",
+	},
+	{
+		"Name" = "Turn",
+		"ToolTip" = "Transports Items to another direction",
+		"ModelPath" = "res://Assets/Models/Turn.tscn",
+	},
+	{
 		"Name" = "Emmiter",
 		"ToolTip" = "Emmits Extractium",
 		"ModelPath" = "res://Assets/Models/Emiter.tscn",
 	}
 ]
-
+var camera_zoom=1
+var camera_pos=Vector2(0,0)
+var taken_squares={}
 @onready var item_loaded=preload("res://Scenes/inventory_item.tscn")
 
 var Player_Inventory = []
@@ -30,7 +47,7 @@ func _ready():
 	#gives 100 items?
 	for i in range(100):
 		var new_item= item_loaded.instantiate()
-		new_item.assign(randi_range(0,1))
+		new_item.assign(randi_range(0,3))
 		add_item_to_inv(new_item)
 		
 func add_item_to_inv(added_item):

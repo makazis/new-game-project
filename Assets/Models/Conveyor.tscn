@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqa5vwv3b7yo4"]
+
+[ext_resource type="Texture2D" uid="uid://bn7jbmdexof1c" path="res://Assets/tileset.png" id="1_bbslk"]
+
+[node name="Conveyor" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_bbslk")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)

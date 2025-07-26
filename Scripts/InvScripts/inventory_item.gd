@@ -9,12 +9,20 @@ func assign(new_ID):
 	var item_data=[
 		{
 			"Name":"Conveyor",
-			"Texture Path":"res://Assets/conveyor.png"
+			"Texture Path":"res://Assets/Icons/conveyor.png"
 		},
 		{
-			"Name":"Collectorr",
-			"Texture Path":"res://Assets/collector.png"
+			"Name":"Collector",
+			"Texture Path":"res://Assets/Icons/collector.png"
 		},
+		{
+			"Name":"Turn",
+			"Texture Path":"res://Assets/Icons/conveyor_turn.png"
+		},
+		{
+			"Name":"Emitter",
+			"Texture Path":"res://Assets/Icons/Emiter.png"
+		}
 	]
 	item_texture=item_data[new_ID]["Texture Path"]
 	item_name=item_data[new_ID]["Name"]

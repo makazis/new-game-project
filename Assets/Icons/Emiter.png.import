@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbp3ubh6k4c26"
-path="res://.godot/imported/collector.png-e956a210c6589db4c34bd4bef94f63cc.ctex"
+uid="uid://cinwcvl7wahgl"
+path="res://.godot/imported/Emiter.png-ee957f94c8a107c039b2f97fc78dbc63.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/collector.png"
-dest_files=["res://.godot/imported/collector.png-e956a210c6589db4c34bd4bef94f63cc.ctex"]
+source_file="res://Assets/Icons/Emiter.png"
+dest_files=["res://.godot/imported/Emiter.png-ee957f94c8a107c039b2f97fc78dbc63.ctex"]
 
 [params]
 

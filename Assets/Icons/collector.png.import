@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4fll2q7g8yiu"
-path="res://.godot/imported/conveyor_turn.png-c9b1d0f4e78f1507d560752508b4e13b.ctex"
+uid="uid://bbp3ubh6k4c26"
+path="res://.godot/imported/collector.png-1a93676d3e86f6129c1f2eebdd2d091c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/conveyor_turn.png"
-dest_files=["res://.godot/imported/conveyor_turn.png-c9b1d0f4e78f1507d560752508b4e13b.ctex"]
+source_file="res://Assets/Icons/collector.png"
+dest_files=["res://.godot/imported/collector.png-1a93676d3e86f6129c1f2eebdd2d091c.ctex"]
 
 [params]
 
