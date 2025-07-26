@@ -56,5 +56,5 @@ class Need:
 	func complete():
 		Order.money+=money_for_this
 		Order.orders_completed+=1
-func _ready():
-	offered_requests.append(Need.new())
+# func _ready():
+# 	offered_requests.append(Need.new())
