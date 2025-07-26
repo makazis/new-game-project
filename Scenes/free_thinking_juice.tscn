@@ -1,4 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dkriwqbhomaqo"]
+[gd_scene load_steps=6 format=3 uid="uid://dkriwqbhomaqo"]
+
+[ext_resource type="Script" uid="uid://d2a82k7koo4qs" path="res://Scripts/free_thinking_juice.gd" id="1_y6tui"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_y6tui"]
+friction = 0.9
+bounce = 0.1
 
 [sub_resource type="Gradient" id="Gradient_algyu"]
 offsets = PackedFloat32Array(0.519481, 0.857143)
@@ -13,9 +19,12 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_onhwu"]
-radius = 3.0
+radius = 2.0
 
 [node name="Free Thinker Juice" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_y6tui")
+gravity_scale = 0.0
+script = ExtResource("1_y6tui")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1

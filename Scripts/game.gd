@@ -1,5 +1,7 @@
 extends Node2D
 
+
+
 #This is only for the buildings that require actual 
 class Local_Timer:
 	var time_left : float
@@ -9,15 +11,17 @@ class Local_Timer:
 	func _init(in_period) -> void:
 		internal_timer=Timer.new()
 		internal_timer.timeout.connect(on_timeout)
+		Global.game.add_child(internal_timer)
 		is_finished=false
 		period=in_period
+		reset()
 	func on_timeout():
 		is_finished=true
 	func reset():
 		is_finished=false
-		internal_timer.wait_time=period
-		internal_timer.start()
+		internal_timer.start(period)
 class building:
+	var liquid=preload("res://Scenes/free_thinking_juice.tscn")
 	var id : int
 	var classification_id : int
 	var name : String
@@ -26,12 +30,14 @@ class building:
 	var direction : int
 	var storage: Dictionary
 	var item_timers : Array
+	var direction_vector : Vector2
 	func _init(in_buildings_id, in_direction, parent, position) -> void:
 		id = Global.getNewId()
 		classification_id = in_buildings_id
 		name = Global.buildings[in_buildings_id]["Name"]
 		tool_tip = Global.buildings[in_buildings_id]["ToolTip"]
 		object = load(Global.buildings[in_buildings_id]["ModelPath"]).instantiate()
+		direction_vector=[Vector2(-1,0),Vector2(0,-1),Vector2(1,0),Vector2(0,1)][in_direction]	
 		parent.add_child(object)
 		rotate(in_direction)
 		storage={}
@@ -48,16 +54,17 @@ class building:
 	func per_frame(delta):
 		if classification_id == 3: #Emitter 
 			if item_timers[0].is_finished:
-				add_to_storage("Neothol",1)
+				#print("Ā")
+				create_liquid(0)
 				item_timers[0].reset()
-			if item_timers[1].is_finished:
-
-				add_to_storage("Neothol",1)
-				item_timers[1].reset()
 	#func get_adjacent_building(to_direction):
-	#	var direction_vector=[Vector2(-1,0),Vector2(0,-1),Vector2(1,0),Vector2(0,1)][to_direction]
-
-
+	#
+	func create_liquid(liquid_ID):
+		var new_particle=liquid.instantiate()
+		Global.game.add_child(new_particle)
+		new_particle.assign(liquid_ID)
+		new_particle.position=object.position
+		new_particle.apply_force(direction_vector*1000)
 	func add_to_storage(item,quantity):
 		if not item in storage:
 			storage[item]=quantity
@@ -68,6 +75,7 @@ class building:
 			Global.buildings_2.erase(self)
 var temp_building : building
 func _ready() -> void:
+	Global.game = self
 	temp_building = building.new(0, 0, $Buildings, Vector2(0,0))
 
 var delay = 0

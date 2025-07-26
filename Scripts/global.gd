@@ -34,6 +34,8 @@ var camera_zoom=1
 var camera_pos=Vector2(0,0)
 var taken_squares={}
 var buildings_2=[]
+
+var game=null 
 @onready var item_loaded=preload("res://Scenes/inventory_item.tscn")
 
 var Player_Inventory = []
