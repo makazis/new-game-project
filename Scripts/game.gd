@@ -38,6 +38,7 @@ class building:
 	var inputs=[]
 	var _parent
 	var max_storage: int
+	var total_storage: int
 	func _init(in_buildings_id, in_direction, parent, position) -> void:
 		id = Global.getNewId()
 		classification_id = in_buildings_id
@@ -79,9 +80,9 @@ class building:
 				create_liquid(0)
 				item_timers[0].reset()
 		if classification_id==5:
-			if item_timers[1].is_finished:
+			if item_timers[0].is_finished:
 				slow_Update()
-				item_timers[1].reset()
+				item_timers[0].reset()
 	#func get_adjacent_building(to_direction):
 	#
 	func create_liquid(liquid_ID):
@@ -107,7 +108,6 @@ class building:
 		return Global.taken_squares[pos+Global.directional_vectors[_direction]]
 	func slow_Update():
 		if classification_id == 5: #Merger
-			print(storage)
 			var did_something=false
 			for i in Global.crafting_tree:
 				if not did_something:
@@ -123,12 +123,13 @@ class building:
 					if can_do:
 						for requirement in i["Req"]:
 							storage[requirement]-=i["Req"][requirement]
+							total_storage-=i["Req"][requirement]
 						for result in i["Result"]:
 							for ii in range(i["Result"][result]):
 								create_liquid(result)
 						did_something=true
 	func Update():
-		
+		print(storage)
 		if classification_id ==6:
 			
 			for i in storage:
@@ -136,19 +137,23 @@ class building:
 					Global.in_storage_items[i]=storage[i]
 				else:
 					Global.in_storage_items[i]+=storage[i]
+			total_storage=0
 			storage={}
 			print(Global.in_storage_items)
 	func explode():
+		print(storage)
 		for liquid_name in storage:
-			for liquid_instance in storage[liquid_name]:
+			print(liquid_name)
+			for liquid_instance in range(storage[liquid_name]):
 				var new_particle=liquid.instantiate()
+				
 				_parent.add_child(new_particle)
 				new_particle.assign(Global.liquid_map_name_to_id[liquid_name])
 				new_particle.position=object.position
 				var aangle=randf_range(0,PI*2)
 				new_particle.linear_velocity.x=cos(aangle)*20
 				new_particle.linear_velocity.y=sin(aangle)*20
-				
+				print(new_particle.liquid_name)
 
 					
 		die()
