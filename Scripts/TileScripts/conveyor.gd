@@ -3,6 +3,7 @@ extends Node2D
 @onready var area=$Area2D
 var colliding_bodies=[]
 var direction = 0
+var building
 var direction_vector=Vector2(-1,0)
 func _physics_process(delta: float) -> void:
 	for i in colliding_bodies:

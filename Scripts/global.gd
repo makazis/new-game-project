@@ -28,13 +28,28 @@ var buildings = [
 		"ToolTip" = "Emmits Extractium",
 		"ModelPath" = "res://Assets/Models/Emiter.tscn",
 	},{}, #Saved for the delete item
-	
+	{
+		"Name" = "Fuser",
+		"ToolTip" = "Fuses liquids together into new ones",
+		"ModelPath" = "res://Assets/Models/Merger.tscn",
+	}
+]
+var crafting_tree=[
+	{ #This is cursed, but oh well
+		"Req":{
+			"Neothol":4
+		},
+		"Result":{
+			1:1,
+			0:1
+		}
+	}
 ]
 var camera_zoom=1
 var camera_pos=Vector2(0,0)
 var taken_squares={}
 var buildings_2=[]
-
+var directional_vectors=[Vector2(-1,0),Vector2(0,-1),Vector2(1,0),Vector2(0,1)]
 var game=null 
 @onready var item_loaded=preload("res://Scenes/inventory_item.tscn")
 
@@ -53,7 +68,9 @@ func _ready():
 		var new_item= item_loaded.instantiate()
 		new_item.assign(randi_range(0,3))
 		add_item_to_inv(new_item)
-		
+	var new_item= item_loaded.instantiate()
+	new_item.assign(5)
+	add_item_to_inv(new_item)
 func add_item_to_inv(added_item):
 	var item_is_in_inventory=false
 	#check if item exists

@@ -7,10 +7,12 @@ friction = 0.0
 bounce = 0.1
 
 [sub_resource type="Gradient" id="Gradient_algyu"]
+resource_local_to_scene = true
 offsets = PackedFloat32Array(0.519481, 0.857143)
 colors = PackedColorArray(0, 0.435294, 0.678431, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_iuruo"]
+resource_local_to_scene = true
 gradient = SubResource("Gradient_algyu")
 width = 6
 height = 6
