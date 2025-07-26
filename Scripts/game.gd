@@ -81,7 +81,6 @@ func _ready() -> void:
 
 var delay = 0
 func _process(delta: float) -> void:
-
 	for i in Global.buildings_2:
 		i.per_frame(delta)
 var inv_open=true
