@@ -57,4 +57,5 @@ class Need:
 		Order.money+=money_for_this
 		Order.orders_completed+=1
 func _ready():
-	offered_requests.append(Need.new())
+	for i in range(3):
+		offered_requests.append(Need.new(orders_completed))

@@ -68,6 +68,5 @@ visible = false
 
 [node name="Buildings" type="Node2D" parent="."]
 modulate = Color(0.796131, 0.881554, 0.876849, 1)
-z_index = -1
 
 [editable path="Camera2D/Inspector"]

@@ -34,6 +34,10 @@ func assign(new_ID):
 		{
 			"Name":"Storer",
 			"Texture Path":"res://Assets/Icons/Storer.png"
+		},
+		{
+			"Name":"Rubble",
+			"Texture Path":"res://Assets/Icons/Rubble.png"
 		}
 	]
 	item_texture=item_data[new_ID]["Texture Path"]

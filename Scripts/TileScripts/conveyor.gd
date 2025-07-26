@@ -13,8 +13,8 @@ func _physics_process(delta: float) -> void:
 		else:
 			i.apply_force(Vector2(global_position.x-i.global_position.x,0)*delta*1000)
 		var their_velocity=i.linear_velocity.distance_to(Vector2(0,0))
-		if their_velocity>12:
-			i.linear_velocity/=their_velocity/12
+		#if their_velocity>12:
+		#	i.linear_velocity/=their_velocity/12
 			
 
 
