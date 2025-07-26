@@ -40,7 +40,7 @@ class building:
 	var max_storage: int
 	var total_storage: int
 	var tags=[]
-	func _init(in_buildings_id, in_direction, parent, position) -> void:
+	func _init(in_buildings_id, in_direction, parent, position, more_data={}) -> void:
 		id = Global.getNewId()
 		classification_id = in_buildings_id
 		name = Global.buildings[in_buildings_id]["Name"]
