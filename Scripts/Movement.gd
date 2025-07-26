@@ -12,6 +12,7 @@ func _input(event):
 			camera_zoom *= 1.1
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			camera_zoom *= 0.9
+		camera_zoom = clamp(camera_zoom, 0.3, 10)
 	Global.camera_zoom=camera_zoom
 func _process(delta: float) -> void:
 	if Global.drag_locked:

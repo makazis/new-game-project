@@ -2,58 +2,7 @@ extends Node2D
 
 #This is only for the buildings that require actual 
 
-class building:
-	var id : int
-	var classification_id : int
-	var name : String
-	var tool_tip : String
-	var object : Node2D
-	var direction : int
-	var storage: Dictionary
-	var item_timer : float
-	func _init(in_buildings_id, in_direction, parent, position) -> void:
-		id = Global.getNewId()
-		classification_id = in_buildings_id
-		name = Global.buildings[in_buildings_id]["Name"]
-		tool_tip = Global.buildings[in_buildings_id]["ToolTip"]
-		object = load(Global.buildings[in_buildings_id]["ModelPath"]).instantiate()
-		parent.add_child(object)
-		rotate(in_direction)
-		storage={}
-		object.position = position*16+Vector2(8,8)
-		if not position in Global.taken_squares:
-			Global.taken_squares[position]=self
-		item_timer=0
-		Global.buildings_2.append(self)
-	func rotate(in_direction) -> void:
-		direction = in_direction % 4
-		# print(direction)
-		#Don't question this line it is perfect and shouldn't be tuched (mkaestexture right dir)
-		object.get_node("Sprite2D").region_rect = Rect2(direction*16,object.get_node("Sprite2D").region_rect.position.y,object.get_node("Sprite2D").region_rect.size.x,object.get_node("Sprite2D").region_rect.size.y)
-	func per_frame(delta):
-		if classification_id == 3: #Emitter 
-			item_timer+=delta
-			if item_timer>1.5:
-				item_timer-=1.5
-				add_to_storage("Neothol",1)
-	func add_to_storage(item,quantity):
-		if not item in storage:
-			storage[item]=quantity
-		else:
-			storage[item]+=quantity
-	func die():
-		if self in Global.buildings:
-			Global.buildings_2.erase(self)
-var temp_building : building
-func _ready() -> void:
-	temp_building = building.new(0, 0, $Buildings, Vector2(0,0))
-
-var delay = 0
 func _process(delta: float) -> void:
-	delay += delta
-	if delay > 1:
-		delay = 0
-		temp_building.rotate(temp_building.direction + 1)
 	for i in Global.buildings_2:
 		i.per_frame(delta)
 var inv_open=true
