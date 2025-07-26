@@ -31,6 +31,7 @@ class building:
 	var storage: Dictionary
 	var item_timers : Array
 	var direction_vector : Vector2
+	var pos : Vector2
 	func _init(in_buildings_id, in_direction, parent, position) -> void:
 		id = Global.getNewId()
 		classification_id = in_buildings_id
@@ -42,9 +43,11 @@ class building:
 		direction_vector=[Vector2(-1,0),Vector2(0,-1),Vector2(1,0),Vector2(0,1)][in_direction]	
 		object.direction=in_direction
 		object.direction_vector=direction_vector
+		object.building=self
 		parent.add_child(object)
 		rotate(in_direction)
 		storage={}
+		pos=position
 		object.position = position*16+Vector2(8,8)
 		if not position in Global.taken_squares:
 			Global.taken_squares[position]=self
@@ -66,17 +69,44 @@ class building:
 		var new_particle=liquid.instantiate()
 		Global.game.add_child(new_particle)
 		new_particle.assign(liquid_ID)
-		new_particle.position=object.position
-		new_particle.apply_force(direction_vector*1000)
+		new_particle.position=object.position+Vector2(randi_range(-3,3),randi_range(-3,3))
+		new_particle.apply_force(direction_vector*1000+Vector2(randi_range(-7,7),randi_range(-7,7))*25)
 	func add_to_storage(item,quantity):
 		if not item in storage:
 			storage[item]=quantity
 		else:
 			storage[item]+=quantity
 	func die():
-		if self in Global.buildings:
+		if self in Global.buildings_2:
 			Global.buildings_2.erase(self)
-			
+	
+	func has_building(_direction):
+		return pos+Global.directional_vectors[_direction] in Global.taken_squares
+	func get_building(_direction):
+		return Global.taken_squares[pos+Global.directional_vectors[_direction]]
+	func Update():
+		if classification_id == 5: #Merger
+			print(storage)
+			var did_something=false
+			for i in Global.crafting_tree:
+				if not did_something:
+					var can_do=true
+					for requirement in i["Req"]:
+						if can_do:
+							if not requirement in storage:
+								can_do=false
+								continue
+							elif storage[requirement]<i["Req"][requirement]:
+								can_do=false
+								continue
+					if can_do:
+						for requirement in i["Req"]:
+							storage[requirement]-=i["Req"][requirement]
+						for result in i["Result"]:
+							for ii in range(i["Result"][result]):
+								create_liquid(result)
+						print(i)
+						did_something=true
 func _ready() -> void:
 	Global.game = self
 

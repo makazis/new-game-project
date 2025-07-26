@@ -18,7 +18,14 @@ var liquid_data=[
 ]
 func assign(new_ID):
 	ID=new_ID
-	name=liquid_data[new_ID]["Name"]
+	liquid_name=liquid_data[new_ID]["Name"]
+	#sprite.texture=GradientTexture2D.new()
+	#sprite.texture.width=6
+	#sprite.texture.height=6
+	#sprite.texture.fill_from=Vector2(0.5,0.5)
+	#sprite.texture.fill="radial"
+	#sprite.texture.gradient.offsets=PackedFloat32Array([0.519,0.857])
+	
 	sprite.texture.gradient.set_color(0,liquid_data[new_ID]["Color"])
 	if "Bouncy" in liquid_data[new_ID]:
 		physics_material_override.bounce=liquid_data[new_ID]["Bouncy"]

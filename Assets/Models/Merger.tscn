@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ir0n5pb08xpj"]
+
+[ext_resource type="Script" uid="uid://p36nrfpb03kf" path="res://Scripts/TileScripts/default_script.gd" id="1_ivnqj"]
+[ext_resource type="Texture2D" uid="uid://bn7jbmdexof1c" path="res://Assets/tileset.png" id="1_pswdy"]
+
+[node name="Merger" type="Node2D"]
+script = ExtResource("1_ivnqj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_pswdy")
+region_enabled = true
+region_rect = Rect2(0, 64, 16, 16)
