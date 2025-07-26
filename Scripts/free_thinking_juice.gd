@@ -74,7 +74,74 @@ var liquid_data=[
 		"Color":Color(0.841, 0.594, 0.0),
 		"Bouncy":0.6,
 		"Friction":0.6
-	}
+	},{  
+		"Name": "Cursed Blood",  # Human Blood + Nightmare Fuel (1:1)  
+		"Color": Color(0.45, 0.0, 0.1),  
+		"Bouncy": 0.7,  
+		"Friction": 0.3,  
+		"Aging": {  
+			"In": 45,  
+			"To": 6  # Turns back into Human Blood  
+		}  
+	},  
+	{  
+		"Name": "Golden Milk",  # Milk + Arionite (3:1)  
+		"Color": Color(0.9, 0.8, 0.4),  
+		"Bouncy": 0.5,  
+		"Friction": 0.4,  
+		"Accelerating": {  
+			"Speed Needed": 50,  
+			"To": 10  # Becomes Cheese  
+		}  
+	},  
+	{  
+		"Name": "Black Water",  # Water + Nightmare Fuel (2:1)  
+		"Color": Color(0.1, 0.1, 0.2),  
+		"Bouncy": 0.1,  
+		"Friction": 0.8,  
+		"Aging": {  
+			"In": 60,  
+			"To": 0  # Reverts to Water  
+		}  
+	},  
+	{  
+		"Name": "Blood Cheese",  # Cheese + Human Blood (1:2)  
+		"Color": Color(0.6, 0.3, 0.2),  
+		"Bouncy": 0.4,  
+		"Friction": 0.7  
+	},  
+	{  
+		"Name": "Holy Milk",  # Milk + Holy Water (1:1)  
+		"Color": Color(0.8, 0.85, 0.9),  
+		"Bouncy": 0.3,  
+		"Friction": 0.6,  
+		"Aging": {  
+			"In": 20,  
+			"To": 5  # Spoils into Evil Milk  
+		}  
+	},  
+	{  
+		"Name": "Necrotic Slime",  # Ichor + Evil Milk (1:1)  
+		"Color": Color(0.3, 0.4, 0.1),  
+		"Bouncy": 0.2,  
+		"Friction": 0.9  
+	},  
+	{  
+		"Name": "Purified Ichor",  # Ichor + Pure Water (1:3)  
+		"Color": Color(0.5, 0.3, 0.7),  
+		"Bouncy": 0.6,  
+		"Friction": 0.4  
+	},    
+	{  
+		"Name": "Unholy Water",  # Holy Water + Evil Milk (1:1)  
+		"Color": Color(0.4, 0.3, 0.5),  
+		"Bouncy": 0.5,  
+		"Friction": 0.5,  
+		"Aging": {  
+			"In": 15,  
+			"To": 6  # Decays into Evil Milk  
+		}  
+	}  
 ]
 func _ready() -> void:
 	if Global.liquid_map_id_to_name.size()==0:
