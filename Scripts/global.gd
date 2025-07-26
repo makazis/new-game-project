@@ -55,6 +55,24 @@ var crafting_tree=[
 		"Result":{
 			2:1
 		}
+	},
+	{
+		"Req":{
+			"Human Blood":6,
+			"Holy Water":2
+		},
+		"Result":{
+			4:1
+		}
+	},
+	{
+		"Req":{
+			"Human Blood":6,
+			"Evil Milk":6
+		},
+		"Result":{
+			7:6
+		}
 	}
 ]
 var in_storage_items={}
