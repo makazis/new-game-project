@@ -1,7 +1,22 @@
 extends Node2D
 
 #This is only for the buildings that require actual 
-
+class Local_Timer:
+	var time_left : float
+	var period : int
+	var internal_timer : Timer
+	var is_finished: bool
+	func _init(in_period) -> void:
+		internal_timer=Timer.new()
+		internal_timer.timeout.connect(on_timeout)
+		is_finished=false
+		period=in_period
+	func on_timeout():
+		is_finished=true
+	func reset():
+		is_finished=false
+		internal_timer.wait_time=period
+		internal_timer.start()
 class building:
 	var id : int
 	var classification_id : int
@@ -10,7 +25,7 @@ class building:
 	var object : Node2D
 	var direction : int
 	var storage: Dictionary
-	var item_timer : float
+	var item_timers : Array
 	func _init(in_buildings_id, in_direction, parent, position) -> void:
 		id = Global.getNewId()
 		classification_id = in_buildings_id
@@ -23,7 +38,7 @@ class building:
 		object.position = position*16+Vector2(8,8)
 		if not position in Global.taken_squares:
 			Global.taken_squares[position]=self
-		item_timer=0
+		item_timers=[Local_Timer.new(1.5),Local_Timer.new(1)]
 		Global.buildings_2.append(self)
 	func rotate(in_direction) -> void:
 		direction = in_direction % 4
@@ -32,10 +47,17 @@ class building:
 		object.get_node("Sprite2D").region_rect = Rect2(direction*16,object.get_node("Sprite2D").region_rect.position.y,object.get_node("Sprite2D").region_rect.size.x,object.get_node("Sprite2D").region_rect.size.y)
 	func per_frame(delta):
 		if classification_id == 3: #Emitter 
-			item_timer+=delta
-			if item_timer>1.5:
-				item_timer-=1.5
+			if item_timers[0].is_finished:
 				add_to_storage("Neothol",1)
+				item_timers[0].reset()
+			if item_timers[1].is_finished:
+
+				add_to_storage("Neothol",1)
+				item_timers[1].reset()
+	#func get_adjacent_building(to_direction):
+	#	var direction_vector=[Vector2(-1,0),Vector2(0,-1),Vector2(1,0),Vector2(0,1)][to_direction]
+
+
 	func add_to_storage(item,quantity):
 		if not item in storage:
 			storage[item]=quantity
