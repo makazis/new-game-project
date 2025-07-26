@@ -61,7 +61,9 @@ var liquid_data=[
 func _ready() -> void:
 	if Global.liquid_map_id_to_name.size()==0:
 		for i in liquid_data.size():
-			Global.liquid_map_id_to_name
+			Global.liquid_map_id_to_name[i]=liquid_data[i]["Name"]
+			Global.liquid_map_name_to_id[liquid_data[i]["Name"]]=i
+			
 			
 var cached_assigned_ID=0
 func assign(new_ID):
@@ -81,4 +83,9 @@ func assign(new_ID):
 		my_timer.timeout.connect(cached_assign)
 func cached_assign():
 	assign(cached_assigned_ID)
-		
+func _physics_process(delta: float) -> void:
+	var global_mouse_pos=get_viewport().get_camera_2d().get_global_mouse_position()
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		if global_mouse_pos.distance_to(global_position)<75:
+			var aangle=atan2(global_mouse_pos.y-global_position.y,global_mouse_pos.x-global_position.x)
+			apply_force(Vector2(-cos(aangle),-sin(aangle))*delta*1200)

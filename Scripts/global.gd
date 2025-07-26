@@ -91,7 +91,6 @@ var crafting_tree=[
 		}
 	}
 ]
-var in_storage_items={}
 var camera_zoom=1
 var camera_pos=Vector2(0,0)
 var taken_squares={}

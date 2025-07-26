@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b683t7ljuei3w"]
+
+[ext_resource type="Script" uid="uid://s8xb1qnyurk6" path="res://Scenes/order.gd" id="1_70v6w"]
+
+[node name="Orders" type="Node"]
+script = ExtResource("1_70v6w")

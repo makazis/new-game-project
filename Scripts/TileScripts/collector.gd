@@ -25,24 +25,31 @@ func _physics_process(delta: float) -> void:
 					storage[i.liquid_name]+=1
 				total_in_storage+=1
 				i.queue_free()
+	building.storage=storage	
 	if building.has_building(direction):
 		if building.get_building(direction).can_intake_liquid:
 			var del_storage=true
+			var push_left = 5
 			for i in storage:
 				if ((direction+2)-building.get_building(direction).object.direction)%4 in building.get_building(direction).inputs:
 					if building.get_building(direction).total_storage>building.get_building(direction).max_storage:
 						del_storage=false
+						
 						continue
+					var pushed=min(storage[i],push_left)
 					if not i in building.get_building(direction).storage :
-						building.get_building(direction).storage[i]=storage[i]
+						building.get_building(direction).storage[i]=pushed
 						
 					else:
-						building.get_building(direction).storage[i]+=storage[i]
-					building.get_building(direction).total_storage+=storage[i]
-					total_in_storage-=storage[i]
+						building.get_building(direction).storage[i]+=pushed
+					building.get_building(direction).total_storage+=pushed
+					total_in_storage-=pushed
+					storage[i]-=pushed
+					push_left-=pushed
 					building.get_building(direction).Update()
-			if del_storage:
-				storage={}
+	building.storage=storage
+			#if del_storage:
+			#	storage={}
 			
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Liquid"):

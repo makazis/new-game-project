@@ -39,6 +39,7 @@ class building:
 	var _parent
 	var max_storage: int
 	var total_storage: int
+	var tags=[]
 	func _init(in_buildings_id, in_direction, parent, position) -> void:
 		id = Global.getNewId()
 		classification_id = in_buildings_id
@@ -61,8 +62,11 @@ class building:
 			Global.taken_squares[position]=self
 		item_timers=[Local_Timer.new(1.5),Local_Timer.new(1)]
 		Global.buildings_2.append(self)
-		if classification_id in [5,6]:
+		if classification_id in [1,5,6]:
 			can_intake_liquid=true
+		if classification_id==1:
+			max_storage=100
+			tags=["Unstable"]
 		if classification_id==5: 
 			inputs=[1,3]
 			max_storage=50
@@ -129,21 +133,21 @@ class building:
 								create_liquid(result)
 						did_something=true
 	func Update():
-		print(storage)
-		if classification_id ==6:
-			
-			for i in storage:
-				if not i in Global.in_storage_items:
-					Global.in_storage_items[i]=storage[i]
-				else:
-					Global.in_storage_items[i]+=storage[i]
-			total_storage=0
-			storage={}
-			print(Global.in_storage_items)
+		pass
+		#print(storage)
+		#if classification_id ==6:
+		#	
+		#	for i in storage:
+		#		if not i in Global.in_storage_items:
+		#			Global.in_storage_items[i]=storage[i]
+		#		else:
+		#			Global.in_storage_items[i]+=storage[i]
+		#	total_storage=0
+		#	storage={}
+			#print(Global.in_storage_items)
 	func explode():
-		print(storage)
 		for liquid_name in storage:
-			print(liquid_name)
+			#print(liquid_name)
 			for liquid_instance in range(storage[liquid_name]):
 				var new_particle=liquid.instantiate()
 				
@@ -151,9 +155,8 @@ class building:
 				new_particle.assign(Global.liquid_map_name_to_id[liquid_name])
 				new_particle.position=object.position
 				var aangle=randf_range(0,PI*2)
-				new_particle.linear_velocity.x=cos(aangle)*20
-				new_particle.linear_velocity.y=sin(aangle)*20
-				print(new_particle.liquid_name)
+				new_particle.linear_velocity.x=cos(aangle)*50
+				new_particle.linear_velocity.y=sin(aangle)*50
 
 					
 		die()
@@ -181,7 +184,12 @@ func _process(delta: float) -> void:
 			if inspect_last_storage_keys == inspect_gotten_building.storage:
 				inspect_last_storage_keys = inspect_gotten_building.storage
 				var finalText = ""
-				finalText += inspect_gotten_building.name + "\n"
+				finalText += inspect_gotten_building.name
+				if inspect_gotten_building.can_intake_liquid:
+					finalText+=" ("+str(inspect_gotten_building.total_storage)+"/"+str(inspect_gotten_building.max_storage)+")" 
+				finalText+="\n"
+				for iter_tags in inspect_gotten_building.tags:
+					finalText += iter_tags + "\n"
 				for iter_storage in inspect_gotten_building.storage.keys():
 					finalText += iter_storage + " (" + str(inspect_gotten_building.storage[iter_storage]) + ")\n"
 				$Camera2D/Inspector/Panel/Label.text = finalText
