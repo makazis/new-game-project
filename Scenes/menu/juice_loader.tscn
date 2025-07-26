@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8a7yryfkamlw"]
+
+[ext_resource type="Script" uid="uid://db8ijre3y2ram" path="res://Scripts/MenuScripts/juice_loader.gd" id="1_ij6l7"]
+
+[node name="JuiceLoader" type="Node2D"]
+z_index = 20
+script = ExtResource("1_ij6l7")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(640, 360, 640, 0, 704, -16, 704, 408)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D2"]
+polygon = PackedVector2Array(-1, 0, 0, 360, -64, 408, -64, -16)

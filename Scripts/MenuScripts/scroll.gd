@@ -8,7 +8,7 @@ var offsets = {
 	"Exit" = -370
 }
 var switch_speed = 2
-
+var transition = false
 func _process(delta: float) -> void:
 	velocity_y += (offsets[move_to] - position.y) * delta * 0.5
 	position.y += velocity_y
@@ -22,8 +22,10 @@ func _process(delta: float) -> void:
 
 
 func _on_button_button_up() -> void:
+	if transition: return
 	get_tree().quit()
 
 
 func _on_start_a_new_game_button_up() -> void:
-	get_tree().change_scene_to_file("res://Scenes/game.tscn")
+	if transition: return
+	get_parent().get_node("Transition").transition("res://Scenes/game.tscn")

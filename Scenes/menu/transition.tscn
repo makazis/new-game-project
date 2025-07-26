@@ -1,8 +1,14 @@
-[gd_scene format=3 uid="uid://4bjdrngq16hn"]
+[gd_scene load_steps=2 format=3 uid="uid://4bjdrngq16hn"]
+
+[ext_resource type="Script" uid="uid://bkqarmuvv534s" path="res://Scripts/MenuScripts/transition.gd" id="1_fklqt"]
 
 [node name="Transition" type="Node2D"]
+z_index = 20
+script = ExtResource("1_fklqt")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-polygon = PackedVector2Array(-1, 0, 0, 360, 640, 360, 640, 0, 704, -16, 704, 408, -64, 408, -64, -16)
+polygon = PackedVector2Array(-1, -200, 0, 360, 640, 360, 640, -200, 704, -200, 704, 408, -64, 408, -64, -200)
+
+[node name="Juices" type="Node2D" parent="."]
