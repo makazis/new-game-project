@@ -93,7 +93,75 @@ var crafting_tree=[
 			8:1,
 			5:1
 		}
-	}
+	},
+	{
+		"Req":{
+			"Human Blood":3,
+			"Nightmare Fuel":1
+		},
+		"Result":{
+			11:3
+		}
+	},
+	{
+		"Req":{
+			"Milk":5,
+			"Arionite":1
+		},
+		"Result":{
+			12:5
+		}
+	},
+	{
+		"Req":{
+			"Water":25,
+			"Nightmare Fuel":1
+		},
+		"Result":{
+			13:5
+		}
+	},
+	{
+		"Req":{
+			"Cheese":1,
+			"Human Blood":2
+		},
+		"Result":{
+			14:1
+		}
+	},{
+		"Req":{
+			"Milk":2,
+			"Holy Water":1
+		},
+		"Result":{
+			15:2
+		}
+	},{
+		"Req":{
+			"Ichor":1,
+			"Evil Milk":12
+		},
+		"Result":{
+			16:12
+		}
+	},{
+		"Req":{
+			"Ichor":2,
+			"Holy Water":2
+		},
+		"Result":{
+			17:1
+		}
+	},{
+		"Req":{
+			"Evil Milk":2,
+			"Holy Water":1
+		},
+		"Result":{
+			18:1
+		}
+	},
 ]
 var camera_zoom=1
 var camera_pos=Vector2(0,0)
