@@ -106,6 +106,7 @@ var liquid_map_name_to_id={}
 var liquid_map_id_to_name={}
 @onready var item_loaded=preload("res://Scenes/inventory_item.tscn")
 
+var menu_open = false
 var Player_Inventory = []
 var Player_hotbar = [] #Epic inventory management system
 
