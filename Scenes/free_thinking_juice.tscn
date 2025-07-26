@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkriwqbhomaqo"]
+
+[ext_resource type="Script" uid="uid://d2a82k7koo4qs" path="res://Scripts/free_thinking_juice.gd" id="1_y6tui"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_y6tui"]
+friction = 0.9
+bounce = 0.1
+
+[sub_resource type="Gradient" id="Gradient_algyu"]
+offsets = PackedFloat32Array(0.519481, 0.857143)
+colors = PackedColorArray(0, 0.435294, 0.678431, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_iuruo"]
+gradient = SubResource("Gradient_algyu")
+width = 6
+height = 6
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_onhwu"]
+radius = 2.0
+
+[node name="Free Thinker Juice" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_y6tui")
+gravity_scale = 0.0
+script = ExtResource("1_y6tui")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+rotation = 0.000967557
+texture = SubResource("GradientTexture2D_iuruo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_onhwu")
