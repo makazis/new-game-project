@@ -48,9 +48,7 @@ func _process(delta):
 			if Tbutton.visible:
 				if Tbutton.item.ID==4:
 					if (global_mouse_pos/16).floor() in Global.taken_squares:
-						Global.taken_squares[(global_mouse_pos/16).floor()].object.queue_free()
 						Global.taken_squares[(global_mouse_pos/16).floor()].die()
-						Global.taken_squares.erase((global_mouse_pos/16).floor())
 						
 				elif not (global_mouse_pos/16).floor() in Global.taken_squares:	
 				#This line disproves the existance of god

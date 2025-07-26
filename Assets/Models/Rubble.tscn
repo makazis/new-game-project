@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bglgh13fyt3n0"]
+
+[ext_resource type="Script" uid="uid://p36nrfpb03kf" path="res://Scripts/TileScripts/default_script.gd" id="1_tlg0o"]
+[ext_resource type="Texture2D" uid="uid://bn7jbmdexof1c" path="res://Assets/tileset.png" id="2_cax51"]
+
+[node name="Turn" type="Node2D"]
+script = ExtResource("1_tlg0o")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_cax51")
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 16)

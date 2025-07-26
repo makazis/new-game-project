@@ -37,12 +37,18 @@ var buildings = [
 		"Name" = "Storer",
 		"ToolTip" = "Puts Liquids into production",
 		"ModelPath" = "res://Assets/Models/Storer.tscn",
+	},
+	{
+		"Name" = "Rubble",
+		"ToolTip" = "Does absolutely nothing and dies",
+		"ModelPath" = "res://Assets/Models/Rubble.tscn",
 	}
+	
 ]
 var crafting_tree=[
 	{ #This is cursed, but oh well
 		"Req":{
-			"Neothol":6
+			"Water":6
 		},
 		"Result":{
 			1:1
@@ -50,7 +56,7 @@ var crafting_tree=[
 	},
 	{ 
 		"Req":{
-			"Compressed Neothol":6
+			"Pure Water":6
 		},
 		"Result":{
 			2:1
@@ -73,6 +79,16 @@ var crafting_tree=[
 		"Result":{
 			7:6
 		}
+	},
+	{
+		"Req":{
+			"Water":1,
+			"Lythosine":1
+		},
+		"Result":{
+			8:1,
+			5:1
+		}
 	}
 ]
 var in_storage_items={}
@@ -82,6 +98,9 @@ var taken_squares={}
 var buildings_2=[]
 var directional_vectors=[Vector2(-1,0),Vector2(0,-1),Vector2(1,0),Vector2(0,1)]
 var game=null 
+
+var liquid_map_name_to_id={} 
+var liquid_map_id_to_name={}
 @onready var item_loaded=preload("res://Scenes/inventory_item.tscn")
 
 var Player_Inventory = []

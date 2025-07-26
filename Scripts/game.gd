@@ -1,5 +1,6 @@
 extends Node2D
-
+var liquid=preload("res://Scenes/free_thinking_juice.tscn")
+	
 
 
 #This is only for the buildings that require actual 
@@ -34,6 +35,7 @@ class building:
 	var pos : Vector2
 	var can_intake_liquid : bool
 	var inputs=[]
+	var _parent
 	func _init(in_buildings_id, in_direction, parent, position) -> void:
 		id = Global.getNewId()
 		classification_id = in_buildings_id
@@ -41,7 +43,7 @@ class building:
 		tool_tip = Global.buildings[in_buildings_id]["ToolTip"]
 		object = load(Global.buildings[in_buildings_id]["ModelPath"]).instantiate()
 		
-			
+		direction=in_direction
 		direction_vector=[Vector2(-1,0),Vector2(0,-1),Vector2(1,0),Vector2(0,1)][in_direction]	
 		object.direction=in_direction
 		object.direction_vector=direction_vector
@@ -50,6 +52,7 @@ class building:
 		rotate(in_direction)
 		storage={}
 		pos=position
+		_parent=parent
 		object.position = position*16+Vector2(8,8)
 		if not position in Global.taken_squares:
 			Global.taken_squares[position]=self
@@ -70,7 +73,7 @@ class building:
 	func per_frame(delta):
 		if classification_id == 3: #Emitter 
 			if item_timers[0].is_finished:
-				create_liquid(5)
+				create_liquid(0)
 				item_timers[0].reset()
 	#func get_adjacent_building(to_direction):
 	#
@@ -88,12 +91,15 @@ class building:
 	func die():
 		if self in Global.buildings_2:
 			Global.buildings_2.erase(self)
-	
+		if pos in Global.taken_squares:
+			Global.taken_squares.erase(pos)
+		self.object.queue_free()
 	func has_building(_direction):
 		return pos+Global.directional_vectors[_direction] in Global.taken_squares
 	func get_building(_direction):
 		return Global.taken_squares[pos+Global.directional_vectors[_direction]]
 	func Update():
+		print(storage)
 		if classification_id == 5: #Merger
 			var did_something=false
 			for i in Global.crafting_tree:
@@ -123,9 +129,19 @@ class building:
 					Global.in_storage_items[i]+=storage[i]
 			storage={}
 			print(Global.in_storage_items)
+	func explode():
+		die()
+		var new_building=building.new(7,direction,_parent,pos)
+		Global.buildings_2.append(new_building)
+		Global.taken_squares[pos]=new_building
 func _ready() -> void:
 	Global.game = self
+	
 
+	var new_particle=liquid.instantiate()
+	add_child(new_particle)
+	new_particle.assign(8)
+	new_particle.position=Vector2(200,200)
 var delay = 0
 func _process(delta: float) -> void:
 	for i in Global.buildings_2:
