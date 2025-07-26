@@ -42,6 +42,10 @@ var buildings = [
 		"Name" = "Rubble",
 		"ToolTip" = "Does absolutely nothing and dies",
 		"ModelPath" = "res://Assets/Models/Rubble.tscn",
+	},{
+		"Name" = "Barrel",
+		"ToolTip" = "Stores Certain items",
+		"ModelPath" = "res://Assets/Models/Barrel.tscn",
 	}
 	
 ]

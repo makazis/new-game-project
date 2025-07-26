@@ -39,7 +39,6 @@ func _physics_process(delta: float) -> void:
 					var pushed=min(storage[i],push_left)
 					if not i in building.get_building(direction).storage :
 						building.get_building(direction).storage[i]=pushed
-						
 					else:
 						building.get_building(direction).storage[i]+=pushed
 					building.get_building(direction).total_storage+=pushed
