@@ -176,11 +176,13 @@ var inspect_open = false
 var inspect_gotten_building = null
 var inspect_last_storage_keys = {}
 
+var mouse_on_inspect_menu=false
+
 func _process(delta: float) -> void:
 	for i in Global.buildings_2:
 		i.per_frame(delta)
 	if inspect_open:
-		if last_mouse_position == get_global_mouse_position():
+		if mouse_on_inspect_menu:
 			if inspect_last_storage_keys == inspect_gotten_building.storage:
 				inspect_last_storage_keys = inspect_gotten_building.storage
 				var finalText = ""
@@ -203,8 +205,9 @@ func _process(delta: float) -> void:
 			if not Global.selecting_hotbar:
 				var gotten_building = Global.getBuildingFromPos(get_global_mouse_position())
 				if gotten_building:
+					mouse_on_inspect_menu=true
 					$Camera2D/Inspector.visible = true
-					$Camera2D/Inspector.position = $Camera2D.get_local_mouse_position()
+					$Camera2D/Inspector.position = $Camera2D.get_local_mouse_position()+Vector2(-10,-10)
 					var finalText = ""
 					finalText += gotten_building.name + "\n"
 					for iter_storage in gotten_building.storage.keys():
@@ -225,3 +228,11 @@ func _input(event):
 		Global.drag_locked=not inv_open
 		$CanvasLayer/Inventory.demiload()
 		$CanvasLayer/GUI.demiload()
+
+
+func _on_panel_mouse_entered() -> void:
+	mouse_on_inspect_menu=true
+
+
+func _on_panel_mouse_exited() -> void:
+	mouse_on_inspect_menu=false

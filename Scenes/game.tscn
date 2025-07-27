@@ -69,6 +69,7 @@ script = ExtResource("4_1l0tm")
 
 [node name="Panel" parent="Camera2D/Inspector" index="0"]
 offset_bottom = 150.0
+mouse_filter = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 layer = 2
@@ -87,5 +88,8 @@ mouse_filter = 2
 [node name="Buildings" type="Node2D" parent="."]
 modulate = Color(0.796131, 0.881554, 0.876849, 1)
 z_index = -1
+
+[connection signal="mouse_entered" from="Camera2D/Inspector/Panel" to="." method="_on_panel_mouse_entered"]
+[connection signal="mouse_exited" from="Camera2D/Inspector/Panel" to="." method="_on_panel_mouse_exited"]
 
 [editable path="Camera2D/Inspector"]
