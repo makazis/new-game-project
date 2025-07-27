@@ -66,23 +66,22 @@ visible = false
 script = ExtResource("4_1l0tm")
 
 [node name="Inspector" parent="Camera2D" instance=ExtResource("8_v158k")]
+visible = false
+offset_right = 0.0
+offset_bottom = 0.0
 
-[node name="Panel" parent="Camera2D/Inspector" index="0"]
-offset_bottom = 150.0
-mouse_filter = 1
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+[node name="LoadScreen" type="CanvasLayer" parent="Camera2D"]
 layer = 2
 
-[node name="JuiceLoader" parent="Camera2D/CanvasLayer" instance=ExtResource("9_h4fw4")]
+[node name="JuiceLoader" parent="Camera2D/LoadScreen" instance=ExtResource("9_h4fw4")]
 
 [node name="CanvasLayer2" type="CanvasLayer" parent="Camera2D"]
 layer = 3
 
-[node name="CanvasLayer3" type="CanvasLayer" parent="Camera2D"]
+[node name="EscMenu" type="CanvasLayer" parent="Camera2D"]
 layer = 4
 
-[node name="QuickMenu" parent="Camera2D/CanvasLayer3" instance=ExtResource("10_ldgsr")]
+[node name="QuickMenu" parent="Camera2D/EscMenu" instance=ExtResource("10_ldgsr")]
 mouse_filter = 2
 
 [node name="Buildings" type="Node2D" parent="."]
@@ -91,5 +90,6 @@ z_index = -1
 
 [connection signal="mouse_entered" from="Camera2D/Inspector/Panel" to="." method="_on_panel_mouse_entered"]
 [connection signal="mouse_exited" from="Camera2D/Inspector/Panel" to="." method="_on_panel_mouse_exited"]
+[connection signal="mouse_entered" from="Camera2D/Inspector/Panel/ScrollContainer" to="." method="_on_scroll_container_mouse_entered"]
 
 [editable path="Camera2D/Inspector"]

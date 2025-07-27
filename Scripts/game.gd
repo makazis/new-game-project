@@ -186,11 +186,10 @@ func _ready() -> void:
 	new_particle.assign(8)
 	new_particle.position=Vector2(200,200)
 var delay = 0
-var last_mouse_position = Vector2(0,0)
 var inspect_open = false
 var inspect_gotten_building = null
 var inspect_last_storage_keys = {}
-
+var inspector_global_pos = Vector2.ZERO
 var mouse_on_inspect_menu=false
 
 func _process(delta: float) -> void:
@@ -201,16 +200,12 @@ func _process(delta: float) -> void:
 		if mouse_on_inspect_menu:
 			if inspect_last_storage_keys == inspect_gotten_building.storage:
 				inspect_last_storage_keys = inspect_gotten_building.storage
+				$Camera2D/Inspector/Panel/Label.text = inspect_gotten_building.name
 				var finalText = ""
-				finalText += inspect_gotten_building.name
-				if inspect_gotten_building.can_intake_liquid:
-					finalText+=" ("+str(inspect_gotten_building.total_storage)+"/"+str(inspect_gotten_building.max_storage)+")" 
-				finalText+="\n"
-				for iter_tags in inspect_gotten_building.tags:
-					finalText += iter_tags + "\n"
 				for iter_storage in inspect_gotten_building.storage.keys():
 					finalText += iter_storage + " (" + str(inspect_gotten_building.storage[iter_storage]) + ")\n"
-				$Camera2D/Inspector/Panel/Label.text = finalText
+				$Camera2D/Inspector/Panel/ScrollContainer/VBoxContainer/Label.text = finalText
+				$Camera2D/Inspector.global_position = inspector_global_pos
 		else:
 			inspect_gotten_building = null
 			inspect_open = false
@@ -224,15 +219,15 @@ func _process(delta: float) -> void:
 				if gotten_building:
 					mouse_on_inspect_menu=true
 					$Camera2D/Inspector.visible = true
-					$Camera2D/Inspector.position = $Camera2D.get_local_mouse_position()+Vector2(10,-10)
+					$Camera2D/Inspector.position = $Camera2D.get_local_mouse_position()+Vector2(-10,-10)
+					inspector_global_pos = $Camera2D/Inspector.global_position
+					$Camera2D/Inspector/Panel/Label.text = gotten_building.name
 					var finalText = ""
-					finalText += gotten_building.name + "\n"
 					for iter_storage in gotten_building.storage.keys():
 						finalText += iter_storage + " (" + str(gotten_building.storage[iter_storage]) + ")\n"
-					$Camera2D/Inspector/Panel/Label.text = finalText
+					$Camera2D/Inspector/Panel/ScrollContainer/VBoxContainer/Label.text = finalText
 					inspect_gotten_building = gotten_building
 					inspect_last_storage_keys = gotten_building.storage
-					last_mouse_position = get_global_mouse_position()
 					inspect_open = true
 		else:
 			GUI.can_place_buildings=true
@@ -254,3 +249,7 @@ func _on_panel_mouse_entered() -> void:
 
 func _on_panel_mouse_exited() -> void:
 	mouse_on_inspect_menu=false
+
+
+func _on_scroll_container_mouse_entered() -> void:
+	mouse_on_inspect_menu=true

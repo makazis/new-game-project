@@ -81,7 +81,7 @@ func _process(delta):
 						if not Global.has_item_in_inventory(Tbutton.item.ID):
 							Tbutton.clear_item()
 							Tbutton.visible=false
-				
+	Global.hands_free = not Tbutton.visible				
 	Tbutton.position=get_viewport().get_mouse_position()+Vector2(-320,-360)+[Vector2(0,20),Vector2(40,40),Vector2(20,80),Vector2(-20,60)][selected_rotation]
 func demiload():
 	for i in Global.Player_hotbar.size():
