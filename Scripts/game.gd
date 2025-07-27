@@ -149,6 +149,7 @@ class building:
 		#	storage={}
 			#print(Global.in_storage_items)
 	func explode(force_mult=1.):
+		Global.camera_shake+=force_mult*6
 		for liquid_name in storage:
 			#print(liquid_name)
 			for liquid_instance in range(storage[liquid_name]):

@@ -4,6 +4,7 @@ var camera_zoom = 1
 var mouse_previous_position = Vector2(0,0)
 var just_pressed = false
 
+
 func _unhandled_input(event):
 	if Global.drag_locked:
 		return
@@ -28,3 +29,8 @@ func _process(delta: float) -> void:
 		mouse_previous_position = get_viewport().get_mouse_position()
 	else:
 		just_pressed = true
+	if Global.camera_shake>0.02:
+		var angle=randf_range(0,TAU)
+		offset.x=cos(angle)*pow(Global.camera_shake,1.3)
+		offset.y=sin(angle)*pow(Global.camera_shake,1.3)
+		Global.camera_shake/=1.09
