@@ -81,7 +81,7 @@ class building:
 	func per_frame(delta):
 		if classification_id == 3: #Emitter 
 			if item_timers[0].is_finished:
-				create_liquid(2)
+				create_liquid(0)
 				item_timers[0].reset()
 		if classification_id==5:
 			if item_timers[0].is_finished:
@@ -145,7 +145,7 @@ class building:
 		#	total_storage=0
 		#	storage={}
 			#print(Global.in_storage_items)
-	func explode():
+	func explode(force_mult=1.):
 		for liquid_name in storage:
 			#print(liquid_name)
 			for liquid_instance in range(storage[liquid_name]):
@@ -155,14 +155,26 @@ class building:
 				new_particle.assign(Global.liquid_map_name_to_id[liquid_name])
 				new_particle.position=object.position
 				var aangle=randf_range(0,PI*2)
-				new_particle.linear_velocity.x=cos(aangle)*50
-				new_particle.linear_velocity.y=sin(aangle)*50
+				new_particle.linear_velocity.x=cos(aangle)*25*force_mult
+				new_particle.linear_velocity.y=sin(aangle)*25*force_mult
 
 					
 		die()
 		var new_building=building.new(7,direction,_parent,pos)
 		Global.buildings_2.append(new_building)
 		Global.taken_squares[pos]=new_building
+	func release_liquid(force_mult=0.2):
+		for liquid_name in storage:
+			#print(liquid_name)
+			for liquid_instance in range(storage[liquid_name]):
+				var new_particle=liquid.instantiate()
+				
+				_parent.add_child(new_particle)
+				new_particle.assign(Global.liquid_map_name_to_id[liquid_name])
+				new_particle.position=object.position
+				var aangle=randf_range(0,PI*2)
+				new_particle.linear_velocity.x=cos(aangle)*25*force_mult
+				new_particle.linear_velocity.y=sin(aangle)*25*force_mult
 func _ready() -> void:
 	Global.game = self
 
@@ -207,7 +219,7 @@ func _process(delta: float) -> void:
 				if gotten_building:
 					mouse_on_inspect_menu=true
 					$Camera2D/Inspector.visible = true
-					$Camera2D/Inspector.position = $Camera2D.get_local_mouse_position()+Vector2(-10,-10)
+					$Camera2D/Inspector.position = $Camera2D.get_local_mouse_position()+Vector2(10,-10)
 					var finalText = ""
 					finalText += gotten_building.name + "\n"
 					for iter_storage in gotten_building.storage.keys():

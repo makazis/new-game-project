@@ -17,7 +17,7 @@ func _physics_process(delta: float) -> void:
 		if abs(dist_x)+abs(dist_y)<7:
 			if total_in_storage<100:
 				if randi_range(1,50)<=total_in_storage-50:
-					building.explode()
+					building.explode(total_in_storage/50)
 					continue
 				if not i.liquid_name in storage:
 					storage[i.liquid_name]=1

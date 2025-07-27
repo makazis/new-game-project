@@ -56,14 +56,16 @@ func _process(delta):
 						var new_item=item_class.instantiate()
 						new_item.assign(Global.taken_squares[(global_mouse_pos/16).floor()].classification_id)
 						Global.add_item_to_inv(new_item)
+						Global.taken_squares[(global_mouse_pos/16).floor()].release_liquid()
 						Global.taken_squares[(global_mouse_pos/16).floor()].die()
+						
 						demiload()
 				elif not (global_mouse_pos/16).floor() in Global.taken_squares:	
 					#This line disproves the existance of god
 				#why, WHY
 				#I prayed, and god answered, this line is fixed now
 					var new_building=get_parent().get_parent().building.new(Tbutton.item.ID,selected_rotation,get_parent().get_parent().get_child(4),(global_mouse_pos/16).floor())
-
+						
 					Global.remove_from_inventory(Tbutton.item.ID,1)
 					if not Global.has_item_in_inventory(Tbutton.item.ID):
 						Tbutton.clear_item()
