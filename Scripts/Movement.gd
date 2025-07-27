@@ -4,7 +4,7 @@ var camera_zoom = 1
 var mouse_previous_position = Vector2(0,0)
 var just_pressed = false
 
-func _input(event):
+func _unhandled_input(event):
 	if Global.drag_locked:
 		return
 	if event is InputEventMouseButton and event.is_pressed():
