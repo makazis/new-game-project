@@ -9,17 +9,20 @@ var shop_open = false
 @onready var options = $Options
 @onready var orders = $Orders
 @onready var shop = $Shop
+@onready var money = $Money
 
 var rectracted_positions = {
-	"heading" = Vector2(-220,5),
+	"heading" = Vector2(-250,5),
 	"options" = Vector2(-150,70),
-	"orders" = Vector2(640,5)
+	"orders" = Vector2(640,5),
+	"money" = Vector2(-95,70)
 }
 
 var default_positions = {
 	"heading" = Vector2(0,5),
 	"options" = Vector2(0,70),
-	"orders" = Vector2(440,5)
+	"orders" = Vector2(440,5),
+	"money" = Vector2(155,70)
 }  
 
 func _ready() -> void:
@@ -27,6 +30,7 @@ func _ready() -> void:
 	options.position = rectracted_positions["options"]
 	orders.position = rectracted_positions["orders"]
 	shop.position = rectracted_positions["orders"]
+	money.position = rectracted_positions["money"]
 
 	
 func _process(delta: float) -> void:
@@ -37,6 +41,7 @@ func _process(delta: float) -> void:
 	if open:
 		heading.position += (default_positions["heading"] - heading.position) * delta * open_speed
 		options.position += (default_positions["options"] - options.position) * delta * open_speed
+		money.position += (default_positions["money"] - money.position) * delta * open_speed
 		if quest_open:
 			orders.position += (default_positions["orders"] - orders.position) * delta * open_speed
 		else:
@@ -49,6 +54,7 @@ func _process(delta: float) -> void:
 		heading.position += (rectracted_positions["heading"] - heading.position) * delta * open_speed
 		options.position += (rectracted_positions["options"] - options.position) * delta * open_speed
 		orders.position += (rectracted_positions["orders"] - orders.position) * delta * open_speed
+		money.position += (rectracted_positions["money"] - money.position) * delta * open_speed
 		shop.position += (rectracted_positions["orders"] - shop.position) * delta * open_speed
 
 func load_quests():

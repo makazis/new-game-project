@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://bbdux4myeagsv" path="res://Scripts/follow.gd" id="4_v158k"]
 [ext_resource type="PackedScene" uid="uid://c40uy6qtedf84" path="res://Scenes/inventory.tscn" id="5_i6g32"]
 [ext_resource type="PackedScene" uid="uid://dfh277eii8aw0" path="res://Scenes/gui.tscn" id="5_wowpa"]
-[ext_resource type="PackedScene" uid="uid://yjpghm7e7nno" uid="uid://yjpghm7e7nno" path="res://Scenes/menu/inspector.tscn" id="8_v158k"]
+[ext_resource type="PackedScene" uid="uid://yjpghm7e7nno" path="res://Scenes/menu/inspector.tscn" id="8_v158k"]
 [ext_resource type="PackedScene" uid="uid://c8a7yryfkamlw" path="res://Scenes/menu/juice_loader.tscn" id="9_h4fw4"]
 [ext_resource type="PackedScene" uid="uid://3tsboa5llafg" path="res://Scenes/menu/quick_menu.tscn" id="10_ldgsr"]
 [ext_resource type="Script" uid="uid://cqbonl3dqf1c" path="res://Scripts/juice/hider.gd" id="11_o5yvi"]
