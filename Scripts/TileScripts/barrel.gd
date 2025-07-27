@@ -13,7 +13,7 @@ func _physics_process(delta: float) -> void:
 	building.total_storage=total_in_storage
 	for i in colliding_bodies:
 		if i.linear_velocity.distance_to(Vector2(0,0))>20 and not exploded:
-			building.explode()
+			building.explode(2)
 			exploded=true
 			queue_free()
 	#building.storage=storage
