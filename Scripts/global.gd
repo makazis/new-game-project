@@ -161,7 +161,101 @@ var crafting_tree=[
 		"Result":{
 			18:1
 		}
-	},
+	},{
+		"Req":{
+			"Holy Water":3,
+			"Nightmare Fuel":1
+		},
+		"Result":{
+			19:4
+		}
+	},{
+		"Req":{
+			"Human Blood":1,
+			"Unholy Water":4
+		},
+		"Result":{
+			20:1
+		}
+	},{
+		"Req":{
+			"Sinners Flesh":2,
+			"Holy Milk":4
+		},
+		"Result":{
+			21:1
+		}
+	},{
+		"Req":{
+			"Flesh":2,
+			"Ichor": 4
+		},
+		"Result":{
+			22:1
+		}
+	},{
+		"Req":{
+			"Gods Flesh": 1
+		},
+		"Result":{
+			4:4
+		}
+	},{
+		"Req":{
+			"Flesh": 1
+		},
+		"Result":{
+			3:4
+		}
+	},{
+		"Req":{
+			"Sinners Flesh": 1,
+			"Cheese" : 8
+		},
+		"Result":{
+			23:1
+		}
+	},{
+		"Req":{
+			"Pure Water" : 5,
+			"Necrotic Slime" : 1
+		},
+		"Result":{
+			24:1
+		}
+	},{
+		"Req":{
+			"Fuel" : 10,
+			"Arionite": 1
+		},
+		"Result":{
+			25:1
+		}
+	},{
+		"Req":{
+			"Fuel": 4,
+			"Reality Anomaly": 2
+		},
+		"Result":{
+			8:1
+		}
+	},{
+		"Req":{
+			"Flesh": 2,
+			"Acid": 1
+		},
+		"Result":{
+			24:2
+		}
+	},{
+		"Req":{
+			"Acid": 2,
+			"Lythosine": 2
+		},
+		"Result":{
+			0:0
+		}
+	}
 ]
 var camera_zoom=1
 var camera_pos=Vector2(0,0)

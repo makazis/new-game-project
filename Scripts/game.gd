@@ -84,7 +84,7 @@ class building:
 	func per_frame(delta):
 		if classification_id == 3: #Emitter 
 			if item_timers[0].is_finished:
-				create_liquid(0)
+				create_liquid(25)
 				item_timers[0].reset()
 		if classification_id==5:
 			if item_timers[0].is_finished:
