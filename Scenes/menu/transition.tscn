@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c5p87njrgxn1p"]
 
-[ext_resource type="Script" path="res://Scripts/MenuScripts/transition.gd" id="1_fklqt"]
+[ext_resource type="Script" uid="uid://bkqarmuvv534s" path="res://Scripts/MenuScripts/transition.gd" id="1_fklqt"]
 
 [node name="Transition" type="Node2D"]
 z_index = 20
