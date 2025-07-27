@@ -31,7 +31,7 @@ var liquid_data=[
 		"Bouncy":0.4,
 		"Friction":1.0
 	},
-	{ #6 Human blood + 2 holy water = 1 blood of the gods
+	{ #[4#6 Human blood + 2 holy water = 1 blood of the gods
 		"Name":"Ichor",
 		"Color":Color(0.363, 0.217, 0.414),
 		"Bouncy":0.2,
@@ -60,7 +60,7 @@ var liquid_data=[
 		"Color":Color(0.66, 0.0, 0.011),
 		"Bouncy":0.9,
 		"Friction":0.1
-	},{ #Starts somewhere on the map, needs to be transported into your factory, combining this with water makes 1 Lythosine and 1 milk (converts water to milk)
+	},{ #[8#Starts somewhere on the map, needs to be transported into your factory, combining this with water makes 1 Lythosine and 1 milk (converts water to milk)
 		"Name":"Lythosine",
 		"Color":Color(0.796, 0.882, 0.877),
 		"Bouncy":0.9,
