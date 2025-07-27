@@ -9,7 +9,8 @@ var selected_item=null
 var mouse_timer = 0
 var i_pulled_this_from=null
 var selected_rotation=0
-
+var can_place_buildings=true
+var i_pulled_this_iter_from=0
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Rotate Building"):
 		selected_rotation=(selected_rotation+1)%4
@@ -27,7 +28,8 @@ func _process(delta):
 		mouse_timer=0
 	if mouse_timer==2:
 		Global.selecting_hotbar=false
-		for panel in box_container.get_children():
+		for iter_panel in box_container.get_children().size():
+			var panel=box_container.get_children()[iter_panel]
 			if panel.button.is_pressed():
 				
 				#THX kazimir
@@ -42,13 +44,14 @@ func _process(delta):
 							continue
 						Tbutton.update_item(panel.button.item)
 						i_pulled_this_from=panel.button
+						i_pulled_this_iter_from=iter_panel
 						panel.button.clear_item()
 						Tbutton.visible=true
 						
 				if panel.button.item!=null:
 					selected_item=panel.button.item
 					pass
-		if (not Global.selecting_hotbar) and not Global.drag_locked:
+		if (not Global.selecting_hotbar) and not Global.drag_locked and can_place_buildings:
 			if Tbutton.visible:
 				if Tbutton.item.ID==4:
 					if (global_mouse_pos/16).floor() in Global.taken_squares:
@@ -64,13 +67,21 @@ func _process(delta):
 					#This line disproves the existance of god
 				#why, WHY
 				#I prayed, and god answered, this line is fixed now
-					var new_building=get_parent().get_parent().building.new(Tbutton.item.ID,selected_rotation,get_parent().get_parent().get_child(4),(global_mouse_pos/16).floor())
-						
-					Global.remove_from_inventory(Tbutton.item.ID,1)
-					if not Global.has_item_in_inventory(Tbutton.item.ID):
+					var additional_data={}
+					if Tbutton.item.storage.size()>0:
+						additional_data["Storage"]=Tbutton.item.storage
+					var new_building=get_parent().get_parent().building.new(Tbutton.item.ID,selected_rotation,get_parent().get_parent().get_child(4),(global_mouse_pos/16).floor(),additional_data)
+					if Tbutton.item.storage.size()>0:
+						Global.Player_hotbar[i_pulled_this_iter_from]=null
+						i_pulled_this_from.clear_item()
 						Tbutton.clear_item()
 						Tbutton.visible=false
-	Global.hands_free = not Tbutton.visible
+					else:
+						Global.remove_from_inventory(Tbutton.item.ID,1)
+						if not Global.has_item_in_inventory(Tbutton.item.ID):
+							Tbutton.clear_item()
+							Tbutton.visible=false
+				
 	Tbutton.position=get_viewport().get_mouse_position()+Vector2(-320,-360)+[Vector2(0,20),Vector2(40,40),Vector2(20,80),Vector2(-20,60)][selected_rotation]
 func demiload():
 	for i in Global.Player_hotbar.size():

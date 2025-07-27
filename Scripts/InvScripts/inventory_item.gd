@@ -4,6 +4,7 @@ var ID: int = 0
 var item_name: String = "Conveyor"
 var item_count: int = 1
 var item_texture: String = ""
+var storage={}
 
 func assign(new_ID):
 	var item_data=[

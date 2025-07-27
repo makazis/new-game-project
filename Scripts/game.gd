@@ -1,7 +1,7 @@
 extends Node2D
 var liquid=preload("res://Scenes/free_thinking_juice.tscn")
 	
-
+@onready var GUI = $CanvasLayer/GUI
 
 #This is only for the buildings that require actual 
 class Local_Timer:
@@ -73,6 +73,9 @@ class building:
 		if classification_id==6: 
 			inputs=[1]
 			max_storage=1000
+		for i in more_data:
+			if i=="Storage":
+				storage=more_data["Storage"]
 	func rotate(in_direction) -> void:
 		direction = in_direction % 4
 		# print(direction)
@@ -193,6 +196,7 @@ func _process(delta: float) -> void:
 	for i in Global.buildings_2:
 		i.per_frame(delta)
 	if inspect_open:
+		GUI.can_place_buildings=false
 		if mouse_on_inspect_menu:
 			if inspect_last_storage_keys == inspect_gotten_building.storage:
 				inspect_last_storage_keys = inspect_gotten_building.storage
@@ -208,6 +212,7 @@ func _process(delta: float) -> void:
 			$Camera2D/Inspector.visible = false
 	#this isn't else and don't change it or else it will filcker ;/
 	if not inspect_open:
+		
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 			if Global.hands_free:
 				var gotten_building = Global.getBuildingFromPos(get_global_mouse_position())
@@ -224,7 +229,8 @@ func _process(delta: float) -> void:
 					inspect_gotten_building = gotten_building
 					inspect_last_storage_keys = gotten_building.storage
 					inspect_open = true
-	
+		else:
+			GUI.can_place_buildings=true
 	
 var inv_open=true
 func _input(event):

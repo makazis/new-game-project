@@ -215,30 +215,31 @@ func _ready():
 	add_item_to_inv(new_item)
 func add_item_to_inv(added_item):
 	var item_is_in_hotbar=false
-	
-	#check if item exists
-	for iter_item_key in Player_hotbar.size():
-		var iter_item=Player_hotbar[iter_item_key]
-		#Checks if item exists
-		if iter_item==null:
-			continue
-		#Stacks items
-		if iter_item.ID==added_item.ID:
-			iter_item.item_count+=added_item.item_count
-			item_is_in_hotbar=true
-			return
 	var item_is_in_inventory=false
 	#check if item exists
-	for iter_item_key in Player_Inventory.size():
-		var iter_item=Player_Inventory[iter_item_key]
-		#Checks if item exists
-		if iter_item==null:
-			continue
-		#Stacks items
-		if iter_item.ID==added_item.ID:
-			iter_item.item_count+=added_item.item_count
-			item_is_in_inventory=true
-			return
+	if added_item.storage.size()==0:
+		for iter_item_key in Player_hotbar.size():
+			var iter_item=Player_hotbar[iter_item_key]
+			#Checks if item exists
+			if iter_item==null:
+				continue
+			#Stacks items
+			if iter_item.ID==added_item.ID:
+				iter_item.item_count+=added_item.item_count
+				item_is_in_hotbar=true
+				return
+		
+		#check if item exists
+		for iter_item_key in Player_Inventory.size():
+			var iter_item=Player_Inventory[iter_item_key]
+			#Checks if item exists
+			if iter_item==null:
+				continue
+			#Stacks items
+			if iter_item.ID==added_item.ID:
+				iter_item.item_count+=added_item.item_count
+				item_is_in_inventory=true
+				return
 	if not item_is_in_hotbar:
 		for iter_item_key in Player_hotbar.size():
 			if Player_hotbar[iter_item_key]==null:
@@ -251,6 +252,15 @@ func add_item_to_inv(added_item):
 			if Player_Inventory[iter_item_key]==null:
 				Player_Inventory[iter_item_key]=added_item
 				return
+func remove_singleton_from_inventory(item):
+	for iter_item_key in Player_hotbar.size():
+		if Player_hotbar[iter_item_key]==item:
+			Player_hotbar[iter_item_key]=null
+			return
+	for iter_item_key in Player_Inventory.size():
+		if Player_Inventory[iter_item_key]==item:
+			Player_Inventory[iter_item_key]=null
+			return
 func remove_from_inventory(item_ID,count):
 	for iter_item_key in Player_hotbar.size():
 		if Player_hotbar[iter_item_key]==null:
