@@ -6,7 +6,7 @@
 [ext_resource type="FontFile" uid="uid://cejt8mcsnyqw7" path="res://FONTS/VT323.tres" id="3_uffod"]
 [ext_resource type="Script" uid="uid://bubtwrlj54u3n" path="res://Scripts/MenuScripts/scroll.gd" id="5_u7oun"]
 [ext_resource type="FontFile" uid="uid://ca2t6g7c3o17f" path="res://FONTS/VT323/VT323-Regular.ttf" id="6_kwgaw"]
-[ext_resource type="PackedScene" uid="uid://4bjdrngq16hn" path="res://Scenes/menu/transition.tscn" id="7_u7oun"]
+[ext_resource type="PackedScene" uid="uid://c5p87njrgxn1p" path="res://Scenes/menu/transition.tscn" id="7_u7oun"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ufr4i"]
 bg_color = Color(0, 0, 0, 0.462745)

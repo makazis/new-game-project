@@ -66,7 +66,7 @@ var liquid_data=[
 		"Bouncy":0.9,
 		"Friction":0.1
 	},{ #Created when holy water is accelerated to the maximum
-		"Name":"Arionite",
+		"Name":"Arionite", #[9]
 		"Color":Color(0.543, 0.66, 0.781),
 		"Bouncy":1,
 		"Friction":0
@@ -112,7 +112,7 @@ var liquid_data=[
 		"Friction": 0.7  
 	},  
 	{  
-		"Name": "Holy Milk",  # Milk + Holy Water (1:1)  
+		"Name": "Holy Milk",  # Milk + Holy Water (1:1)   #[15]
 		"Color": Color(0.8, 0.85, 0.9),  
 		"Bouncy": 0.3,  
 		"Friction": 0.6,  
@@ -134,7 +134,7 @@ var liquid_data=[
 		"Friction": 0.4  
 	},    
 	{  
-		"Name": "Unholy Water",  # Holy Water + Evil Milk (1:1)  
+		"Name": "Unholy Water",  # Holy Water + Evil Milk (1:1) #[18] 
 		"Color": Color(0.4, 0.3, 0.5),  
 		"Bouncy": 0.5,  
 		"Friction": 0.5,  
@@ -142,7 +142,59 @@ var liquid_data=[
 			"In": 15,  
 			"To": 6  # Decays into Evil Milk  
 		}  
-	}  
+	},
+	{
+		"Name": "Fuel",
+		"Color": Color(0.2,0.2,0.2),
+		"Bouncy": 0.2,
+		"Friction" : 0.5,
+	},
+	{
+		"Name": "Sinners Flesh", #[20]
+		"Color": Color(0.5,0.1,0.1),
+		"Bouncy": 0.5,
+		"Friction" : 0.5,
+	},
+	{
+		"Name": "Flesh", #[21]
+		"Color": Color(0.8,0.1,0.1),
+		"Bouncy": 0.5,
+		"Friction" : 0.5,
+	},
+	{
+		"Name": "Gods Flesh", #[22]
+		"Color": Color(1.0,0.6,0.3),
+		"Bouncy": 0.6,
+		"Friction" : 0.3,
+	},
+	{
+		"Name": "Abominations Flesh",
+		"Color": Color(0.2,0.5,0.3),
+		"Bouncy": 0.2,
+		"Friction" : 0.7,
+	},
+	{
+		"Name": "Acid",
+		"Color": Color(0.3,0.8,0.3),
+		"Bouncy": 0.5,
+		"Friction" : 0.3,
+	},
+	{
+		"Name": "Unstable Particle",
+		"Color": Color(0.9,0.9,1),
+		"Bouncy": 10,
+		"Friction" : -10,
+		"Accelerating": {  
+			"Speed Needed": 1000,  
+			"To": 26  # Becomes Reality anomaly 
+		}
+	},
+	{
+		"Name": "Reality Anomaly",
+		"Color": Color(0,0,0,0.9),
+		"Bouncy": 0,
+		"Friction" : 0,
+	}
 ]
 func _ready() -> void:
 	if Global.liquid_map_id_to_name.size()==0:
