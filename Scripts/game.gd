@@ -198,14 +198,24 @@ func _process(delta: float) -> void:
 	if inspect_open:
 		GUI.can_place_buildings=false
 		if mouse_on_inspect_menu:
-			if inspect_last_storage_keys == inspect_gotten_building.storage:
-				inspect_last_storage_keys = inspect_gotten_building.storage
-				$Camera2D/Inspector/Panel/Label.text = inspect_gotten_building.name
-				var finalText = ""
-				for iter_storage in inspect_gotten_building.storage.keys():
-					finalText += iter_storage + " (" + str(inspect_gotten_building.storage[iter_storage]) + ")\n"
-				$Camera2D/Inspector/Panel/ScrollContainer/VBoxContainer/Label.text = finalText
-				$Camera2D/Inspector.global_position = inspector_global_pos
+			$Camera2D/Inspector/Panel/Label.text = inspect_gotten_building.name
+			var finalText = ""
+			for iter_storage in inspect_gotten_building.storage.keys():
+				finalText += iter_storage + " (" + str(inspect_gotten_building.storage[iter_storage]) + ")\n"
+			$Camera2D/Inspector/Panel/ScrollContainer/VBoxContainer/Label.text = finalText
+			$Camera2D/Inspector.global_position = inspector_global_pos
+			if Order.offered_requests[0].check_if_can_be_completed(inspect_gotten_building.storage):
+				$Camera2D/Inspector/Panel/HBoxContainer/Quest1.visible=true
+			else:
+				$Camera2D/Inspector/Panel/HBoxContainer/Quest1.visible=false
+			if Order.offered_requests[1].check_if_can_be_completed(inspect_gotten_building.storage):
+				$Camera2D/Inspector/Panel/HBoxContainer/Quest2.visible=true
+			else:
+				$Camera2D/Inspector/Panel/HBoxContainer/Quest2.visible=false
+			if Order.offered_requests[2].check_if_can_be_completed(inspect_gotten_building.storage):
+				$Camera2D/Inspector/Panel/HBoxContainer/Quest3.visible=true
+			else:
+				$Camera2D/Inspector/Panel/HBoxContainer/Quest3.visible=false
 		else:
 			inspect_gotten_building = null
 			inspect_open = false
@@ -258,3 +268,28 @@ func _on_panel_mouse_exited() -> void:
 
 func _on_scroll_container_mouse_entered() -> void:
 	mouse_on_inspect_menu=true
+
+func take_items_from_storage_to_quest(storage,quest):
+	for i in quest.request:
+		storage[Global.liquid_map_id_to_name[i]]-=int(quest.request[i])
+		if storage[Global.liquid_map_id_to_name[i]]==0:
+			storage[Global.liquid_map_id_to_name[i]]=null
+func _on_quest_1_button_down() -> void:
+	take_items_from_storage_to_quest(inspect_gotten_building.storage,Order.offered_requests[0])
+	Order.offered_requests[0].complete()
+	Order.offered_requests.remove_at(0)
+	Order.add_new_quest()
+
+
+func _on_quest_2_button_down() -> void:
+	take_items_from_storage_to_quest(inspect_gotten_building.storage,Order.offered_requests[1])
+	Order.offered_requests[1].complete()
+	Order.offered_requests.remove_at(1)
+	Order.add_new_quest()
+
+
+func _on_quest_3_button_down() -> void:
+	take_items_from_storage_to_quest(inspect_gotten_building.storage,Order.offered_requests[2])
+	Order.offered_requests[2].complete()
+	Order.offered_requests.remove_at(2)
+	Order.add_new_quest()
