@@ -17,4 +17,5 @@ func _ready() -> void:
 	addItem("Emmiter","Has a 2x2 water source.\ncreates more water.\n15 $",12,3)
 	addItem("Collector","Collects items.\nsometimes explodes.\n5 $",5,1)
 	addItem("Conveyor","Transports Items.\n\n2 $",2,0)
-		
+	addItem("Extractor","Extracts the first.\nitem to another direction\n75 $",75,0)
+	

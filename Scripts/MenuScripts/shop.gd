@@ -12,11 +12,13 @@ func refresh() -> void:
 	if len(item_name)>14:
 		$VBoxContainer/Name.add_theme_font_size_override("font_size",20)
 	$VBoxContainer/Desc.text = item_desc
+	
+	prepare_item()
+func _process(delta: float) -> void:
 	if item_price > Order.money:
-		$VBoxContainer/Buy.text = "jjjXjjj" 
+		$VBoxContainer/Buy.text = "---x---" 
 	else:
 		$VBoxContainer/Buy.text = "!!!BUY!!!"
-	prepare_item()
 func prepare_item():
 	var temp_item=inventory_item.instantiate()
 	temp_item.assign(item_id)
