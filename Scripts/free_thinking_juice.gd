@@ -185,7 +185,7 @@ var liquid_data=[
 		"Bouncy": 10,
 		"Friction" : -10,
 		"Accelerating": {  
-			"Speed Needed": 1000,  
+			"Speed Needed": 100,  
 			"To": 26  # Becomes Reality anomaly 
 		}
 	},
@@ -193,8 +193,30 @@ var liquid_data=[
 		"Name": "Reality Anomaly",
 		"Color": Color(0,0,0,0.9),
 		"Bouncy": 0,
-		"Friction" : 0,
-	}
+		"Friction" : 3,
+	},
+	{ #27
+		"Name": "Heart of Prometheus",
+		"Color": Color(0,0,0,1),
+		"Bouncy": 0.4,
+		"Friction" : 0.8,
+		"Custom Texture":"res://Assets/CustomSprites/CellOfPrometheus.png",
+		"On Collide":{
+			"Them To":28
+		}
+	},
+	{ #27
+		"Name": "Blood of Prometheus",
+		"Color": Color(0,0,0,0),
+		"Bouncy": 0.8,
+		"Friction" : 1.4,
+		#"Custom Texture":"res://Assets/CustomSprites/CellOfPrometheus.png",
+		"Aging":{
+			"In":40,
+			"To":3
+		}
+	},
+	
 ]
 func _ready() -> void:
 	if Global.liquid_map_id_to_name.size()==0:
@@ -217,6 +239,10 @@ func assign(new_ID):
 		my_timer.start(liquid_data[new_ID]["Aging"]["In"]*randf_range(0.5,1.3))
 		cached_assigned_ID=liquid_data[new_ID]["Aging"]["To"]
 		my_timer.timeout.connect(cached_assign)
+	if "Custom Texture" in liquid_data[new_ID]:
+		sprite.texture=load(liquid_data[new_ID]["Custom Texture"])
+	if "On Collide" in liquid_data[new_ID]:
+		contact_monitor=true
 func cached_assign():
 	assign(cached_assigned_ID)
 func _physics_process(delta: float) -> void:
@@ -231,3 +257,12 @@ func _physics_process(delta: float) -> void:
 	#if ID==9:
 	#	linear_velocity*=1+delta*30
 			
+
+
+func _on_body_entered(body: Node) -> void:
+	if body.is_in_group("Liquid"):
+		print("Aye")
+		if "On Collide" in liquid_data[ID]:
+			if "Them To" in liquid_data[ID]["On Collide"]:
+				print("Ye")
+				body.assign(liquid_data[ID]["On Collide"]["Them To"])

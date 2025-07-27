@@ -20,4 +20,3 @@ func _ready() -> void:
 	addItem("Fuser","Fuses Items into new items.\n\n20 $",20,5)
 	addItem("Storer","Stores items.\n\n75 $",75,6)
 	addItem("Extractor","Extracts Items.\n\n80 $",80,9)
-	

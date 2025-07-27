@@ -39,3 +39,5 @@ texture = SubResource("GradientTexture2D_iuruo")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("CircleShape2D_onhwu")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
