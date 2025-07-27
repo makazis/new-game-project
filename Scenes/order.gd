@@ -56,6 +56,18 @@ class Need:
 	func complete():
 		Order.money+=money_for_this
 		Order.orders_completed+=1
+	func check_if_can_be_completed(storage):
+		var needed_items=request.duplicate(true)
+		for i in storage:
+			for ii in needed_items:
+				if Global.liquid_map_name_to_id[i]==ii:
+					needed_items[ii]=max(0,needed_items[ii]-storage[i])
+		for i in needed_items:
+			if needed_items[i]>0:
+				return false
+		return true
 func _ready():
 	for i in range(3):
 		offered_requests.append(Need.new(orders_completed))
+func add_new_quest():
+	offered_requests.append(Need.new(orders_completed))
