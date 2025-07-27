@@ -180,6 +180,7 @@ var Player_hotbar = [] #Epic inventory management system
 
 var ctimer=0
 var click=false
+var hands_free = true
 
 func _process(delta: float) -> void:
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
