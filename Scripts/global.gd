@@ -223,6 +223,8 @@ func add_item_to_inv(added_item):
 			#Checks if item exists
 			if iter_item==null:
 				continue
+			if iter_item.storage.size()>0:
+				continue
 			#Stacks items
 			if iter_item.ID==added_item.ID:
 				iter_item.item_count+=added_item.item_count
@@ -234,6 +236,8 @@ func add_item_to_inv(added_item):
 			var iter_item=Player_Inventory[iter_item_key]
 			#Checks if item exists
 			if iter_item==null:
+				continue
+			if iter_item.storage.size()>0:
 				continue
 			#Stacks items
 			if iter_item.ID==added_item.ID:
