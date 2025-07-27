@@ -16,6 +16,10 @@ func _input(event: InputEvent) -> void:
 		Tbutton.rotation_degrees=selected_rotation*90
 		#print(selected_rotation,"  ",Tbutton.rotation)
 func _process(delta):
+	if Global.menu_open:
+		position.y += (440 - position.y) * delta * 10
+	else:
+		position.y += (360 - position.y) * delta * 10
 	var global_mouse_pos=get_viewport().get_camera_2d().get_global_mouse_position()
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		mouse_timer+=1

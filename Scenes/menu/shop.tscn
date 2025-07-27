@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://rvuh1xk2t57f"]
+
+[ext_resource type="Script" uid="uid://vq4s58cmywew" path="res://Scripts/MenuScripts/shop.gd" id="1_jyclr"]
+[ext_resource type="FontFile" uid="uid://cejt8mcsnyqw7" path="res://FONTS/VT323.tres" id="1_mbar3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_of8q8"]
+bg_color = Color(0, 0, 0, 0.462745)
+corner_radius_top_left = 10
+corner_radius_bottom_left = 10
+
+[node name="Shop" type="Panel"]
+custom_minimum_size = Vector2(190, 150)
+offset_right = 190.0
+offset_bottom = 150.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_of8q8")
+script = ExtResource("1_jyclr")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+
+[node name="Name" type="Label" parent="VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_mbar3")
+theme_override_font_sizes/font_size = 30
+text = "Machine"
+
+[node name="Desc" type="Label" parent="VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_mbar3")
+theme_override_font_sizes/font_size = 20
+text = "Some subtext
+goes here :D
+0-coins"
+
+[node name="Buy" type="Button" parent="VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_mbar3")
+theme_override_font_sizes/font_size = 30
+text = "!!!BUY!!!"
+
+[connection signal="button_up" from="VBoxContainer/Buy" to="." method="_on_buy_button_up"]

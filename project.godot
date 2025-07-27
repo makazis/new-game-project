@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Global="*res://Scripts/global.gd"
 Order="*res://Scenes/order.gd"
+Bank="*res://Scripts/bank.gd"
 
 [display]
 
