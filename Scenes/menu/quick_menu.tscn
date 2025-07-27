@@ -1,12 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://3tsboa5llafg"]
+[gd_scene load_steps=10 format=3 uid="uid://3tsboa5llafg"]
 
 [ext_resource type="FontFile" uid="uid://cejt8mcsnyqw7" path="res://FONTS/VT323.tres" id="1_76q4n"]
 [ext_resource type="Script" uid="uid://o3vg66brnm8i" path="res://Scripts/MenuScripts/quick_menu.gd" id="1_uti3n"]
 [ext_resource type="Script" uid="uid://bruosfi8fy6cj" path="res://Scripts/MenuScripts/shop_manager.gd" id="3_4thap"]
+[ext_resource type="Script" uid="uid://b1ojgc0v2b28r" path="res://Scripts/MenuScripts/money_update.gd" id="3_r2uiu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uti3n"]
 bg_color = Color(0, 0, 0, 0.462745)
 corner_radius_top_right = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sotfo"]
+bg_color = Color(0, 0, 0, 0.462745)
+corner_radius_bottom_right = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4thap"]
 bg_color = Color(0, 0, 0, 0.462745)
@@ -36,7 +41,7 @@ script = ExtResource("1_uti3n")
 [node name="Heading" type="Panel" parent="."]
 layout_mode = 0
 offset_top = 5.0
-offset_right = 220.0
+offset_right = 250.0
 offset_bottom = 65.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_uti3n")
 
@@ -54,6 +59,27 @@ grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_76q4n")
 theme_override_font_sizes/font_size = 70
 text = "Overflow"
+
+[node name="Money" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 155.0
+offset_top = 70.0
+offset_right = 250.0
+offset_bottom = 90.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_sotfo")
+
+[node name="Label" type="Label" parent="Money"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_76q4n")
+theme_override_font_sizes/font_size = 20
+text = "100000000$"
+script = ExtResource("3_r2uiu")
 
 [node name="Options" type="Panel" parent="."]
 layout_mode = 1
