@@ -22,6 +22,8 @@ fill_to = Vector2(0, 0)
 radius = 2.0
 
 [node name="Free Thinker Juice" type="RigidBody2D" groups=["Liquid"]]
+collision_layer = 2
+collision_mask = 3
 mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_y6tui")
 

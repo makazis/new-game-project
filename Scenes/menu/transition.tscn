@@ -1,12 +1,14 @@
 [gd_scene load_steps=2 format=3 uid="uid://c5p87njrgxn1p"]
 
-[ext_resource type="Script" path="res://Scripts/MenuScripts/transition.gd" id="1_fklqt"]
+[ext_resource type="Script" uid="uid://bkqarmuvv534s" path="res://Scripts/MenuScripts/transition.gd" id="1_fklqt"]
 
 [node name="Transition" type="Node2D"]
 z_index = 20
 script = ExtResource("1_fklqt")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PackedVector2Array(-1, -200, 0, 360, 640, 360, 640, -200, 704, -200, 704, 408, -64, 408, -64, -200)
