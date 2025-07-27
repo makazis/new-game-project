@@ -46,6 +46,10 @@ var buildings = [
 		"Name" = "Barrel",
 		"ToolTip" = "Stores Certain items",
 		"ModelPath" = "res://Assets/Models/Barrel.tscn",
+	},{
+		"Name" = "Extractor",
+		"ToolTip" = "Takes items out",
+		"ModelPath" = "res://Assets/Models/Splitter.tscn",
 	}
 	
 ]
@@ -302,7 +306,7 @@ func _ready():
 			Player_hotbar.append(null)
 
 	#gives 100 items?
-	var starting_items=[5,2,0,1,0,0,1]
+	var starting_items=[5,2,0,1,0,0,1,0,0,0]
 	for i in starting_items.size():
 		for ii in range(starting_items[i]):
 			create_and_add_item(i)
