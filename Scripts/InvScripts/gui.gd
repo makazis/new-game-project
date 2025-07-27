@@ -77,7 +77,7 @@ func _process(delta):
 						Tbutton.clear_item()
 						Tbutton.visible=false
 					else:
-						#Global.remove_from_inventory(Tbutton.item.ID,1)
+						Global.remove_from_inventory(Tbutton.item.ID,1)
 						if not Global.has_item_in_inventory(Tbutton.item.ID):
 							Tbutton.clear_item()
 							Tbutton.visible=false

@@ -257,9 +257,31 @@ var crafting_tree=[
 			"Lythosine": 2
 		},
 		"Result":{
-			0:0
+			25:1
+		}
+	},{
+		"Req":{
+			"Reality Anomaly": 1,
+			"Gods Flesh": 1,
+			"Blood Cheese":1,
+			"Human Blood":10,
+			"Ichor":5,
+			"Nightmare Fuel":5
+		},
+		"Result":{
+			27:1
+		}
+	},{
+		"Req":{
+			"Water": 4,
+			"Heart of Prometheus": 1,
+		},
+		"Result":{
+			28:2,
+			27:1
 		}
 	}
+	
 ]
 var camera_zoom=1
 var camera_pos=Vector2(0,0)

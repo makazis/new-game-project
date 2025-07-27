@@ -186,6 +186,11 @@ func _ready() -> void:
 	add_child(new_particle)
 	new_particle.assign(8)
 	new_particle.position=Vector2(200,200)
+	
+	new_particle=liquid.instantiate()
+	add_child(new_particle)
+	new_particle.assign(27)
+	new_particle.position=Vector2(-200,200)
 var delay = 0
 var inspect_open = false
 var inspect_gotten_building = null
@@ -223,30 +228,30 @@ func _process(delta: float) -> void:
 			$Camera2D/Inspector.visible = false
 	#this isn't else and don't change it or else it will filcker ;/
 	if not inspect_open:
-		
-		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-			if Global.hands_free and not Global.selecting_hotbar:
-				var gotten_building = Global.getBuildingFromPos(get_global_mouse_position())
-				if gotten_building:
-					mouse_on_inspect_menu=true
-					$Camera2D/Inspector.visible = true
-					$Camera2D/Inspector.position = $Camera2D.get_local_mouse_position()+Vector2(-10,-10)
-					inspector_global_pos = $Camera2D/Inspector.global_position
-					$Camera2D/Inspector/Panel/Label.text = gotten_building.name
-					var finalText = ""
-					for iter_storage in gotten_building.storage.keys():
-						finalText += iter_storage + " (" + str(gotten_building.storage[iter_storage]) + ")\n"
-					$Camera2D/Inspector/Panel/ScrollContainer/VBoxContainer/Label.text = finalText
-					inspect_gotten_building = gotten_building
-					inspect_last_storage_keys = gotten_building.storage
-					inspect_open = true
-					if gotten_building.classification_id==6:
-						$Camera2D/Inspector/Panel/HBoxContainer.visible=true
-					else:
-						$Camera2D/Inspector/Panel/HBoxContainer.visible=false
-						
-		else:
-			GUI.can_place_buildings=true
+		if get_viewport().get_mouse_position()[1]<=296:
+			if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+				if Global.hands_free and not Global.selecting_hotbar:
+					var gotten_building = Global.getBuildingFromPos(get_global_mouse_position())
+					if gotten_building:
+						mouse_on_inspect_menu=true
+						$Camera2D/Inspector.visible = true
+						$Camera2D/Inspector.position = $Camera2D.get_local_mouse_position()+Vector2(-10,-10)
+						inspector_global_pos = $Camera2D/Inspector.global_position
+						$Camera2D/Inspector/Panel/Label.text = gotten_building.name
+						var finalText = ""
+						for iter_storage in gotten_building.storage.keys():
+							finalText += iter_storage + " (" + str(gotten_building.storage[iter_storage]) + ")\n"
+						$Camera2D/Inspector/Panel/ScrollContainer/VBoxContainer/Label.text = finalText
+						inspect_gotten_building = gotten_building
+						inspect_last_storage_keys = gotten_building.storage
+						inspect_open = true
+						if gotten_building.classification_id==6:
+							$Camera2D/Inspector/Panel/HBoxContainer.visible=true
+						else:
+							$Camera2D/Inspector/Panel/HBoxContainer.visible=false
+							
+			else:
+				GUI.can_place_buildings=true
 	
 var inv_open=true
 func _input(event):
