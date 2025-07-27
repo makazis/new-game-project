@@ -40,6 +40,8 @@ func _physics_process(delta: float) -> void:
 					if not i in building.get_building(direction).storage :
 						building.get_building(direction).storage[i]=pushed
 					else:
+						if building.get_building(direction).storage[i]==null:
+							building.get_building(direction).storage[i]=0
 						building.get_building(direction).storage[i]+=pushed
 					building.get_building(direction).total_storage+=pushed
 					total_in_storage-=pushed
