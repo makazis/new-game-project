@@ -185,7 +185,7 @@ var liquid_data=[
 		"Bouncy": 10,
 		"Friction" : -10,
 		"Accelerating": {  
-			"Speed Needed": 100,  
+			"Speed Needed": 1000,  
 			"To": 26  # Becomes Reality anomaly 
 		}
 	},
