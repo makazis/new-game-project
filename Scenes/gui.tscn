@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfh277eii8aw0"]
+[gd_scene load_steps=6 format=3 uid="uid://dfh277eii8aw0"]
 
 [ext_resource type="PackedScene" uid="uid://cj2qoo17ml7cw" path="res://Scenes/inventory_panel.tscn" id="1_80edf"]
 [ext_resource type="Script" uid="uid://dq3dygxp04k61" path="res://Scripts/InvScripts/gui.gd" id="1_bm56d"]
 [ext_resource type="Texture2D" uid="uid://ds6tw41h78rqa" path="res://Assets/Icons/Delete.png" id="3_m6o0h"]
 [ext_resource type="PackedScene" uid="uid://dtadk33ruesdt" path="res://Scenes/Item_holder.tscn" id="3_n5m23"]
+[ext_resource type="Texture2D" uid="uid://do1to6xjiojhp" path="res://Assets/Icons/pointer.png" id="5_8kag3"]
 
 [node name="GUI" type="Control"]
 layout_mode = 3
@@ -61,14 +62,34 @@ texture_normal = ExtResource("3_m6o0h")
 
 [node name="TextureButton" parent="." instance=ExtResource("3_n5m23")]
 visible = false
-layout_mode = 0
-offset_left = -320.0
-offset_top = -360.0
-offset_right = -280.0
-offset_bottom = -320.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Label" parent="TextureButton" index="0"]
 visible = false
+
+[node name="TextureRect" type="TextureRect" parent="TextureButton"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -5.0
+offset_right = 25.0
+offset_bottom = 35.0
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_8kag3")
 
 [editable path="HBoxContainer/Panel"]
 [editable path="HBoxContainer/Deletor"]

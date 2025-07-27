@@ -169,7 +169,7 @@ func cached_assign():
 	assign(cached_assigned_ID)
 func _physics_process(delta: float) -> void:
 	var global_mouse_pos=get_viewport().get_camera_2d().get_global_mouse_position()
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and Global.hands_free:
 		if global_mouse_pos.distance_to(global_position)<75:
 			var aangle=atan2(global_mouse_pos.y-global_position.y,global_mouse_pos.x-global_position.x)
 			apply_force(Vector2(-cos(aangle),-sin(aangle))*delta*1200)
