@@ -219,7 +219,7 @@ func _process(delta: float) -> void:
 	if not inspect_open:
 		
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-			if not Global.selecting_hotbar:
+			if Global.hands_free:
 				var gotten_building = Global.getBuildingFromPos(get_global_mouse_position())
 				if gotten_building:
 					mouse_on_inspect_menu=true
