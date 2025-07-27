@@ -185,12 +185,8 @@ func _ready() -> void:
 	var new_particle=liquid.instantiate()
 	add_child(new_particle)
 	new_particle.assign(8)
-	new_particle.position=Vector2(200,200)
+	new_particle.position=Vector2(0,0)
 	
-	new_particle=liquid.instantiate()
-	add_child(new_particle)
-	new_particle.assign(27)
-	new_particle.position=Vector2(-200,200)
 var delay = 0
 var inspect_open = false
 var inspect_gotten_building = null
