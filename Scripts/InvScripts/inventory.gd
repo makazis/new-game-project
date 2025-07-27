@@ -12,6 +12,7 @@ func demiload():
 			$"BoxContainer/Inv Row 3".get_child(i-18).button.update_item(Global.Player_Inventory[i])
 	
 	for i in Global.Player_hotbar.size():
+		$BoxContainer/Hotbar.get_child(i).button.clear_item()
 		if Global.Player_hotbar[i]==null:
 			continue
 		$BoxContainer/Hotbar.get_child(i).button.update_item(Global.Player_hotbar[i])

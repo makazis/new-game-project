@@ -8,7 +8,7 @@ var storage={}
 
 func assign(new_ID):
 	var item_data=[
-		{
+		{ #0
 			"Name":"Conveyor",
 			"Texture Path":"res://Assets/Icons/conveyor.png"
 		},
@@ -16,7 +16,7 @@ func assign(new_ID):
 			"Name":"Collector",
 			"Texture Path":"res://Assets/Icons/collector.png"
 		},
-		{
+		{ #2
 			"Name":"Turn",
 			"Texture Path":"res://Assets/Icons/conveyor_turn.png"
 		},
@@ -24,7 +24,7 @@ func assign(new_ID):
 			"Name":"Emitter",
 			"Texture Path":"res://Assets/Icons/Emiter.png"
 		},
-		{
+		{ #4
 			"Name":"Deletor",
 			"Texture Path":"res://Assets/Icons/Delete.png"
 		},
@@ -32,7 +32,7 @@ func assign(new_ID):
 			"Name":"Fuser",
 			"Texture Path":"res://Assets/Icons/Fuser.png"
 		},
-		{
+		{ #6
 			"Name":"Storer",
 			"Texture Path":"res://Assets/Icons/Storer.png"
 		},
@@ -40,7 +40,7 @@ func assign(new_ID):
 			"Name":"Rubble",
 			"Texture Path":"res://Assets/Icons/Rubble.png"
 		},
-		{
+		{ #8
 			"Name":"Barrel",
 			"Texture Path":"res://Assets/Icons/Barrel.png"
 		}

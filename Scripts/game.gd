@@ -214,7 +214,7 @@ func _process(delta: float) -> void:
 	if not inspect_open:
 		
 		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-			if Global.hands_free:
+			if Global.hands_free and not Global.selecting_hotbar:
 				var gotten_building = Global.getBuildingFromPos(get_global_mouse_position())
 				if gotten_building:
 					mouse_on_inspect_menu=true
@@ -229,6 +229,11 @@ func _process(delta: float) -> void:
 					inspect_gotten_building = gotten_building
 					inspect_last_storage_keys = gotten_building.storage
 					inspect_open = true
+					if gotten_building.classification_id==6:
+						$Camera2D/Inspector/Panel/HBoxContainer.visible=true
+					else:
+						$Camera2D/Inspector/Panel/HBoxContainer.visible=false
+						
 		else:
 			GUI.can_place_buildings=true
 	
