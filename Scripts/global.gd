@@ -196,7 +196,10 @@ func getBuildingFromPos(in_position):
 	return null
 
 var selecting_hotbar = false
-
+func create_and_add_item(id):
+	var new_item= item_loaded.instantiate()
+	new_item.assign(id)
+	add_item_to_inv(new_item)
 func _ready():
 	#initilises inv slots
 	for i in range(27):
@@ -205,16 +208,10 @@ func _ready():
 			Player_hotbar.append(null)
 
 	#gives 100 items?
-	for i in range(1000):
-		var new_item= item_loaded.instantiate()
-		new_item.assign(randi_range(0,3))
-		add_item_to_inv(new_item)
-	var new_item= item_loaded.instantiate()
-	new_item.assign(5)
-	add_item_to_inv(new_item)
-	new_item= item_loaded.instantiate()
-	new_item.assign(6)
-	add_item_to_inv(new_item)
+	var starting_items=[5,2,0,1,0,0,1]
+	for i in starting_items.size():
+		for ii in range(starting_items[i]):
+			create_and_add_item(i)
 func add_item_to_inv(added_item):
 	var item_is_in_hotbar=false
 	var item_is_in_inventory=false

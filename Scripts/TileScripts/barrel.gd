@@ -8,11 +8,13 @@ var direction_vector=Vector2(-1,0)
 
 var storage={}
 var total_in_storage=0 #out of 100
+var exploded=false
 func _physics_process(delta: float) -> void:
 	building.total_storage=total_in_storage
 	for i in colliding_bodies:
-		if i.linear_velocity.distance_to(Vector2(0,0))>20:
+		if i.linear_velocity.distance_to(Vector2(0,0))>20 and not exploded:
 			building.explode()
+			exploded=true
 			queue_free()
 	#building.storage=storage
 			#if del_storage:
