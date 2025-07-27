@@ -2,7 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://cejt8mcsnyqw7" path="res://FONTS/VT323.tres" id="1_76q4n"]
 [ext_resource type="Script" uid="uid://o3vg66brnm8i" path="res://Scripts/MenuScripts/quick_menu.gd" id="1_uti3n"]
-[ext_resource type="Script" path="res://Scenes/menu/shop_manager.gd" id="3_4thap"]
+[ext_resource type="Script" uid="uid://bruosfi8fy6cj" path="res://Scenes/menu/shop_manager.gd" id="3_4thap"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uti3n"]
 bg_color = Color(0, 0, 0, 0.462745)

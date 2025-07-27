@@ -28,7 +28,8 @@ var liquid_data=[
 	{ #We just have a way to buy human blood in crates from a shop, and we have some customers that want something else added to it
 		"Name":"Human Blood",
 		"Color":Color(0.29, 0.0, 0.0),
-		"Bouncy":0.4
+		"Bouncy":0.4,
+		"Friction":1.0
 	},
 	{ #6 Human blood + 2 holy water = 1 blood of the gods
 		"Name":"Ichor",

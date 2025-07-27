@@ -16,7 +16,7 @@ func weighted_choice(weights=[]):
 
 
 var orders_completed=0
-var money=0
+var money=100
 var offered_requests=[]
 class Need:
 	# Min obtaining level, how hard is it to obtain in bulk, 
