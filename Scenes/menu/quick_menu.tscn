@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://3tsboa5llafg"]
+[gd_scene load_steps=7 format=3 uid="uid://yai2jdm5rmoy"]
 
 [ext_resource type="FontFile" uid="uid://cejt8mcsnyqw7" path="res://FONTS/VT323.tres" id="1_76q4n"]
 [ext_resource type="Script" uid="uid://o3vg66brnm8i" path="res://Scripts/MenuScripts/quick_menu.gd" id="1_uti3n"]
@@ -33,6 +33,7 @@ grow_vertical = 2
 script = ExtResource("1_uti3n")
 
 [node name="Heading" type="Panel" parent="."]
+layout_mode = 0
 offset_top = 5.0
 offset_right = 220.0
 offset_bottom = 65.0

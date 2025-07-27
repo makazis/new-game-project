@@ -26,9 +26,11 @@ func _ready() -> void:
 	options.position = rectracted_positions["options"]
 	orders.position = rectracted_positions["orders"]
 
+	
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		open = not open
+		load_quests()
 	if open:
 		heading.position += (default_positions["heading"] - heading.position) * delta * open_speed
 		options.position += (default_positions["options"] - options.position) * delta * open_speed
@@ -41,6 +43,13 @@ func _process(delta: float) -> void:
 		options.position += (rectracted_positions["options"] - options.position) * delta * open_speed
 		orders.position += (rectracted_positions["orders"] - orders.position) * delta * open_speed
 
+func load_quests():
+	for i in range(3):
+		var end_text=""
+		for ii in Order.offered_requests[i].request:
+			end_text+=str(Global.liquid_map_id_to_name[ii])+" x"+str(Order.offered_requests[i].request[ii])+"\n"
+		end_text+=str(Order.offered_requests[i].money_for_this)+"$"
+		$Orders/VBoxContainer.get_child(i).get_child(0).text=end_text
 func _on_continue_button_up() -> void:
 	open = false
 

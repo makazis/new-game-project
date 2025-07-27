@@ -4,12 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://csvh0xos1tpk8" path="res://Tiles/tileset.png" id="2_wowpa"]
 [ext_resource type="Texture2D" uid="uid://beeo6en1qgiok" path="res://Tiles/background_grid.png" id="3_i6g32"]
 [ext_resource type="Script" uid="uid://d207fq8s0pwfs" path="res://Scripts/Movement.gd" id="4_1l0tm"]
-[ext_resource type="Script" uid="uid://bbdux4myeagsv" path="res://Scripts/follow.gd" id="4_v158k"]
+[ext_resource type="Script" path="res://Scripts/follow.gd" id="4_v158k"]
 [ext_resource type="PackedScene" uid="uid://c40uy6qtedf84" path="res://Scenes/inventory.tscn" id="5_i6g32"]
 [ext_resource type="PackedScene" uid="uid://dfh277eii8aw0" path="res://Scenes/gui.tscn" id="5_wowpa"]
-[ext_resource type="PackedScene" uid="uid://yjpghm7e7nno" path="res://Scenes/menu/inspector.tscn" id="8_v158k"]
-[ext_resource type="PackedScene" uid="uid://c8a7yryfkamlw" path="res://Scenes/menu/juice_loader.tscn" id="9_h4fw4"]
-[ext_resource type="PackedScene" uid="uid://3tsboa5llafg" path="res://Scenes/menu/quick_menu.tscn" id="10_ldgsr"]
+[ext_resource type="PackedScene" path="res://Scenes/menu/inspector.tscn" id="8_v158k"]
+[ext_resource type="PackedScene" path="res://Scenes/menu/juice_loader.tscn" id="9_h4fw4"]
+[ext_resource type="PackedScene" uid="uid://yai2jdm5rmoy" path="res://Scenes/menu/quick_menu.tscn" id="10_ldgsr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e2o6t"]
 texture = ExtResource("2_wowpa")
@@ -66,7 +66,9 @@ visible = false
 script = ExtResource("4_1l0tm")
 
 [node name="Inspector" parent="Camera2D" instance=ExtResource("8_v158k")]
-visible = false
+
+[node name="Panel" parent="Camera2D/Inspector" index="0"]
+offset_bottom = 150.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 layer = 2

@@ -175,6 +175,7 @@ var last_mouse_position = Vector2(0,0)
 var inspect_open = false
 var inspect_gotten_building = null
 var inspect_last_storage_keys = {}
+
 func _process(delta: float) -> void:
 	for i in Global.buildings_2:
 		i.per_frame(delta)

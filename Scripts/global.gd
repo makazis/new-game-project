@@ -177,6 +177,15 @@ var liquid_map_id_to_name={}
 var Player_Inventory = []
 var Player_hotbar = [] #Epic inventory management system
 
+var ctimer=0
+var click=false
+
+func _process(delta: float) -> void:
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		ctimer+=1
+	else:
+		ctimer=0
+	click=ctimer==1
 func getBuildingFromPos(in_position):
 	if taken_squares.has(floor(in_position/16)):
 		return taken_squares[floor(in_position/16)]
