@@ -2,6 +2,7 @@ extends Node2D
 var liquid=preload("res://Scenes/free_thinking_juice.tscn")
 	
 @onready var GUI = $CanvasLayer/GUI
+@onready var inv = $CanvasLayer/Inventory
 
 #This is only for the buildings that require actual 
 class Local_Timer:
@@ -96,6 +97,7 @@ class building:
 		var new_particle=liquid.instantiate()
 		Global.game.add_child(new_particle)
 		new_particle.assign(liquid_ID)
+		Global.known_liquids.append(new_particle.liquid_name)
 		new_particle.position=object.position+Vector2(randi_range(-3,3),randi_range(-3,3))
 		new_particle.apply_force(direction_vector*1000+Vector2(randi_range(-7,7),randi_range(-7,7))*25)
 	func add_to_storage(item,quantity):

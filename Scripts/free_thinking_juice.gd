@@ -201,9 +201,6 @@ var liquid_data=[
 		"Bouncy": 0.4,
 		"Friction" : 0.8,
 		"Custom Texture":"res://Assets/CustomSprites/CellOfPrometheus.png",
-		"On Collide":{
-			"Them To":28
-		}
 	},
 	{ #27
 		"Name": "Blood of Prometheus",
@@ -219,23 +216,58 @@ var liquid_data=[
 	
 ]
 func _ready() -> void:
+	#makes the big lists
 	if Global.liquid_map_id_to_name.size()==0:
 		for i in liquid_data.size():
 			Global.liquid_map_id_to_name[i]=liquid_data[i]["Name"]
 			Global.liquid_map_name_to_id[liquid_data[i]["Name"]]=i
-			Global.liquid_created_map[i]=[]
-			Global.liquid_creation_map[i]=[]
-			Global.liquid_makes_map=[]
-			if "Aging" in liquid_data[i]:
-				Global.liquid_created_map[liquid_data[i]["Aging"]["To"]]={
-					"Ingredients":[[liquid_data[i]["Name"],1]]
+			Global.liquid_created_map[liquid_data[i]["Name"]]=[]
+			Global.liquid_makes_map[liquid_data[i]["Name"]]=[]
+		for i in liquid_data:
+			if "Aging" in i:
+				Global.liquid_created_map[Global.liquid_map_id_to_name[i["Aging"]["To"]]].append({
+					"Ingredients":[[i["Name"],1]],
+					"Result":[[Global.liquid_map_id_to_name[i["Aging"]["To"]],1]],
+					"Type":"Aging",
+				})
+				Global.liquid_makes_map[i["Name"]].append({
+					"Ingredients":[[i["Name"],1]],
+					"Result":[[Global.liquid_map_id_to_name[i["Aging"]["To"]],1]],
 					"Type":"Aging"
-				}
-				Global.liquid_makes_map[[liquid_data[i]["Name"]]={
-					"Ingredients":[[liquid_data[i]["Name"],1]],
-					"Result":liquid_data[i]["Aging"]["To"]
-					"Type":"Aging"
-				}
+				})
+			if "Accelerating" in i:
+				Global.liquid_created_map[Global.liquid_map_id_to_name[i["Accelerating"]["To"]]].append({
+					"Ingredients":[[i["Name"],1]],
+					"Result":[[Global.liquid_map_id_to_name[i["Accelerating"]["To"]],1]],
+					"Type":"Accelerating"
+				})
+				Global.liquid_makes_map[i["Name"]].append({
+					"Ingredients":[[i["Name"],1]],
+					"Result":[[Global.liquid_map_id_to_name[i["Accelerating"]["To"]],1]],
+					"Type":"Accelerating"
+				})
+				
+		for i in Global.crafting_tree:
+			var ingredient_list=[]
+			var result_list=[]
+			for ii in i["Req"]:
+				ingredient_list.append([ii,i["Req"][ii]])
+			for ii in i["Result"]:
+				result_list.append([Global.liquid_map_id_to_name[ii],i["Result"][ii]])
+				
+			for ii in i["Req"]:
+				Global.liquid_makes_map[ii].append({
+					"Ingredients":ingredient_list,
+					"Result":result_list,
+					"Type":"Classic"
+				})
+			for ii in i["Result"]:
+				Global.liquid_created_map[Global.liquid_map_id_to_name[ii]].append({
+					"Ingredients":ingredient_list,
+					"Result":result_list,
+					"Type":"Classic"
+				})
+	
 var cached_assigned_ID=0
 func assign(new_ID):
 	ID=new_ID

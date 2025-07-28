@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5v1w463u2bm"]
+
+[ext_resource type="Texture2D" uid="uid://bs6u6op25jvb5" path="res://Assets/The Green Barrel.png" id="1_bor7s"]
+[ext_resource type="Script" uid="uid://c1cjbqk0uh1l7" path="res://Scripts/InvScripts/liquid_display_icon.gd" id="1_l7eww"]
+
+[node name="LiquidDisplayIcon" type="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(20, 20)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -620.0
+offset_bottom = -340.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_l7eww")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(10, 10)
+texture = ExtResource("1_bor7s")
