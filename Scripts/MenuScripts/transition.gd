@@ -13,7 +13,7 @@ func transition(in_transition_scene):
 			var temp_juice = juice_thingy.instantiate()
 			temp_juice.position = Vector2(320 + randf_range(-320,320),-200)
 			$Juices.add_child(temp_juice)
-	print(balls)
+	# print(balls)
 	await get_tree().create_timer(1).timeout
 	Global.transition_instance = []
 	for ball in $Juices.get_children():

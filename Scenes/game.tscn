@@ -108,3 +108,4 @@ shape = SubResource("CircleShape2D_rku1e")
 [connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]
 
 [editable path="Camera2D/Inspector"]
+[editable path="Camera2D/LoadScreen/JuiceLoader"]
