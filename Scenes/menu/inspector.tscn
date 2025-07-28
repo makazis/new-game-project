@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://yjpghm7e7nno"]
 
-[ext_resource type="FontFile" uid="uid://cejt8mcsnyqw7" path="res://FONTS/VT323.tres" id="1_5msmv"]
+[ext_resource type="FontFile" uid="uid://8tq25a25x4n5" path="res://FONTS/VT323.tres" id="1_5msmv"]
 
 [node name="Inspector" type="Control"]
 z_index = 10

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://hy17qk6hroyd"]
+[gd_scene load_steps=16 format=3 uid="uid://hy17qk6hroyd"]
 
 [ext_resource type="Script" uid="uid://lygfmdulrdk1" path="res://Scripts/game.gd" id="1_3dryh"]
 [ext_resource type="Texture2D" uid="uid://csvh0xos1tpk8" path="res://Tiles/tileset.png" id="2_wowpa"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dfh277eii8aw0" path="res://Scenes/gui.tscn" id="5_wowpa"]
 [ext_resource type="PackedScene" uid="uid://yjpghm7e7nno" path="res://Scenes/menu/inspector.tscn" id="8_v158k"]
 [ext_resource type="PackedScene" uid="uid://c8a7yryfkamlw" path="res://Scenes/menu/juice_loader.tscn" id="9_h4fw4"]
+[ext_resource type="FontFile" uid="uid://ca2t6g7c3o17f" path="res://FONTS/VT323/VT323-Regular.ttf" id="9_rku1e"]
 [ext_resource type="PackedScene" uid="uid://3tsboa5llafg" path="res://Scenes/menu/quick_menu.tscn" id="10_ldgsr"]
 [ext_resource type="Script" uid="uid://cqbonl3dqf1c" path="res://Scripts/juice/hider.gd" id="11_o5yvi"]
 
@@ -73,6 +74,21 @@ script = ExtResource("4_1l0tm")
 visible = false
 offset_right = 0.0
 offset_bottom = 0.0
+
+[node name="Label" parent="Camera2D/Inspector/Panel" index="0"]
+theme_override_fonts/font = ExtResource("9_rku1e")
+
+[node name="Label" parent="Camera2D/Inspector/Panel/ScrollContainer/VBoxContainer" index="0"]
+theme_override_fonts/font = ExtResource("9_rku1e")
+
+[node name="Quest1" parent="Camera2D/Inspector/Panel/HBoxContainer" index="0"]
+theme_override_fonts/font = ExtResource("9_rku1e")
+
+[node name="Quest2" parent="Camera2D/Inspector/Panel/HBoxContainer" index="1"]
+theme_override_fonts/font = ExtResource("9_rku1e")
+
+[node name="Quest3" parent="Camera2D/Inspector/Panel/HBoxContainer" index="2"]
+theme_override_fonts/font = ExtResource("9_rku1e")
 
 [node name="LoadScreen" type="CanvasLayer" parent="Camera2D"]
 layer = 2

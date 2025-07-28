@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cpfb8knybnnpl"]
 
-[ext_resource type="Script" uid="uid://dusmxxxeyr7gf" path="res://Scripts/InvScripts/num_icon.gd" id="1_cufut"]
+[ext_resource type="Script" path="res://Scripts/InvScripts/num_icon.gd" id="1_cufut"]
 [ext_resource type="Texture2D" uid="uid://c8vo3u3dyp4bk" path="res://Assets/ParticleIconTileSet.png" id="2_2fanc"]
 
 [node name="NumIcon" type="Panel"]
@@ -11,6 +11,7 @@ offset_bottom = 20.0
 script = ExtResource("1_cufut")
 
 [node name="Label" type="Label" parent="."]
+layout_mode = 0
 offset_top = -1.0
 offset_right = 30.0
 offset_bottom = 22.0
