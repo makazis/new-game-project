@@ -2,6 +2,7 @@ extends Node2D
 var liquid=preload("res://Scenes/free_thinking_juice.tscn")
 	
 @onready var GUI = $CanvasLayer/GUI
+@onready var inv = $CanvasLayer/Inventory
 
 #This is only for the buildings that require actual 
 class Local_Timer:
@@ -96,6 +97,8 @@ class building:
 		var new_particle=liquid.instantiate()
 		Global.game.add_child(new_particle)
 		new_particle.assign(liquid_ID)
+		if not Global.liquid_map_id_to_name[liquid_ID] in Global.known_liquids:
+			Global.known_liquids.append(Global.liquid_map_id_to_name[liquid_ID])
 		new_particle.position=object.position+Vector2(randi_range(-3,3),randi_range(-3,3))
 		new_particle.apply_force(direction_vector*1000+Vector2(randi_range(-7,7),randi_range(-7,7))*25)
 	func add_to_storage(item,quantity):
@@ -186,7 +189,6 @@ func _ready() -> void:
 	add_child(new_particle)
 	new_particle.assign(8)
 	new_particle.position=Vector2(0,0)
-	
 var delay = 0
 var inspect_open = false
 var inspect_gotten_building = null
@@ -258,8 +260,8 @@ func _input(event):
 		Global.drag_locked=not inv_open
 		$CanvasLayer/Inventory.demiload()
 		$CanvasLayer/GUI.demiload()
-
-
+	if event.is_action_pressed("Alchemy Menu"):
+		get_tree().change_scene_to_file("res://Scenes/menu/Alchemy/alchemy_info_menu.tscn")
 func _on_panel_mouse_entered() -> void:
 	mouse_on_inspect_menu=true
 
@@ -272,26 +274,30 @@ func _on_scroll_container_mouse_entered() -> void:
 	mouse_on_inspect_menu=true
 
 func take_items_from_storage_to_quest(storage,quest):
+	var items_used=0
 	for i in quest.request:
 		storage[Global.liquid_map_id_to_name[i]]-=int(quest.request[i])
+		items_used+=int(quest.request[i])
 		if storage[Global.liquid_map_id_to_name[i]]==0:
 			storage[Global.liquid_map_id_to_name[i]]=null
+	return items_used
 func _on_quest_1_button_down() -> void:
-	take_items_from_storage_to_quest(inspect_gotten_building.storage,Order.offered_requests[0])
+	
+	inspect_gotten_building.total_storage-=take_items_from_storage_to_quest(inspect_gotten_building.storage,Order.offered_requests[0])
 	Order.offered_requests[0].complete()
 	Order.offered_requests.remove_at(0)
 	Order.add_new_quest()
 
 
 func _on_quest_2_button_down() -> void:
-	take_items_from_storage_to_quest(inspect_gotten_building.storage,Order.offered_requests[1])
+	inspect_gotten_building.total_storage-=take_items_from_storage_to_quest(inspect_gotten_building.storage,Order.offered_requests[1])
 	Order.offered_requests[1].complete()
 	Order.offered_requests.remove_at(1)
 	Order.add_new_quest()
 
 
 func _on_quest_3_button_down() -> void:
-	take_items_from_storage_to_quest(inspect_gotten_building.storage,Order.offered_requests[2])
+	inspect_gotten_building.total_storage-=take_items_from_storage_to_quest(inspect_gotten_building.storage,Order.offered_requests[2])
 	Order.offered_requests[2].complete()
 	Order.offered_requests.remove_at(2)
 	Order.add_new_quest()

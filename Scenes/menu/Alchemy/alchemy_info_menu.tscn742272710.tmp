@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnn045fpt8qt8"]
+
+[ext_resource type="Script" uid="uid://d0f8cs8kmo6ph" path="res://Scripts/MenuScripts/Alchemy/alchemy_info_menu.gd" id="1_lvfvf"]
+
+[node name="Alchemy Info Menu" type="Node2D"]
+script = ExtResource("1_lvfvf")
