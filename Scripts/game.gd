@@ -199,7 +199,7 @@ func _process(delta: float) -> void:
 		i.per_frame(delta)
 	if inspect_open:
 		GUI.can_place_buildings=false
-		if mouse_on_inspect_menu:
+		if mouse_on_inspect_menu and Global.hands_free:
 			$Camera2D/Inspector/Panel/Label.text = inspect_gotten_building.name
 			var finalText = ""
 			for iter_storage in inspect_gotten_building.storage.keys():
