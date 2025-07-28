@@ -54,6 +54,7 @@ func _process(delta):
 						Tbutton.clear_item()
 						Tbutton.visible = false
 						if i_pulled_this_iter_from == iter_panel: break
+						#TODO
 						#this is used if it's placed in same cell
 						# if i_pulled_this_iter_from == iter_panel:
 						# 	panel.button.update_item(Tbutton.item)
