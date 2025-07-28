@@ -97,7 +97,8 @@ class building:
 		var new_particle=liquid.instantiate()
 		Global.game.add_child(new_particle)
 		new_particle.assign(liquid_ID)
-		Global.known_liquids.append(new_particle.liquid_name)
+		if not Global.liquid_map_id_to_name[liquid_ID] in Global.known_liquids:
+			Global.known_liquids.append(Global.liquid_map_id_to_name[liquid_ID])
 		new_particle.position=object.position+Vector2(randi_range(-3,3),randi_range(-3,3))
 		new_particle.apply_force(direction_vector*1000+Vector2(randi_range(-7,7),randi_range(-7,7))*25)
 	func add_to_storage(item,quantity):

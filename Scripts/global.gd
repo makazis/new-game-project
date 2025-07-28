@@ -295,7 +295,7 @@ var liquid_map_id_to_name={}
 var liquid_created_map={}
 var liquid_makes_map={}
 
-var known_liquids=[]
+var known_liquids=["Water"]
 @onready var item_loaded=preload("res://Scenes/inventory_item.tscn")
 
 var menu_open = false
@@ -332,7 +332,7 @@ func _ready():
 			Player_hotbar.append(null)
 
 	#gives 100 items?
-	var starting_items=[5,2,0,1,0,0,1,0,0,0]
+	var starting_items=[5,2,0,1,0,1,1,0,0,0]
 	for i in starting_items.size():
 		for ii in range(starting_items[i]):
 			create_and_add_item(i)
