@@ -85,3 +85,10 @@ func _on_fullscreen_button_up() -> void:
 
 func _on_exit_button_up() -> void:
 	get_tree().quit()
+
+
+func _on_save_button_up() -> void:
+	#TODO
+	# var json_data = JSON.parse_string()
+	# var save_file = 
+	pass

@@ -21,6 +21,7 @@ func demiload():
 		first_load=false
 var first_load=true
 var mouse_timer=0
+var mouse_debounce = false
 var animation={
 	"Type":"None"
 } #Only one animation at a time
@@ -43,12 +44,9 @@ func _process(delta: float) -> void:
 				var pos_q=(cos(animation["Time Left"]/animation["Total Time"]*PI)+1)/2
 				position=animation["Old Pos"]*(1-pos_q)+animation["New Pos"]*(pos_q)
 	else:
-		if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-			mouse_timer+=1
-		else:
-			mouse_timer=0
 		if menu_pos==Vector2(0,0):
-			if mouse_timer==2:
+			if not mouse_debounce:
+				mouse_debounce = true
 				for container_iter in get_child(0).get_children().size():
 					var container=get_child(0).get_children()[container_iter]
 					for panel_iter in container.get_children().size():
@@ -73,6 +71,8 @@ func _process(delta: float) -> void:
 									
 									panel.button.clear_item()
 									Tbutton.visible=true
+			else:
+				mouse_debounce = false
 			Tbutton.position=get_viewport().get_mouse_position()+Vector2(0,20)+position
 
 var numicon_containter=preload("res://Scenes/menu/num_icon_container.tscn")

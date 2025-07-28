@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://cc2mrbfawwsfb" path="res://Scripts/MenuScripts/MainScript.gd" id="1_kwgaw"]
 [ext_resource type="Texture2D" uid="uid://beeo6en1qgiok" path="res://Tiles/background_grid.png" id="1_ufr4i"]
 [ext_resource type="Script" uid="uid://dq813cc3q24ms" path="res://Scripts/MenuScripts/MoveBg.gd" id="2_ufr4i"]
-[ext_resource type="FontFile" uid="uid://8tq25a25x4n5" path="res://FONTS/VT323.tres" id="3_uffod"]
 [ext_resource type="Script" uid="uid://bubtwrlj54u3n" path="res://Scripts/MenuScripts/scroll.gd" id="5_u7oun"]
 [ext_resource type="FontFile" uid="uid://ca2t6g7c3o17f" path="res://FONTS/VT323/VT323-Regular.ttf" id="6_kwgaw"]
+[ext_resource type="Script" uid="uid://4butyahkqbfu" path="res://Scripts/MenuScripts/small/fullscreen_toggle.gd" id="7_0jlf4"]
 [ext_resource type="PackedScene" uid="uid://c5p87njrgxn1p" path="res://Scenes/menu/transition.tscn" id="7_u7oun"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ufr4i"]
@@ -64,7 +64,7 @@ offset_top = -35.0
 offset_right = 206.0
 offset_bottom = 35.0
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_uffod")
+theme_override_fonts/font = ExtResource("6_kwgaw")
 theme_override_font_sizes/font_size = 70
 text = "Overflow"
 
@@ -92,21 +92,21 @@ alignment = 1
 [node name="Play" type="Button" parent="Options/VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_uffod")
+theme_override_fonts/font = ExtResource("6_kwgaw")
 theme_override_font_sizes/font_size = 40
 text = "Play"
 
 [node name="Options" type="Button" parent="Options/VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_uffod")
+theme_override_fonts/font = ExtResource("6_kwgaw")
 theme_override_font_sizes/font_size = 40
 text = "Options"
 
 [node name="Exit" type="Button" parent="Options/VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_uffod")
+theme_override_fonts/font = ExtResource("6_kwgaw")
 theme_override_font_sizes/font_size = 40
 text = "Exit
 "
@@ -141,20 +141,161 @@ anchor_bottom = 1.0
 offset_left = 5.0
 offset_top = 5.0
 offset_right = -5.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NewGame" type="Button" parent="Menu_container/Play/Panel/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(380, 135)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_kwgaw")
+theme_override_font_sizes/font_size = 62
+text = "START A 
+NEW GAME"
+
+[node name="LoadGame" type="Button" parent="Menu_container/Play/Panel/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(380, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_kwgaw")
+theme_override_font_sizes/font_size = 43
+text = "Load a previous game"
+
+[node name="NewGame" type="Control" parent="Menu_container"]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Menu_container/NewGame"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 0
+offset_right = 390.0
+offset_bottom = 200.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu_container/NewGame/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
 offset_bottom = -5.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 1
 
-[node name="StartANewGame" type="Button" parent="Menu_container/Play/Panel/VBoxContainer"]
+[node name="LabelHolder" type="Panel" parent="Menu_container/NewGame/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Menu_container/NewGame/Panel/VBoxContainer/LabelHolder"]
 texture_filter = 1
-custom_minimum_size = Vector2(380, 190)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_kwgaw")
+theme_override_font_sizes/font_size = 50
+text = "New game"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu_container/NewGame/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+
+[node name="Sandbox" type="Button" parent="Menu_container/NewGame/Panel/VBoxContainer/HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(124, 135)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("6_kwgaw")
-theme_override_font_sizes/font_size = 54
-text = "START
-A NEW
-GAME"
+theme_override_font_sizes/font_size = 29
+text = "Sandbox"
+
+[node name="Normal" type="Button" parent="Menu_container/NewGame/Panel/VBoxContainer/HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(124, 135)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_kwgaw")
+theme_override_font_sizes/font_size = 29
+text = "Normal
+"
+
+[node name="Nightmare" type="Button" parent="Menu_container/NewGame/Panel/VBoxContainer/HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(124, 135)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_kwgaw")
+theme_override_font_sizes/font_size = 29
+text = "Nightmare
+[Locked]"
+
+[node name="LoadGame" type="Control" parent="Menu_container"]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Menu_container/LoadGame"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 0
+offset_right = 390.0
+offset_bottom = 200.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu_container/LoadGame/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = -5.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LabelHolder" type="Panel" parent="Menu_container/LoadGame/Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Menu_container/LoadGame/Panel/VBoxContainer/LabelHolder"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("6_kwgaw")
+theme_override_font_sizes/font_size = 50
+text = "Load game"
+horizontal_alignment = 1
+
+[node name="SelectGame" type="FileDialog" parent="Menu_container/LoadGame/Panel/VBoxContainer"]
+title = "Open a File"
+initial_position = 2
+size = Vector2i(500, 300)
+transient_to_focused = true
+ok_button_text = "Open"
+file_mode = 0
+root_subfolder = "res://Saves"
+filters = PackedStringArray("*.tscn")
+
+[node name="PickSave" type="Button" parent="Menu_container/LoadGame/Panel/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(380, 80)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_kwgaw")
+theme_override_font_sizes/font_size = 43
+text = "Pick saved game
+"
+
+[node name="LoadGame" type="Button" parent="Menu_container/LoadGame/Panel/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(380, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_kwgaw")
+theme_override_font_sizes/font_size = 43
+text = "Load game!"
 
 [node name="Options" type="Control" parent="Menu_container"]
 custom_minimum_size = Vector2(0, 220)
@@ -190,10 +331,20 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_uffod")
+theme_override_fonts/font = ExtResource("6_kwgaw")
 theme_override_font_sizes/font_size = 50
 text = "Options"
 horizontal_alignment = 1
+
+[node name="Fullscreen" type="Button" parent="Menu_container/Options/Panel/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(380, 135)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("6_kwgaw")
+theme_override_font_sizes/font_size = 62
+text = "Fullscreen
+"
+script = ExtResource("7_0jlf4")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Menu_container/Options/Panel/VBoxContainer"]
 visible = false
@@ -212,7 +363,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_uffod")
+theme_override_fonts/font = ExtResource("6_kwgaw")
 theme_override_font_sizes/font_size = 50
 text = "Master"
 horizontal_alignment = 1
@@ -254,7 +405,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_uffod")
+theme_override_fonts/font = ExtResource("6_kwgaw")
 theme_override_font_sizes/font_size = 50
 text = "Exit"
 horizontal_alignment = 1
@@ -271,7 +422,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_uffod")
+theme_override_fonts/font = ExtResource("6_kwgaw")
 theme_override_font_sizes/font_size = 25
 text = "Are you sure jvj"
 horizontal_alignment = 1
@@ -301,5 +452,12 @@ text = "NO"
 [connection signal="button_down" from="Options/VBoxContainer/Play" to="." method="_on_play_button_down"]
 [connection signal="button_down" from="Options/VBoxContainer/Options" to="." method="_on_options_button_down"]
 [connection signal="button_down" from="Options/VBoxContainer/Exit" to="." method="_on_exit_button_down"]
-[connection signal="button_up" from="Menu_container/Play/Panel/VBoxContainer/StartANewGame" to="Menu_container" method="_on_start_a_new_game_button_up"]
+[connection signal="button_up" from="Menu_container/Play/Panel/VBoxContainer/NewGame" to="Menu_container" method="_on_new_game_button_up"]
+[connection signal="button_up" from="Menu_container/Play/Panel/VBoxContainer/LoadGame" to="Menu_container" method="_on_load_game_button_up"]
+[connection signal="button_up" from="Menu_container/NewGame/Panel/VBoxContainer/HBoxContainer/Sandbox" to="Menu_container" method="_on_sandbox_button_up"]
+[connection signal="button_up" from="Menu_container/NewGame/Panel/VBoxContainer/HBoxContainer/Normal" to="Menu_container" method="_on_normal_button_up"]
+[connection signal="button_up" from="Menu_container/NewGame/Panel/VBoxContainer/HBoxContainer/Nightmare" to="Menu_container" method="_on_nightmare_button_up"]
+[connection signal="button_up" from="Menu_container/LoadGame/Panel/VBoxContainer/PickSave" to="Menu_container" method="_on_load_game_button_up"]
+[connection signal="button_up" from="Menu_container/LoadGame/Panel/VBoxContainer/LoadGame" to="Menu_container" method="_on_load_game_button_up"]
+[connection signal="button_up" from="Menu_container/Options/Panel/VBoxContainer/Fullscreen" to="Menu_container/Options/Panel/VBoxContainer/Fullscreen" method="_on_button_up"]
 [connection signal="button_up" from="Menu_container/Exit/Panel/VBoxContainer/HBoxContainer/Button" to="Menu_container" method="_on_button_button_up"]

@@ -14,8 +14,8 @@ config/name="Overflow"
 run/main_scene="uid://bftqjhe27e7sx"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 boot_splash/bg_color=Color(0.23, 0.23, 0.23, 1)
-boot_splash/image="uid://d2f3r6elegff4"
-config/icon="res://icon.svg"
+boot_splash/image="uid://bbxsb6qxal2ka"
+config/icon="uid://cinwcvl7wahgl"
 
 [autoload]
 
