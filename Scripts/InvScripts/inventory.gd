@@ -49,3 +49,6 @@ func _process(delta: float) -> void:
 							panel.button.clear_item()
 							Tbutton.visible=true
 	Tbutton.position=get_viewport().get_mouse_position()+Vector2(0,20)
+
+func load_element(element):
+	

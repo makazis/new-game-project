@@ -292,6 +292,9 @@ var game=null
 var transition_instance = null
 var liquid_map_name_to_id={} 
 var liquid_map_id_to_name={}
+var liquid_creation_map={}
+var liquid_created_map={}
+var liquid_makes_map={}
 @onready var item_loaded=preload("res://Scenes/inventory_item.tscn")
 
 var menu_open = false

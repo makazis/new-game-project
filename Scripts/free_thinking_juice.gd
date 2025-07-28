@@ -223,6 +223,19 @@ func _ready() -> void:
 		for i in liquid_data.size():
 			Global.liquid_map_id_to_name[i]=liquid_data[i]["Name"]
 			Global.liquid_map_name_to_id[liquid_data[i]["Name"]]=i
+			Global.liquid_created_map[i]=[]
+			Global.liquid_creation_map[i]=[]
+			Global.liquid_makes_map=[]
+			if "Aging" in liquid_data[i]:
+				Global.liquid_created_map[liquid_data[i]["Aging"]["To"]]={
+					"Ingredients":[[liquid_data[i]["Name"],1]]
+					"Type":"Aging"
+				}
+				Global.liquid_makes_map[[liquid_data[i]["Name"]]={
+					"Ingredients":[[liquid_data[i]["Name"],1]],
+					"Result":liquid_data[i]["Aging"]["To"]
+					"Type":"Aging"
+				}
 var cached_assigned_ID=0
 func assign(new_ID):
 	ID=new_ID
