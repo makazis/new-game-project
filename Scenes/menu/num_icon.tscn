@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpfb8knybnnpl"]
+
+[ext_resource type="Script" path="res://Scripts/InvScripts/num_icon.gd" id="1_cufut"]
+[ext_resource type="Texture2D" uid="uid://c8vo3u3dyp4bk" path="res://Assets/ParticleIconTileSet.png" id="2_2fanc"]
+
+[node name="NumIcon" type="Panel"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(40, 20)
+offset_right = 51.0
+offset_bottom = 20.0
+script = ExtResource("1_cufut")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_top = -1.0
+offset_right = 30.0
+offset_bottom = 22.0
+text = "10x"
+horizontal_alignment = 2
+text_overrun_behavior = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(40, 10)
+texture = ExtResource("2_2fanc")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="Button" type="Button" parent="Sprite2D"]
+modulate = Color(1, 1, 1, 0)
+z_index = -1
+anchors_preset = -1
+anchor_left = 0.584906
+anchor_right = 0.584906
+offset_left = -19.5283
+offset_top = -10.0
+offset_right = -5.5283
+offset_bottom = 14.0
+scale = Vector2(1.51576, 0.807311)
+metadata/_edit_use_anchors_ = true
+
+[connection signal="button_up" from="Sprite2D/Button" to="." method="_on_button_button_up"]

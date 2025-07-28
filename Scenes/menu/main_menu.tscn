@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cc2mrbfawwsfb" path="res://Scripts/MenuScripts/MainScript.gd" id="1_kwgaw"]
 [ext_resource type="Texture2D" uid="uid://beeo6en1qgiok" path="res://Tiles/background_grid.png" id="1_ufr4i"]
 [ext_resource type="Script" uid="uid://dq813cc3q24ms" path="res://Scripts/MenuScripts/MoveBg.gd" id="2_ufr4i"]
+[ext_resource type="FontFile" uid="uid://8tq25a25x4n5" path="res://FONTS/VT323.tres" id="3_uffod"]
 [ext_resource type="Script" uid="uid://bubtwrlj54u3n" path="res://Scripts/MenuScripts/scroll.gd" id="5_u7oun"]
 [ext_resource type="FontFile" uid="uid://ca2t6g7c3o17f" path="res://FONTS/VT323/VT323-Regular.ttf" id="6_kwgaw"]
 [ext_resource type="Script" uid="uid://4butyahkqbfu" path="res://Scripts/MenuScripts/small/fullscreen_toggle.gd" id="7_0jlf4"]
