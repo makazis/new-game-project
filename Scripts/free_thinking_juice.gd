@@ -272,6 +272,8 @@ var cached_assigned_ID=0
 func assign(new_ID):
 	ID=new_ID
 	liquid_name=liquid_data[new_ID]["Name"]
+	if not liquid_name in Global.known_liquids:
+		Global.known_liquids.append(liquid_name)
 	sprite.texture.gradient.set_color(0,liquid_data[new_ID]["Color"])
 	if "Bouncy" in liquid_data[new_ID]:
 		physics_material_override.bounce=liquid_data[new_ID]["Bouncy"]
