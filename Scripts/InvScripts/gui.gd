@@ -26,14 +26,12 @@ func _process(delta):
 	var global_mouse_pos=get_viewport().get_camera_2d().get_global_mouse_position()
 	if Input.is_action_just_pressed("deselect"):
 		for iter_panel in box_container.get_children().size():
-			var panel=box_container.get_children()[iter_panel]
-			if panel.button.item==null:
-				continue
-			Tbutton.update_item(panel.button.item)
-			i_pulled_this_from=panel.button
-			i_pulled_this_iter_from=iter_panel
-			panel.button.clear_item()
-			Tbutton.visible=true
+			Global.selecting_hotbar=false
+			if Tbutton.visible:
+				i_pulled_this_from.update_item(Tbutton.item)
+				Tbutton.clear_item()
+				Tbutton.visible = false
+				break
 	#Hotbar thingamajig who i dont fully understand... i think?
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		if not mouse_debounce:
