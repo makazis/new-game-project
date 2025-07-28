@@ -50,26 +50,30 @@ func _process(delta):
 					#used break instead of continue since only one button can be pressed at once
 					#if you have item in hand it placed in hotbar
 					if Tbutton.visible:
+						i_pulled_this_from.update_item(Tbutton.item)
+						Tbutton.clear_item()
+						Tbutton.visible = false
+						if i_pulled_this_iter_from == iter_panel: break
 						#this is used if it's placed in same cell
-						if i_pulled_this_iter_from == iter_panel:
-							panel.button.update_item(Tbutton.item)
-							Tbutton.clear_item()
-							Tbutton.visible=false
-							break
-						#if placed in blank inv slot
-						if panel.button.item==null:
-							panel.button.update_item(Tbutton.item)
-							Tbutton.clear_item()
-							Tbutton.visible=false
-						else:
-							#Transfers all items around a circle lol
-							var temp_item = i_pulled_this_from.item
-							i_pulled_this_from.clear_item()
-							panel.button.update_item(Tbutton.item)
-							Tbutton.update_item(temp_item)
-						break
+						# if i_pulled_this_iter_from == iter_panel:
+						# 	panel.button.update_item(Tbutton.item)
+						# 	Tbutton.clear_item()
+						# 	Tbutton.visible=false
+						# 	break
+						# #if placed in blank inv slot
+						# if panel.button.item==null:
+						# 	panel.button.update_item(Tbutton.item)
+						# 	Tbutton.clear_item()
+						# 	Tbutton.visible=false
+						# else:
+						# 	#Transfers all items around a circle lol
+						# 	var temp_item = item_class.instantiate()
+						# 	temp_item = Tbutton.item
+						# 	panel.button.update_item(Tbutton.item)
+						# 	Tbutton.update_item(temp_item)
+						# break
 					#No item and you try to pick up new item
-					else:
+					if not Tbutton.visible:
 						#there was no item in that inventory slot
 						if panel.button.item==null:
 							break
