@@ -50,6 +50,10 @@ var buildings = [
 		"Name" = "Extractor",
 		"ToolTip" = "Takes items out",
 		"ModelPath" = "res://Assets/Models/Splitter.tscn",
+	},{
+		"Name" = "Assembler",
+		"ToolTip" = "Makes cooler shit",
+		"ModelPath" = "res://Assets/Models/Assembler.tscn",
 	}
 	
 ]
@@ -324,15 +328,25 @@ func create_and_add_item(id):
 	var new_item= item_loaded.instantiate()
 	new_item.assign(id)
 	add_item_to_inv(new_item)
-func _ready():
+func setup_player_inventory():
 	#initilises inv slots
 	for i in range(27):
 		Player_Inventory.append(null)
 		if i<8:
 			Player_hotbar.append(null)
 
-	#gives 100 items?
-	var starting_items=[5,2,0,1,0,1,1,0,0,0]
+	#10 items each row, useful for adding items to inventory later
+	var starting_items=[]
+	if Dev.mode=="Normal":
+		starting_items=[
+			5,2,0,1,0,0,1,0,0,0,
+			0
+		]
+	if Dev.mode=="Sandbox":
+		starting_items=[
+			1,1,0,1,0,1,1,0,0,1,
+			1
+		]
 	for i in starting_items.size():
 		for ii in range(starting_items[i]):
 			create_and_add_item(i)

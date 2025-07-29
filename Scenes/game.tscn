@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://hy17qk6hroyd"]
+[gd_scene load_steps=17 format=3 uid="uid://hy17qk6hroyd"]
 
 [ext_resource type="Script" uid="uid://lygfmdulrdk1" path="res://Scripts/game.gd" id="1_3dryh"]
 [ext_resource type="Texture2D" uid="uid://csvh0xos1tpk8" path="res://Tiles/tileset.png" id="2_wowpa"]
@@ -12,6 +12,7 @@
 [ext_resource type="FontFile" uid="uid://ca2t6g7c3o17f" path="res://FONTS/VT323/VT323-Regular.ttf" id="9_rku1e"]
 [ext_resource type="PackedScene" uid="uid://3tsboa5llafg" path="res://Scenes/menu/quick_menu.tscn" id="10_ldgsr"]
 [ext_resource type="Script" uid="uid://cqbonl3dqf1c" path="res://Scripts/juice/hider.gd" id="11_o5yvi"]
+[ext_resource type="PackedScene" uid="uid://dpna871xelh5k" path="res://Scenes/ghost_building.tscn" id="12_rfjv2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e2o6t"]
 texture = ExtResource("2_wowpa")
@@ -107,6 +108,8 @@ mouse_filter = 2
 [node name="Buildings" type="Node2D" parent="."]
 modulate = Color(0.796131, 0.881554, 0.876849, 1)
 z_index = -1
+
+[node name="GhostBuilding" parent="Buildings" instance=ExtResource("12_rfjv2")]
 
 [node name="Area2D" type="Area2D" parent="."]
 script = ExtResource("11_o5yvi")

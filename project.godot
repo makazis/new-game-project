@@ -23,6 +23,7 @@ Global="*res://Scripts/global.gd"
 Order="*res://Scenes/order.gd"
 Bank="*res://Scripts/bank.gd"
 Liquids="*res://Scripts/Liquids.gd"
+Dev="*res://Scripts/dev.gd"
 
 [display]
 

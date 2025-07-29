@@ -26,18 +26,25 @@ func _on_button_button_up() -> void:
 
 func _on_normal_button_up() -> void:
 	if transition: return
+	Dev.mode="Normal"
+	Global.setup_player_inventory()
 	get_parent().get_node("Transition").transition("res://Scenes/game.tscn")
 
 
 func _on_new_game_button_up() -> void:
 	move_to = "NewGame"
+	
 
 
 func _on_nightmare_button_up() -> void:
 	pass # Replace with function body.
 
 func _on_sandbox_button_up() -> void:
-	pass
+	if transition: return
+	Dev.mode="Sandbox"
+	Global.setup_player_inventory()
+	get_parent().get_node("Transition").transition("res://Scenes/game.tscn")
 
 func _on_load_game_button_up() -> void:
 	move_to = "LoadGame"
+	Dev.mode="Normal"

@@ -18,12 +18,13 @@ func _input(event: InputEvent) -> void:
 		#print(selected_rotation,"  ",Tbutton.rotation)
 #Hate this mess so im gona comment the hell out of it >:(
 var mouse_debounce = false
+var global_mouse_pos=Vector2(0,0)
 func _process(delta):
 	if Global.menu_open:
 		position.y += (440 - position.y) * delta * 10
 	else:
 		position.y += (360 - position.y) * delta * 10
-	var global_mouse_pos=get_viewport().get_camera_2d().get_global_mouse_position()
+	global_mouse_pos=get_viewport().get_camera_2d().get_global_mouse_position()
 	if Input.is_action_just_pressed("deselect"):
 		for iter_panel in box_container.get_children().size():
 			Global.selecting_hotbar=false
@@ -84,40 +85,43 @@ func _process(delta):
 							
 					if panel.button.item!=null:
 						selected_item=panel.button.item
-			if (not Global.selecting_hotbar) and not Global.drag_locked and can_place_buildings:
+			if (not Global.selecting_hotbar) and (not Global.drag_locked) and can_place_buildings:
 				if Tbutton.visible:
 					if Tbutton.item.ID==4:
 						if (global_mouse_pos/16).floor() in Global.taken_squares:
 							
 							var new_item=item_class.instantiate()
 							new_item.assign(Global.taken_squares[(global_mouse_pos/16).floor()].classification_id)
-							Global.add_item_to_inv(new_item)
+							if Dev.mode!="Sandbox":
+								Global.add_item_to_inv(new_item)
 							Global.taken_squares[(global_mouse_pos/16).floor()].release_liquid()
 							Global.taken_squares[(global_mouse_pos/16).floor()].die()
 							
 							demiload()
-					elif not (global_mouse_pos/16).floor() in Global.taken_squares:	
-						#This line disproves the existance of god
-						#why, WHY
-						#I prayed, and god answered, this line is fixed now
+					elif Global.game.can_i_place_a_building_there:
+						#print("Triggered")
 						var additional_data={}
 						if Tbutton.item.storage.size()>0:
 							additional_data["Storage"]=Tbutton.item.storage
 						var new_building=get_parent().get_parent().building.new(Tbutton.item.ID,selected_rotation,get_parent().get_parent().get_child(4),(global_mouse_pos/16).floor(),additional_data)
 						if Tbutton.item.storage.size()>0:
-							Global.Player_hotbar[i_pulled_this_iter_from]=null
-							i_pulled_this_from.clear_item()
-							Tbutton.clear_item()
-							Tbutton.visible=false
+							if Dev.mode!="Sandbox":
+								Global.Player_hotbar[i_pulled_this_iter_from]=null
+								i_pulled_this_from.clear_item()
+								Tbutton.clear_item()
+								Tbutton.visible=false
 						else:
-							Global.remove_from_inventory(Tbutton.item.ID,1)
+							if Dev.mode!="Sandbox":
+								Global.remove_from_inventory(Tbutton.item.ID,1)
 							if not Global.has_item_in_inventory(Tbutton.item.ID):
 								Tbutton.clear_item()
 								Tbutton.visible=false
 	else:
 		mouse_debounce = false
+		
 	Global.hands_free = not Tbutton.visible				
 	Tbutton.position=get_viewport().get_mouse_position()+Vector2(-320,-360)+[Vector2(0,20),Vector2(40,40),Vector2(20,80),Vector2(-20,60)][selected_rotation]
+
 func demiload():
 	for i in Global.Player_hotbar.size():
 		$HBoxContainer.get_child(i).button.clear_item()

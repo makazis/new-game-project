@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpna871xelh5k"]
+
+[ext_resource type="Texture2D" uid="uid://cpuusc1cr8hiv" path="res://Assets/Icons/Barrel.png" id="1_yt4b3"]
+
+[node name="GhostBuilding" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_yt4b3")

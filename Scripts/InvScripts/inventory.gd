@@ -45,7 +45,7 @@ func _process(delta: float) -> void:
 				position=animation["Old Pos"]*(1-pos_q)+animation["New Pos"]*(pos_q)
 	else:
 		if menu_pos==Vector2(0,0):
-			if not mouse_debounce:
+			if Global.ctimer==2:
 				mouse_debounce = true
 				for container_iter in get_child(0).get_children().size():
 					var container=get_child(0).get_children()[container_iter]
@@ -74,7 +74,7 @@ func _process(delta: float) -> void:
 			else:
 				mouse_debounce = false
 			Tbutton.position=get_viewport().get_mouse_position()+Vector2(0,20)+position
-
+			
 var numicon_containter=preload("res://Scenes/menu/num_icon_container.tscn")
 func load_element(element):
 	var element_ID=Global.liquid_map_name_to_id[element]

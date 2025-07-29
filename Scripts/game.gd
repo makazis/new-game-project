@@ -4,6 +4,7 @@ var liquid=preload("res://Scenes/free_thinking_juice.tscn")
 @onready var GUI = $CanvasLayer/GUI
 @onready var inv = $CanvasLayer/Inventory
 
+@onready var ghost_building=$Buildings/GhostBuilding
 #This is only for the buildings that require actual 
 class Local_Timer:
 	var time_left : float
@@ -41,9 +42,15 @@ class building:
 	var max_storage: int
 	var total_storage: int
 	var tags=[]
+	var takes_up=[[0,0]]
+	var custom_size=false
 	func _init(in_buildings_id, in_direction, parent, position, more_data={}) -> void:
 		id = Global.getNewId()
 		classification_id = in_buildings_id
+		if classification_id==10:
+			#Assembler
+			takes_up=[[0,0],[1,0],[1,-1]]
+			custom_size=true	
 		name = Global.buildings[in_buildings_id]["Name"]
 		tool_tip = Global.buildings[in_buildings_id]["ToolTip"]
 		object = load(Global.buildings[in_buildings_id]["ModelPath"]).instantiate()
@@ -58,7 +65,8 @@ class building:
 		storage={}
 		pos=position
 		_parent=parent
-		object.position = position*16+Vector2(8,8)
+		object.position = Global.game.ghost_building.position
+		object.get_node("Sprite2D").position=Global.game.ghost_building.get_node("Sprite2D").position
 		if not position in Global.taken_squares:
 			Global.taken_squares[position]=self
 		item_timers=[Local_Timer.new(1.5),Local_Timer.new(1)]
@@ -80,7 +88,10 @@ class building:
 	func rotate(in_direction) -> void:
 		direction = in_direction % 4
 		#Don't question this line it is perfect and shouldn't be tuched (mkaestexture right dir)
-		object.get_node("Sprite2D").region_rect = Rect2(direction*16,object.get_node("Sprite2D").region_rect.position.y,object.get_node("Sprite2D").region_rect.size.x,object.get_node("Sprite2D").region_rect.size.y)
+		if custom_size:
+			object.get_node("Sprite2D").rotation_degrees=direction*90
+		else:
+			object.get_node("Sprite2D").region_rect = Rect2(direction*16,object.get_node("Sprite2D").region_rect.position.y,object.get_node("Sprite2D").region_rect.size.x,object.get_node("Sprite2D").region_rect.size.y)
 	func per_frame(delta):
 		if classification_id == 3: #Emitter 
 			if item_timers[0].is_finished:
@@ -202,8 +213,48 @@ var inspect_gotten_building = null
 var inspect_last_storage_keys = {}
 var inspector_global_pos = Vector2.ZERO
 var mouse_on_inspect_menu=false
-
+func check_if_you_can_place_a_building_there(building_map,new_rotation,new_position):
+	for i in building_map:
+		var new_tile_position=Vector2(0,0)
+		if new_rotation==0:
+			new_tile_position=Vector2(i[0],i[1])
+		if new_rotation==1:
+			new_tile_position=Vector2(-i[1],i[0])
+		if new_rotation==2:
+			new_tile_position=Vector2(-i[0],-i[1])
+		if new_rotation==3:
+			new_tile_position=Vector2(i[1],-i[0])
+		if new_tile_position+new_position in Global.taken_squares:
+			return false
+	return true
+var last_placing_building_position=Vector2(0,0)
+var last_placing_building_rotation=0
+var last_item_held=null
+var can_i_place_a_building_there=false
+func recheck_if_you_can_place_a_building_there():
+	if last_placing_building_position!=(GUI.global_mouse_pos/16).floor() or last_placing_building_rotation!=GUI.selected_rotation:
+		can_i_place_a_building_there=check_if_you_can_place_a_building_there(GUI.Tbutton.item.building_map,GUI.selected_rotation,(GUI.global_mouse_pos/16).floor())
+	last_placing_building_position=(GUI.global_mouse_pos/16).floor()
+	last_placing_building_rotation=GUI.selected_rotation
+	if GUI.Tbutton.item!=last_item_held:
+		var last_item_held=GUI.Tbutton.item
+		$Buildings/GhostBuilding.get_child(0).texture=load(GUI.Tbutton.item.placement_texture)
 func _process(delta: float) -> void:
+	if GUI.Tbutton.visible:
+		if not GUI.Tbutton.item.ID==4:
+			$Buildings/GhostBuilding.visible=GUI.Tbutton.visible
+			if GUI.Tbutton.visible:
+				recheck_if_you_can_place_a_building_there()
+			$Buildings/GhostBuilding.position=last_placing_building_position*16+GUI.Tbutton.item.rotation_offsets[last_placing_building_rotation]*16+Vector2(GUI.Tbutton.item.x_size,GUI.Tbutton.item.y_size)*8
+			$Buildings/GhostBuilding.get_child(0).rotation_degrees=last_placing_building_rotation*90
+			if not can_i_place_a_building_there:
+				$Buildings/GhostBuilding.modulate=Color(1.0, 0.461, 0.393, 0.343)
+			else:
+				$Buildings/GhostBuilding.modulate=Color(0.0, 0.788, 0.06, 0.343)
+		else:
+			$Buildings/GhostBuilding.visible=false
+	else:
+		$Buildings/GhostBuilding.visible=false
 	for i in Global.buildings_2:
 		i.per_frame(delta)
 	if inspect_open:
