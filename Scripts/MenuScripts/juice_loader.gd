@@ -11,5 +11,5 @@ func _init() -> void:
 			tempJuice.rotation = pos_rot[1]
 			tempJuice.linear_velocity = pos_rot[2]
 func _ready() -> void:
-	await get_tree().create_timer(10).timeout
+	await get_tree().create_timer(4).timeout
 	get_parent().queue_free()
