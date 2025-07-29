@@ -202,16 +202,21 @@ var liquid_data=[
 		"Friction" : 0.8,
 		"Custom Texture":"res://Assets/CustomSprites/CellOfPrometheus.png",
 	},
-	{ #27
+	{ #28
 		"Name": "Blood of Prometheus",
 		"Color": Color(0,0,0,0),
 		"Bouncy": 0.8,
 		"Friction" : 1.4,
-		#"Custom Texture":"res://Assets/CustomSprites/CellOfPrometheus.png",
 		"Aging":{
 			"In":40,
 			"To":3
 		}
+	},
+	{ #29, created sometimes during an explosion. Dissipates into water after a little bit of time
+		"Name": "Electrolyte",
+		"Color": Color(0.342, 0.565, 0.36),
+		"Bouncy": 0.2,
+		"Friction" : 0.3,
 	},
 	
 ]

@@ -164,7 +164,15 @@ class building:
 				var aangle=randf_range(0,PI*2)
 				new_particle.linear_velocity.x=cos(aangle)*25*force_mult
 				new_particle.linear_velocity.y=sin(aangle)*25*force_mult
-
+				if randi_range(1,20)==1:
+					new_particle=liquid.instantiate()
+					_parent.add_child(new_particle)
+					new_particle.assign(29)
+					new_particle.position=object.position
+					aangle=randf_range(0,PI*2)
+					new_particle.linear_velocity.x=cos(aangle)*25*force_mult
+					new_particle.linear_velocity.y=sin(aangle)*25*force_mult
+					
 					
 		die()
 		var new_building=building.new(7,direction,_parent,pos)
