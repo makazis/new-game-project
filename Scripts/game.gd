@@ -69,17 +69,16 @@ class building:
 			max_storage=100
 			tags=["Unstable"]
 		if classification_id==5: 
-			inputs=[1,3]
+			inputs=[2]
 			max_storage=50
 		if classification_id==6: 
-			inputs=[1]
+			inputs=[2]
 			max_storage=1000
 		for i in more_data:
 			if i=="Storage":
 				storage=more_data["Storage"]
 	func rotate(in_direction) -> void:
 		direction = in_direction % 4
-		# print(direction)
 		#Don't question this line it is perfect and shouldn't be tuched (mkaestexture right dir)
 		object.get_node("Sprite2D").region_rect = Rect2(direction*16,object.get_node("Sprite2D").region_rect.position.y,object.get_node("Sprite2D").region_rect.size.x,object.get_node("Sprite2D").region_rect.size.y)
 	func per_frame(delta):
