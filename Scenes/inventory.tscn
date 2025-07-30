@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cj2qoo17ml7cw" path="res://Scenes/inventory_panel.tscn" id="2_yxepq"]
 [ext_resource type="PackedScene" uid="uid://dtadk33ruesdt" path="res://Scenes/Item_holder.tscn" id="3_yxepq"]
 [ext_resource type="Texture2D" uid="uid://c8vo3u3dyp4bk" path="res://Assets/ParticleIconTileSet.png" id="4_0n8tc"]
-[ext_resource type="Script" uid="uid://d2fnvricq8al1" path="res://Scripts/InvScripts/alchemy_menu.gd" id="5_c5ffv"]
+[ext_resource type="Script" path="res://Scripts/InvScripts/alchemy_menu.gd" id="5_c5ffv"]
 [ext_resource type="PackedScene" uid="uid://b5m1ypmgfrnqj" path="res://Scenes/Inventory/liquid_searcher.tscn" id="5_k1vlg"]
 
 [node name="Inventory" type="Control"]

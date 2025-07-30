@@ -23,6 +23,9 @@ class Local_Timer:
 	func reset():
 		is_finished=false
 		internal_timer.start(period)
+class new_building_system:
+	var buildings_size: Vector2
+	var texture: String
 class building:
 	var liquid=preload("res://Scenes/free_thinking_juice.tscn")
 	var id : int
