@@ -203,13 +203,6 @@ var crafting_tree=[
 		}
 	},{
 		"Req":{
-			"Gods Flesh": 1
-		},
-		"Result":{
-			4:4
-		}
-	},{
-		"Req":{
 			"Flesh": 1
 		},
 		"Result":{
