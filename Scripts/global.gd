@@ -105,7 +105,7 @@ var crafting_tree=[
 	{
 		"Req":{
 			"Human Blood":3,
-			"Nightmare Fuel":1
+			"Black Water":1
 		},
 		"Result":{
 			11:3
@@ -200,13 +200,6 @@ var crafting_tree=[
 		},
 		"Result":{
 			22:1
-		}
-	},{
-		"Req":{
-			"Gods Flesh": 1
-		},
-		"Result":{
-			4:4
 		}
 	},{
 		"Req":{
@@ -312,7 +305,23 @@ var hands_free = true
 
 var camera_shake=0
 
+var speedrun_timer=0
+var clocked_timer=""
+var show_speedrun_timer=true
 func _process(delta: float) -> void:
+	var hours=str(int(speedrun_timer)/3600)
+	if len(hours)==1:
+		hours="0"+hours
+	var minutes=str(int(speedrun_timer)/60%60)
+	if len(minutes)==1:
+		minutes="0"+minutes
+	var seconds=str(int(speedrun_timer)%60)
+	if len(seconds)==1:
+		seconds="0"+seconds
+	var miliseconds=str(int(speedrun_timer*1000)%1000)
+	while len(miliseconds)<3:
+		miliseconds="0"+miliseconds
+	clocked_timer=hours+":"+minutes+":"+seconds+"."+miliseconds
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		ctimer+=1
 	else:
@@ -433,3 +442,5 @@ func has_item_in_inventory(item_ID):
 			return true
 	return false
 	
+
+var first_animator=null

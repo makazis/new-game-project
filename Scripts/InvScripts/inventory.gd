@@ -19,6 +19,7 @@ func demiload():
 	if first_load:
 		load_element("Water")
 		first_load=false
+		$"Alchemy Menu".demiload()
 var first_load=true
 var mouse_timer=0
 var mouse_debounce = false
@@ -26,10 +27,7 @@ var animation={
 	"Type":"None"
 } #Only one animation at a time
 var menu_pos=Vector2(0,0)
-var menus=[
-	Vector2(0,0),
-	Vector2(1,0)
-]
+
 func _process(delta: float) -> void:
 	
 	if animation["Type"]!="None":
@@ -105,7 +103,7 @@ func load_element(element):
 func _input(event: InputEvent) -> void:
 	if animation["Type"]=="None" and Global.drag_locked:
 		if event.is_action_pressed("menu_right"):
-			if menu_pos+Vector2(1,0) in menus:
+			if menu_pos+Vector2(1,0) in Dev.inv_menus:
 				menu_pos+=Vector2(1,0)
 				animation={
 				"Type":"Moving",
@@ -115,7 +113,7 @@ func _input(event: InputEvent) -> void:
 				"Total Time":0.2
 			}
 		if event.is_action_pressed("menu_left"):
-			if menu_pos+Vector2(-1,0) in menus:
+			if menu_pos+Vector2(-1,0) in Dev.inv_menus:
 				menu_pos+=Vector2(-1,0)
 				animation={
 				"Type":"Moving",
@@ -125,7 +123,7 @@ func _input(event: InputEvent) -> void:
 				"Total Time":0.2
 			}
 		if event.is_action_pressed("menu_down"):
-			if menu_pos+Vector2(0,1) in menus:
+			if menu_pos+Vector2(0,1) in Dev.inv_menus:
 				menu_pos+=Vector2(0,1)
 				animation={
 				"Type":"Moving",
@@ -135,7 +133,7 @@ func _input(event: InputEvent) -> void:
 				"Total Time":0.2
 			}
 		if event.is_action_pressed("menu_up"):
-			if menu_pos+Vector2(0,-1) in menus:
+			if menu_pos+Vector2(0,-1) in Dev.inv_menus:
 				menu_pos+=Vector2(0,-1)
 				animation={
 				"Type":"Moving",

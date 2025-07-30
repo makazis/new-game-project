@@ -66,7 +66,10 @@ class building:
 		pos=position
 		_parent=parent
 		object.position = Global.game.ghost_building.position
+		
 		object.get_node("Sprite2D").position=Global.game.ghost_building.get_node("Sprite2D").position
+		if object.has_node("AnimatedSprite2D"):
+			object.get_node("AnimatedSprite2D").position=Global.game.ghost_building.get_node("Sprite2D").position
 		if not position in Global.taken_squares:
 			Global.taken_squares[position]=self
 		item_timers=[Local_Timer.new(1.5),Local_Timer.new(1)]
@@ -87,11 +90,14 @@ class building:
 				storage=more_data["Storage"]
 	func rotate(in_direction) -> void:
 		direction = in_direction % 4
-		#Don't question this line it is perfect and shouldn't be tuched (mkaestexture right dir)
-		if custom_size:
+		if object.has_node("Sprite2D"):
 			object.get_node("Sprite2D").rotation_degrees=direction*90
-		else:
-			object.get_node("Sprite2D").region_rect = Rect2(direction*16,object.get_node("Sprite2D").region_rect.position.y,object.get_node("Sprite2D").region_rect.size.x,object.get_node("Sprite2D").region_rect.size.y)
+		if object.has_node("AnimatedSprite2D"):
+			object.get_node("AnimatedSprite2D").rotation_degrees=direction*90
+		
+		#Don't question this line it is perfect and shouldn't be tuched (mkaestexture right dir)
+		#MUHAHAHAHA, ! I TOUCHED IT AND IT WORKS!!!
+			#object.get_node("Sprite2D").region_rect = Rect2(direction*16,object.get_node("Sprite2D").region_rect.position.y,object.get_node("Sprite2D").region_rect.size.x,object.get_node("Sprite2D").region_rect.size.y)
 	func per_frame(delta):
 		if classification_id == 3: #Emitter 
 			if item_timers[0].is_finished:
@@ -107,8 +113,6 @@ class building:
 		var new_particle=liquid.instantiate()
 		Global.game.add_child(new_particle)
 		new_particle.assign(liquid_ID)
-		if not Global.liquid_map_id_to_name[liquid_ID] in Global.known_liquids:
-			Global.known_liquids.append(Global.liquid_map_id_to_name[liquid_ID])
 		new_particle.position=object.position+Vector2(randi_range(-3,3),randi_range(-3,3))
 		new_particle.apply_force(direction_vector*1000+Vector2(randi_range(-7,7),randi_range(-7,7))*25)
 	func add_to_storage(item,quantity):
@@ -231,15 +235,18 @@ var last_placing_building_position=Vector2(0,0)
 var last_placing_building_rotation=0
 var last_item_held=null
 var can_i_place_a_building_there=false
+var last_buildings_length=0
 func recheck_if_you_can_place_a_building_there():
-	if last_placing_building_position!=(GUI.global_mouse_pos/16).floor() or last_placing_building_rotation!=GUI.selected_rotation:
+	if last_placing_building_position!=(GUI.global_mouse_pos/16).floor() or last_placing_building_rotation!=GUI.selected_rotation or last_buildings_length!=Global.buildings_2.size():
 		can_i_place_a_building_there=check_if_you_can_place_a_building_there(GUI.Tbutton.item.building_map,GUI.selected_rotation,(GUI.global_mouse_pos/16).floor())
 	last_placing_building_position=(GUI.global_mouse_pos/16).floor()
 	last_placing_building_rotation=GUI.selected_rotation
+	last_buildings_length=Global.buildings_2.size()
 	if GUI.Tbutton.item!=last_item_held:
 		var last_item_held=GUI.Tbutton.item
 		$Buildings/GhostBuilding.get_child(0).texture=load(GUI.Tbutton.item.placement_texture)
 func _process(delta: float) -> void:
+	Global.speedrun_timer+=delta
 	if GUI.Tbutton.visible:
 		if not GUI.Tbutton.item.ID==4:
 			$Buildings/GhostBuilding.visible=GUI.Tbutton.visible
@@ -318,8 +325,6 @@ func _input(event):
 		Global.drag_locked=not inv_open
 		$CanvasLayer/Inventory.demiload()
 		$CanvasLayer/GUI.demiload()
-	if event.is_action_pressed("Alchemy Menu"):
-		get_tree().change_scene_to_file("res://Scenes/menu/Alchemy/alchemy_info_menu.tscn")
 func _on_panel_mouse_entered() -> void:
 	mouse_on_inspect_menu=true
 

@@ -60,3 +60,10 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Liquid"):
 		colliding_bodies.erase(body)
+
+func _ready() -> void:
+	$"AnimatedSprite2D".play("default")
+	if Global.first_animator==null:
+		Global.first_animator=$"AnimatedSprite2D"
+	else:
+		$"AnimatedSprite2D".set_frame_and_progress(Global.first_animator.get_frame(),Global.first_animator.get_frame_progress())

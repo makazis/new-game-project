@@ -84,6 +84,7 @@ func _on_fullscreen_button_up() -> void:
 
 
 func _on_exit_button_up() -> void:
+	Dev.trigger_on_exit()
 	get_tree().quit()
 
 

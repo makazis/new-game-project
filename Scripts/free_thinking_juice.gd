@@ -80,10 +80,6 @@ var liquid_data=[
 		"Color": Color(0.45, 0.0, 0.1),  
 		"Bouncy": 0.7,  
 		"Friction": 0.3,  
-		"Aging": {  
-			"In": 45,  
-			"To": 6  # Turns back into Human Blood  
-		}  
 	},  
 	{  
 		"Name": "Golden Milk",  # Milk + Arionite (3:1)  
@@ -212,7 +208,7 @@ var liquid_data=[
 			"To":3
 		}
 	},
-	{ #29, created sometimes during an explosion. Dissipates into water after a little bit of time
+	{ #29, created sometimes during an explosion.
 		"Name": "Electrolyte",
 		"Color": Color(0.342, 0.565, 0.36),
 		"Bouncy": 0.2,
@@ -221,6 +217,7 @@ var liquid_data=[
 	
 ]
 func _ready() -> void:
+	add_child(my_timer)
 	#makes the big lists
 	if Global.liquid_map_id_to_name.size()==0:
 		for i in liquid_data.size():
@@ -228,6 +225,9 @@ func _ready() -> void:
 			Global.liquid_map_name_to_id[liquid_data[i]["Name"]]=i
 			Global.liquid_created_map[liquid_data[i]["Name"]]=[]
 			Global.liquid_makes_map[liquid_data[i]["Name"]]=[]
+			if Dev.alchemist_mode:
+				
+				Global.known_liquids.append(liquid_data[i]["Name"])
 		for i in liquid_data:
 			if "Aging" in i:
 				Global.liquid_created_map[Global.liquid_map_id_to_name[i["Aging"]["To"]]].append({
@@ -274,10 +274,15 @@ func _ready() -> void:
 				})
 	
 var cached_assigned_ID=0
+var my_timer=Timer.new()
 func assign(new_ID):
 	ID=new_ID
 	liquid_name=liquid_data[new_ID]["Name"]
 	if not liquid_name in Global.known_liquids:
+		Dev.log_achievement({
+			"Type":"Created Liquid",
+			"Liquid":liquid_name
+		})
 		Global.known_liquids.append(liquid_name)
 	sprite.texture.gradient.set_color(0,liquid_data[new_ID]["Color"])
 	if "Bouncy" in liquid_data[new_ID]:
@@ -286,8 +291,8 @@ func assign(new_ID):
 		#physics_material_override.bounce=liquid_data[new_ID]["Friction"]
 		linear_damp=0.1*(liquid_data[new_ID]["Friction"])
 	if "Aging" in liquid_data[new_ID]:
-		var my_timer=Timer.new()
-		add_child(my_timer)
+		#var my_timer=Timer.new()
+		
 		my_timer.start(liquid_data[new_ID]["Aging"]["In"]*randf_range(0.5,1.3))
 		cached_assigned_ID=liquid_data[new_ID]["Aging"]["To"]
 		my_timer.timeout.connect(cached_assign)
@@ -296,6 +301,7 @@ func assign(new_ID):
 	if "On Collide" in liquid_data[new_ID]:
 		contact_monitor=true
 func cached_assign():
+	my_timer.stop()
 	assign(cached_assigned_ID)
 func _physics_process(delta: float) -> void:
 	var global_mouse_pos=get_viewport().get_camera_2d().get_global_mouse_position()

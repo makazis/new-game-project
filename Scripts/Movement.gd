@@ -16,6 +16,7 @@ func _unhandled_input(event):
 		camera_zoom = clamp(camera_zoom, 0.3, 10)
 	Global.camera_zoom=camera_zoom
 func _process(delta: float) -> void:
+	$SpeedrunTimer.text=Global.clocked_timer
 	if Global.drag_locked:
 		return
 	zoom = Vector2.ONE * camera_zoom

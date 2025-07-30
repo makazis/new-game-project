@@ -3,7 +3,10 @@ extends Panel
 var ID=0
 var element_name="Water"
 var ammount=1
-func setup(liquid,_ammount):
+var type=0
+
+var chosen=false
+func setup(liquid,_ammount,_type=0):
 	ID=Global.liquid_map_name_to_id[liquid]
 	element_name=liquid
 	ammount=_ammount
@@ -17,7 +20,9 @@ func setup(liquid,_ammount):
 		$Label.text=""
 		custom_minimum_size=Vector2(20,20)
 		$Sprite2D.position=Vector2(10,10)
-
-
+	type=_type
 func _on_button_button_up() -> void:
-	Global.game.inv.load_element(element_name)
+	if type==0:
+		Global.game.inv.load_element(element_name)
+	elif type==1:
+		chosen=true
