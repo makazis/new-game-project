@@ -21,9 +21,9 @@ config/icon="uid://cinwcvl7wahgl"
 
 Global="*res://Scripts/global.gd"
 Order="*res://Scripts/order.gd"
-Bank="*res://Scripts/bank.gd"
 Liquids="*res://Scripts/Liquids.gd"
 Dev="*res://Scripts/dev.gd"
+Buildings="*res://Scripts/buildings.gd"
 
 [display]
 
