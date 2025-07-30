@@ -21,6 +21,7 @@ func _process(delta: float) -> void:
 #quits
 func _on_button_button_up() -> void:
 	if transition: return
+	Dev.trigger_on_exit()
 	get_tree().quit()
 
 

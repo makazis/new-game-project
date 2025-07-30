@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://hy17qk6hroyd"]
+[gd_scene load_steps=18 format=3 uid="uid://hy17qk6hroyd"]
 
 [ext_resource type="Script" uid="uid://lygfmdulrdk1" path="res://Scripts/game.gd" id="1_3dryh"]
 [ext_resource type="Texture2D" uid="uid://csvh0xos1tpk8" path="res://Tiles/tileset.png" id="2_wowpa"]
@@ -31,6 +31,9 @@ texture = ExtResource("2_wowpa")
 
 [sub_resource type="TileSet" id="TileSet_feb5d"]
 sources/0 = SubResource("TileSetAtlasSource_e2o6t")
+
+[sub_resource type="Theme" id="Theme_rfjv2"]
+default_font = ExtResource("9_rku1e")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rku1e"]
 radius = 20.0
@@ -104,6 +107,15 @@ layer = 4
 
 [node name="QuickMenu" parent="Camera2D/EscMenu" instance=ExtResource("10_ldgsr")]
 mouse_filter = 2
+
+[node name="SpeedrunTimer" type="Label" parent="Camera2D"]
+modulate = Color(0, 1, 1, 1)
+offset_left = -320.0
+offset_top = -180.0
+offset_right = -243.0
+offset_bottom = -157.0
+theme = SubResource("Theme_rfjv2")
+text = "00:00:00.000"
 
 [node name="Buildings" type="Node2D" parent="."]
 modulate = Color(0.796131, 0.881554, 0.876849, 1)

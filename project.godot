@@ -20,7 +20,7 @@ config/icon="uid://cinwcvl7wahgl"
 [autoload]
 
 Global="*res://Scripts/global.gd"
-Order="*res://Scenes/order.gd"
+Order="*res://Scripts/order.gd"
 Bank="*res://Scripts/bank.gd"
 Liquids="*res://Scripts/Liquids.gd"
 Dev="*res://Scripts/dev.gd"
