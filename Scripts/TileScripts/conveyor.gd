@@ -28,7 +28,7 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.is_in_group("Liquid"):
 		colliding_bodies.erase(body)
 
-func _process(delta: float) -> void:
+func _ready() -> void:
 	$"AnimatedSprite2D".play("default")
 	if Global.first_animator==null:
 		
