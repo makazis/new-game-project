@@ -121,3 +121,13 @@ func clear_spot(in_spot_id : int) -> void:
         buildings[in_spot_id] = null
     if in_spot_id < buildings_free_id:
         buildings_free_id = in_spot_id
+
+func check_placable(in_building_type : String, in_position : Vector2, in_rotation : int):
+    (x,y) (-y,x) (-x,-y) (y,-x) # rotates clockwise 90 degresee
+    var check_cells = buildings[in_building_type]["Occupied_cells"]
+    match in_rotation:
+        0:
+            for iter_cell_position in check_cells:
+                if #Check position + offset and for next one rotate 'em
+        1:
+

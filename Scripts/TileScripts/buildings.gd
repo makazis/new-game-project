@@ -8,10 +8,8 @@ var buildings_refrences : Array[String]
 var textures : Array[NB_Texture]
 var intakes : Array[NB_Intake]
 var storage : int
-var function : Array[NB_Function]
+var functions : Array[NB_Function]
 var outputs : Array[NB_Output]
-
-var follow_mouse : bool
 
 class NB_Output:
     var position : Vector2
@@ -49,20 +47,23 @@ class NB_Texture:
         texture = load(in_iter_compress["Path"])
         offset = in_iter_compress["Offset"]
 
-func initilize(in_building : String):
+func initilize(in_building : String, in_position : Vector2, in_rotation : int) -> void:
     var building_init : Dictionary = Buildings.BUILDINGS[in_building]
     buildings_name = building_init["Name"]
     buildings_dict_name = in_building
     buildings_id = Buildings.reserve_spot(self)
     occupied_cells = building_init["Occupied_cells"]
     buildings_refrences = []
-    textures = 
-    intakes
-    storage
-    function
-    outputs
-
-func place(position, rotation)
+    for iter_texture in in_building["Textures"]:
+        textures.append(NB_Texture.new(iter_texture))
+    for iter_intake in in_building["Intake"]:
+        textures.append(NB_Intake.new(iter_intake))
+    storage = in_building["Storage"]
+    for iter_functions in in_building["Functions"]:
+        functions.append(NB_Function.new(iter_functions))
+    for iter_options in in_building["Outputs"]:
+        outputs.append(NB_Function.new(iter_options))
+    
 #make so dosn't follow cursor or in inventory
 #Make it log and add refrences from Buildings.buildings to self and from self to buildings
 func destroy()
@@ -71,5 +72,5 @@ func destroy()
 
 func _process(delta: float) -> void:
     if follow_mouse:
-        #Add code to follow mouse
+        
         #add some code to put it in inventory
