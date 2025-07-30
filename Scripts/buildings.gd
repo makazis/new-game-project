@@ -36,5 +36,49 @@ var BUILDINGS = {
                 "Velocity" : Vector2(10,0) # gets affected by rotation
             }
         ]
+    },
+    "collector" : { ##UNFINISHED JUST WANTED SHOW HOW TRANSFERS WORK
+        "Name" : "emmiter",
+        "Occupied_cells" : [
+            Vector2(0,0)
+        ],
+        "Textures" : [
+            {
+                "Path" : "res://Assets/newTiles.png",
+                "Offset" : Rect2(0, 32, 16, 16)
+            },
+            {
+                "Path" : "res://Assets/newTiles.png",
+                "Offset" : Rect2(16, 32, 16, 16)
+            }
+        ],
+        "Intake" : [], 
+        "Storage" : 50, #Size of container
+        "Functions" : [ 
+            {
+                "Name" : "Explosion", #Explodes function wich dosn't yet exist but imagine, also functions can add custom velocity, well will be able to
+                "Params" : {
+                    "Output" : 0 #Where it all explodes to
+                }
+            },
+            {
+                "Name" : "Transfer",
+                "Params" : {
+                    "Speed" : 1,
+                    "Output" : 1
+                }
+            }
+        ],
+        "Outputs" : [
+            {
+                "Position" : Vector2(0,0), #uses world coords for detailed emmision
+                "Size" : Vector2(16,16),
+                "Velocity" : Vector2(0,0) # gets affected by rotation
+            },
+            {
+                "Position" : Vector2(1,0), #Uses building coords for grid modifications
+                "type" : 0 #Used so there can be multiple type pipes/ passes
+            }
+        ]
     }
 }
