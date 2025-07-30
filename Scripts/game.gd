@@ -23,9 +23,9 @@ class Local_Timer:
 	func reset():
 		is_finished=false
 		internal_timer.start(period)
-class new_building_system:
-	var buildings_size: Vector2
-	var texture: String
+
+
+
 class building:
 	var liquid=preload("res://Scenes/free_thinking_juice.tscn")
 	var id : int
@@ -207,6 +207,9 @@ class building:
 				var aangle=randf_range(0,PI*2)
 				new_particle.linear_velocity.x=cos(aangle)*25*force_mult
 				new_particle.linear_velocity.y=sin(aangle)*25*force_mult
+
+
+
 func _ready() -> void:
 	Global.game = self
 

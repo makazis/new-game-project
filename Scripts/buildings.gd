@@ -52,7 +52,13 @@ var BUILDINGS = {
                 "Offset" : Rect2(16, 32, 16, 16)
             }
         ],
-        "Intake" : [], 
+        "Intake" : [
+            { #THIS isn't for collector is just for crafter
+                "Position" : Vector2(0,0), #Uses world coords
+                "Rotation" : 0,
+                "Type" : 0
+            }
+        ], 
         "Storage" : 50, #Size of container
         "Functions" : [ 
             {
@@ -66,6 +72,12 @@ var BUILDINGS = {
                 "Params" : {
                     "Speed" : 1,
                     "Output" : 1
+                }
+            },
+            {
+                "Name" : "Collect", #Will have to creat area2d using only script
+                "Params" : {
+                    "Position" : Vector2(0,0)
                 }
             }
         ],
@@ -82,3 +94,6 @@ var BUILDINGS = {
         ]
     }
 }
+
+var buildings_position = {}
+var buildings = []
