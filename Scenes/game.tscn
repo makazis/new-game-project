@@ -12,7 +12,7 @@
 [ext_resource type="FontFile" uid="uid://ca2t6g7c3o17f" path="res://FONTS/VT323/VT323-Regular.ttf" id="9_rku1e"]
 [ext_resource type="PackedScene" uid="uid://3tsboa5llafg" path="res://Scenes/menu/quick_menu.tscn" id="10_ldgsr"]
 [ext_resource type="Script" uid="uid://cqbonl3dqf1c" path="res://Scripts/juice/hider.gd" id="11_o5yvi"]
-[ext_resource type="PackedScene" uid="uid://dpna871xelh5k" path="res://Scenes/ghost_building.tscn" id="12_rfjv2"]
+[ext_resource type="PackedScene" uid="uid://bt5550vjyyxo0" path="res://Scenes/ghost_building.tscn" id="12_rfjv2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e2o6t"]
 texture = ExtResource("2_wowpa")
