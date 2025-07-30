@@ -16,10 +16,11 @@ func setup(liquid,_ammount,_type=0):
 		$Sprite2D.region_rect=Rect2(ID%16*16,(ID/16)*16,16,16)
 	if _ammount>1:
 		$Label.text=str(_ammount)+"x"
+		custom_minimum_size=Vector2(40,20)
+		$Sprite2D.position=Vector2(40,10)
 	else:
 		$Label.text=""
-		custom_minimum_size=Vector2(20,20)
-		$Sprite2D.position=Vector2(10,10)
+		
 	type=_type
 func _on_button_button_up() -> void:
 	if type==0:

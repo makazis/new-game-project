@@ -339,6 +339,8 @@ func create_and_add_item(id):
 	add_item_to_inv(new_item)
 func setup_player_inventory():
 	#initilises inv slots
+	Player_Inventory=[]
+	Player_hotbar=[]
 	for i in range(27):
 		Player_Inventory.append(null)
 		if i<8:

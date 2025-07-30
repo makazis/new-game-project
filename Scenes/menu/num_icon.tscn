@@ -1,17 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://cpfb8knybnnpl"]
 
-[ext_resource type="Script" path="res://Scripts/InvScripts/num_icon.gd" id="1_cufut"]
+[ext_resource type="Script" uid="uid://dusmxxxeyr7gf" path="res://Scripts/InvScripts/num_icon.gd" id="1_cufut"]
 [ext_resource type="Texture2D" uid="uid://c8vo3u3dyp4bk" path="res://Assets/ParticleIconTileSet.png" id="2_2fanc"]
 [ext_resource type="FontFile" uid="uid://ca2t6g7c3o17f" path="res://FONTS/VT323/VT323-Regular.ttf" id="2_sn3s2"]
 
 [node name="NumIcon" type="Panel"]
 self_modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(40, 20)
+custom_minimum_size = Vector2(20, 20)
 offset_right = 51.0
 offset_bottom = 20.0
 script = ExtResource("1_cufut")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 texture_filter = 1
 layout_mode = 0
 offset_top = -1.0
@@ -23,7 +24,7 @@ horizontal_alignment = 2
 text_overrun_behavior = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(40, 10)
+position = Vector2(10, 10)
 texture = ExtResource("2_2fanc")
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
