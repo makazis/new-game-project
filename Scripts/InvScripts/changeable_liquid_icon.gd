@@ -2,7 +2,6 @@ extends Control
 
 var selected_liquid="Water"
 func demiload() -> void:
-	print("Demiload")
 	$NumIcon.setup("Water",1,1)
 	$"Liquid Searcher".demiload()
 func _process(delta: float) -> void:

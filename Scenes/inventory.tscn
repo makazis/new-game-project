@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dtadk33ruesdt" path="res://Scenes/Item_holder.tscn" id="3_yxepq"]
 [ext_resource type="Texture2D" uid="uid://c8vo3u3dyp4bk" path="res://Assets/ParticleIconTileSet.png" id="4_0n8tc"]
 [ext_resource type="Script" uid="uid://d2fnvricq8al1" path="res://Scripts/InvScripts/alchemy_menu.gd" id="5_c5ffv"]
-[ext_resource type="PackedScene" uid="uid://br2opncfhpfcj" path="res://Scenes/Inventory/Changeable Liquid Icon.tscn" id="6_c5ffv"]
+[ext_resource type="PackedScene" uid="uid://vpt0grmkenap" path="res://Scenes/Inventory/RecipeLiquidThingy.tscn" id="6_c5ffv"]
 
 [node name="Inventory" type="Control"]
 layout_mode = 3
@@ -292,28 +292,98 @@ anchors_preset = 0
 offset_left = 640.0
 offset_top = -360.0
 offset_right = 1280.0
+mouse_filter = 1
 script = ExtResource("5_c5ffv")
 
 [node name="Panel" type="Panel" parent="Alchemy Menu"]
+self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 620.0
 offset_bottom = 340.0
 
-[node name="ChangeableLiquidIcon" parent="Alchemy Menu/Panel" instance=ExtResource("6_c5ffv")]
-layout_mode = 1
-offset_left = 10.0
-offset_top = 49.0
-offset_right = -520.0
-offset_bottom = -235.0
-
-[node name="Label" type="Label" parent="Alchemy Menu/Panel"]
+[node name="Inputs" type="Panel" parent="Alchemy Menu/Panel"]
 layout_mode = 0
-offset_left = 30.0
-offset_top = 48.0
-offset_right = 77.0
-offset_bottom = 71.0
-text = "Water"
+offset_right = 230.0
+offset_bottom = 320.0
+
+[node name="RL1" parent="Alchemy Menu/Panel/Inputs" instance=ExtResource("6_c5ffv")]
+offset_left = 4.0
+offset_top = 123.0
+offset_right = 4.0
+offset_bottom = 123.0
+
+[node name="RL2" parent="Alchemy Menu/Panel/Inputs" instance=ExtResource("6_c5ffv")]
+offset_left = 4.0
+offset_top = 183.0
+offset_right = 4.0
+offset_bottom = 183.0
+
+[node name="RL3" parent="Alchemy Menu/Panel/Inputs" instance=ExtResource("6_c5ffv")]
+offset_left = 4.0
+offset_top = 243.0
+offset_right = 4.0
+offset_bottom = 243.0
+
+[node name="RL4" parent="Alchemy Menu/Panel/Inputs" instance=ExtResource("6_c5ffv")]
+offset_left = 4.0
+offset_top = 64.0
+offset_right = 4.0
+offset_bottom = 64.0
+
+[node name="RL5" parent="Alchemy Menu/Panel/Inputs" instance=ExtResource("6_c5ffv")]
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 4.0
+offset_bottom = 5.0
+
+[node name="Outputs" type="Panel" parent="Alchemy Menu/Panel"]
+layout_mode = 0
+offset_left = 250.0
+offset_right = 480.0
+offset_bottom = 320.0
+
+[node name="RL1" parent="Alchemy Menu/Panel/Outputs" instance=ExtResource("6_c5ffv")]
+offset_left = 4.0
+offset_top = 123.0
+offset_right = 4.0
+offset_bottom = 123.0
+
+[node name="RL2" parent="Alchemy Menu/Panel/Outputs" instance=ExtResource("6_c5ffv")]
+offset_left = 4.0
+offset_top = 183.0
+offset_right = 4.0
+offset_bottom = 183.0
+
+[node name="RL3" parent="Alchemy Menu/Panel/Outputs" instance=ExtResource("6_c5ffv")]
+offset_left = 4.0
+offset_top = 243.0
+offset_right = 4.0
+offset_bottom = 243.0
+
+[node name="RL4" parent="Alchemy Menu/Panel/Outputs" instance=ExtResource("6_c5ffv")]
+offset_left = 4.0
+offset_top = 64.0
+offset_right = 4.0
+offset_bottom = 64.0
+
+[node name="RL5" parent="Alchemy Menu/Panel/Outputs" instance=ExtResource("6_c5ffv")]
+offset_left = 4.0
+offset_top = 5.0
+offset_right = 4.0
+offset_bottom = 5.0
+
+[node name="Button" type="Button" parent="Alchemy Menu/Panel"]
+layout_mode = 0
+offset_left = 486.0
+offset_top = 5.0
+offset_right = 494.0
+offset_bottom = 13.0
+text = "Print In
+Terminal"
+
+[connection signal="pressed" from="Alchemy Menu/Panel/Button" to="Alchemy Menu" method="_on_button_pressed"]
 
 [editable path="TextureButton"]
+[editable path="Alchemy Menu/Panel/Inputs/RL5"]

@@ -277,7 +277,15 @@ var crafting_tree=[
 			28:2,
 			27:1
 		}
-	}
+	},
+	{
+		"Req":{ "Water": 1, "Electrolyte": 1 },
+		"Result":{ 30: 1, 29: 1 }
+	},
+	{
+		"Req":{ "Charged Water": 10 },
+		"Result":{ 31: 1, 0: 10 }
+	},
 	
 ]
 var camera_zoom=1

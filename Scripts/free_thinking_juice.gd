@@ -214,7 +214,22 @@ var liquid_data=[
 		"Bouncy": 0.2,
 		"Friction" : 0.3,
 	},
-	
+	{ #30, created by mixing an electrolyte with a water molecule, decays into water 2 seconds after being created
+		"Name": "Charged Water",
+		"Color": Color(0.0, 0.735, 0.588),
+		"Bouncy": 1.1,
+		"Friction" : 0.1,
+		"Aging":{
+			"In":2,
+			"To":0
+		}
+	},
+	{ #31, Charged particle
+		"Name": "Charged Particle",
+		"Color": Color(0.899, 0.687, 0.769),
+		"Bouncy": 1.0,
+		"Friction" : 0.2,
+	},
 ]
 func _ready() -> void:
 	add_child(my_timer)
@@ -319,8 +334,6 @@ func _physics_process(delta: float) -> void:
 
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("Liquid"):
-		print("Aye")
 		if "On Collide" in liquid_data[ID]:
 			if "Them To" in liquid_data[ID]["On Collide"]:
-				print("Ye")
 				body.assign(liquid_data[ID]["On Collide"]["Them To"])

@@ -16,15 +16,16 @@ grow_vertical = 2
 script = ExtResource("1_mm26m")
 
 [node name="NumIcon" parent="." instance=ExtResource("2_mm26m")]
+modulate = Color(0, 0.734845, 0.588068, 1)
 layout_mode = 0
 
 [node name="Liquid Searcher" parent="." instance=ExtResource("1_ixivt")]
 visible = false
 z_index = 3
 layout_mode = 1
-offset_left = 5.0
-offset_top = 5.0
-offset_right = -105.0
-offset_bottom = -71.0
+offset_left = 52.0
+offset_top = 23.0
+offset_right = -58.0
+offset_bottom = -53.0
 
 [connection signal="chosen_element" from="Liquid Searcher" to="." method="_on_liquid_searcher_chosen_element"]
