@@ -1,5 +1,8 @@
 extends Node
 
+
+#Defult rotation is right
+#List of all buildings
 var BUILDINGS = {
     "emmiter" : {
         "Name" : "emmiter", #naem that will be displayed and just to simpler to get :D
@@ -19,6 +22,12 @@ var BUILDINGS = {
         "Intake" : [], #this is which cells accept input and wath type also the direction
         "Storage" : 0,
         "Functions" : [ #these are the functions that get run by class like [dunction name]_init and [function_name]_update and [function_name]_destroy
+            {
+                "Name" : "Animation",
+                "Params" : {
+                    "Animations_idexes" : [0,1]
+                }
+            },
             {
                 "Name" : "Emmision", #techincly this is a custom function so params can change altho keep the same funcion name
                 "Params" : { #this means if you don't like this custominazation or want somthing more then you can easily code it yourself :D
@@ -95,39 +104,3 @@ var BUILDINGS = {
         ]
     }
 }
-
-var buildings_position = {}
-var buildings = []
-var buildings_free_id = 0
-func reserve_spot(in_building : Node2D) -> int:
-    var save_id = buildings_free_id
-    if buildings_free_id >= buildings.size():
-        buildings.append(in_building)
-        buildings_free_id += 1
-    else:
-        buildings[buildings_free_id] = in_building
-        for iter in range(buildings_free_id, buildings.size()):
-            if not buildings[iter]:
-                buildings_free_id = iter
-                break
-        if save_id == buildings_free_id:
-            buildings_free_id = buildings.size()
-    return save_id
-
-func clear_spot(in_spot_id : int) -> void:
-    if in_spot_id >= buildings.size() -1:
-        buildings.pop_back()
-    else:
-        buildings[in_spot_id] = null
-    if in_spot_id < buildings_free_id:
-        buildings_free_id = in_spot_id
-
-func check_placable(in_building_type : String, in_position : Vector2, in_rotation : int):
-    (x,y) (-y,x) (-x,-y) (y,-x) # rotates clockwise 90 degresee
-    var check_cells = buildings[in_building_type]["Occupied_cells"]
-    match in_rotation:
-        0:
-            for iter_cell_position in check_cells:
-                if #Check position + offset and for next one rotate 'em
-        1:
-

@@ -24,6 +24,8 @@ Order="*res://Scripts/order.gd"
 Liquids="*res://Scripts/Liquids.gd"
 Dev="*res://Scripts/dev.gd"
 Buildings="*res://Scripts/buildings.gd"
+BuildingsId="*res://Scripts/buildings_id.gd"
+BuildingPosition="*res://Scripts/building_position.gd"
 
 [display]
 
