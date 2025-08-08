@@ -1,6 +1,8 @@
 extends Node2D
 
-func _process(delta: float) -> void:
-    print(Buildings.reserve_spot(self))
-    if randi_range(0,1) == 0:
-        Buildings.clear_spot(randi_range(0,Buildings.buildings.size() - 1))
+func _ready() -> void:
+    print(Buildings.PlaceBuilding("emmiter", Vector2(0,0), 1, self))
+    print(Buildings.PlaceBuilding("emmiter", Vector2(1,0), 1, self))
+    print(Buildings.PlaceBuilding("emmiter", Vector2(2,0), 0, self))
+    print(BuildingPosition.buildings_position)
+    print(BuildingsId.buildings[0].CELL_POS)
