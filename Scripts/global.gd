@@ -203,13 +203,6 @@ var crafting_tree=[
 		}
 	},{
 		"Req":{
-			"Flesh": 1
-		},
-		"Result":{
-			3:4
-		}
-	},{
-		"Req":{
 			"Sinners Flesh": 1,
 			"Cheese" : 8
 		},

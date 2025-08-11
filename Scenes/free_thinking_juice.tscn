@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dkriwqbhomaqo"]
+[gd_scene load_steps=9 format=3 uid="uid://dkriwqbhomaqo"]
 
 [ext_resource type="Script" uid="uid://d2a82k7koo4qs" path="res://Scripts/free_thinking_juice.gd" id="1_y6tui"]
 
@@ -24,6 +24,23 @@ fill_to = Vector2(0, 0)
 [sub_resource type="CircleShape2D" id="CircleShape2D_onhwu"]
 radius = 2.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_y6tui"]
+
+[sub_resource type="Gradient" id="Gradient_y6tui"]
+resource_local_to_scene = true
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.579545, 1)
+colors = PackedColorArray(1, 0, 0, 0.313726, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_82s20"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_y6tui")
+width = 20
+height = 20
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
 [node name="Free Thinker Juice" type="RigidBody2D" groups=["Liquid"]]
 z_index = 4
 physics_material_override = SubResource("PhysicsMaterial_y6tui")
@@ -39,5 +56,16 @@ texture = SubResource("GradientTexture2D_iuruo")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 shape = SubResource("CircleShape2D_onhwu")
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+shape = SubResource("CircleShape2D_y6tui")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+z_index = -1
+texture = SubResource("GradientTexture2D_82s20")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

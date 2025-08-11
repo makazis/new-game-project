@@ -220,16 +220,31 @@ var liquid_data=[
 		"Bouncy": 1.1,
 		"Friction" : 0.1,
 		"Aging":{
-			"In":2,
+			"In":5,
 			"To":0
 		}
 	},
 	{ #31, Charged particle
-		"Name": "Charged Particle",
+		"Name": "Charged Particle (+)",
 		"Color": Color(0.899, 0.687, 0.769),
 		"Bouncy": 1.0,
 		"Friction" : 0.2,
+		"Attractive":{
+			"Radius":20,
+			"Force":2
+		}
 	},
+	{ #31, Charged particle
+		"Name": "Charged Particle (-)",
+		"Color": Color(0.212, 0.686, 0.769),
+		"Bouncy": 1.0,
+		"Friction" : 0.2,
+		"Attractive":{
+			"Radius":20,
+			"Force":-2
+		}
+	},
+	
 ]
 func _ready() -> void:
 	add_child(my_timer)
@@ -241,7 +256,6 @@ func _ready() -> void:
 			Global.liquid_created_map[liquid_data[i]["Name"]]=[]
 			Global.liquid_makes_map[liquid_data[i]["Name"]]=[]
 			if Dev.alchemist_mode:
-				
 				Global.known_liquids.append(liquid_data[i]["Name"])
 		for i in liquid_data:
 			if "Aging" in i:
@@ -290,6 +304,11 @@ func _ready() -> void:
 	
 var cached_assigned_ID=0
 var my_timer=Timer.new()
+
+var is_area_used=false
+var charge=0
+
+var charged_particle_first_time=false
 func assign(new_ID):
 	ID=new_ID
 	liquid_name=liquid_data[new_ID]["Name"]
@@ -313,8 +332,27 @@ func assign(new_ID):
 		my_timer.timeout.connect(cached_assign)
 	if "Custom Texture" in liquid_data[new_ID]:
 		sprite.texture=load(liquid_data[new_ID]["Custom Texture"])
-	if "On Collide" in liquid_data[new_ID]:
-		contact_monitor=true
+	#if "On Collide" in liquid_data[new_ID]:
+#		contact_monitor=true
+	if new_ID==31:
+		if randf_range(1,2)==1:
+			assign(32)
+			return
+	if "Attractive" in liquid_data[new_ID]:
+	
+		is_area_used=true
+		$Area2D.body_entered.connect(on_area_entered)
+		$Area2D.body_exited.connect(on_area_exited)
+		$Area2D/CollisionShape2D.shape.radius=liquid_data[new_ID]["Attractive"]["Radius"]
+		$Area2D/Sprite2D.texture.width=liquid_data[new_ID]["Attractive"]["Radius"]*2
+		$Area2D/Sprite2D.texture.height=liquid_data[new_ID]["Attractive"]["Radius"]*2
+		var charge_diff=(randi_range(0,1)*2-1)
+		if liquid_data[new_ID]["Attractive"]["Force"]*charge_diff>0:
+			$Area2D/Sprite2D.texture.gradient.set_color(0,Color(1,0,0,(1-1./(0.2+liquid_data[new_ID]["Attractive"]["Force"]))))
+		else:
+			$Area2D/Sprite2D.texture.gradient.set_color(0,Color(0,0,1,(1-1./(0.2+liquid_data[new_ID]["Attractive"]["Force"]))))
+		$Area2D.visible=true
+		charge= liquid_data[new_ID]["Attractive"]["Force"]*charge_diff
 func cached_assign():
 	my_timer.stop()
 	assign(cached_assigned_ID)
@@ -329,11 +367,24 @@ func _physics_process(delta: float) -> void:
 			assign(liquid_data[ID]["Accelerating"]["To"])
 	#if ID==9:
 	#	linear_velocity*=1+delta*30
-			
-
-
+	if "Attractive" in liquid_data[ID]:
+		for particle in colliding_bodies:
+			if particle !=self:
+				#Max distance is 23, bc r of this is 20, and r of the other is 3
+				var distance_to_particle=particle.global_position.distance_to(global_position)
+				var aangle=atan2(global_position.y-particle.global_position.y,global_position.x-particle.global_position.x)
+				particle.apply_force(Vector2(cos(aangle),sin(aangle))*(1-pow(distance_to_particle/23,2))*delta*liquid_data[ID]["Attractive"]["Force"]*1000*particle.charge*-1*charge)
+		
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("Liquid"):
 		if "On Collide" in liquid_data[ID]:
 			if "Them To" in liquid_data[ID]["On Collide"]:
 				body.assign(liquid_data[ID]["On Collide"]["Them To"])
+
+var colliding_bodies=[]
+func on_area_entered(body):
+	if body.is_in_group("Liquid"):
+		colliding_bodies.append(body)
+func on_area_exited(body):
+	if body.is_in_group("Liquid"):
+		colliding_bodies.erase(body)

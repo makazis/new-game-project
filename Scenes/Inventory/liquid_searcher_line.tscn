@@ -1,4 +1,4 @@
-[gd_scene load_steps=0 format=3 uid="uid://cej2giydhmcbx"]
+[gd_scene format=3 uid="uid://cej2giydhmcbx"]
 
 [node name="LiquidSearcherLine" type="HBoxContainer"]
 custom_minimum_size = Vector2(0, 20)

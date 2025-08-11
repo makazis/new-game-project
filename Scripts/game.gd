@@ -211,6 +211,11 @@ func _ready() -> void:
 	add_child(new_particle)
 	new_particle.assign(8)
 	new_particle.position=Vector2(0,0)
+	for i in range(190):
+		new_particle=liquid.instantiate()
+		add_child(new_particle)
+		new_particle.assign(31)
+		new_particle.position=Vector2(randf_range(-100,100),randf_range(-100,100))
 var delay = 0
 var inspect_open = false
 var inspect_gotten_building = null
@@ -339,10 +344,11 @@ func _on_scroll_container_mouse_entered() -> void:
 func take_items_from_storage_to_quest(storage,quest):
 	var items_used=0
 	for i in quest.request:
-		storage[Global.liquid_map_id_to_name[i]]-=int(quest.request[i])
-		items_used+=int(quest.request[i])
-		if storage[Global.liquid_map_id_to_name[i]]==0:
-			storage[Global.liquid_map_id_to_name[i]]=null
+		if quest.request[i]>0:
+			storage[Global.liquid_map_id_to_name[i]]-=int(quest.request[i])
+			items_used+=int(quest.request[i])
+			if storage[Global.liquid_map_id_to_name[i]]==0:
+				storage[Global.liquid_map_id_to_name[i]]=null
 	return items_used
 func _on_quest_1_button_down() -> void:
 	
