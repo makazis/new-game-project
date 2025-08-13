@@ -1,212 +1,213 @@
 extends Node2D
 var liquid=preload("res://Scenes/free_thinking_juice.tscn")
-	
+var building_template = Buildings.BUILDING_TEMPLATE
+
 @onready var GUI = $CanvasLayer/GUI
 @onready var inv = $CanvasLayer/Inventory
 
-@onready var ghost_building=$Buildings/GhostBuilding
-#This is only for the buildings that require actual 
-class Local_Timer:
-	var time_left : float
-	var period : int
-	var internal_timer : Timer
-	var is_finished: bool
-	func _init(in_period) -> void:
-		internal_timer=Timer.new()
-		internal_timer.timeout.connect(on_timeout)
-		Global.game.add_child(internal_timer)
-		is_finished=false
-		period=in_period
-		reset()
-	func on_timeout():
-		is_finished=true
-	func reset():
-		is_finished=false
-		internal_timer.start(period)
+# @onready var ghost_building=$Buildings/GhostBuilding
+# #This is only for the buildings that require actual 
+# class Local_Timer:
+# 	var time_left : float
+# 	var period : int
+# 	var internal_timer : Timer
+# 	var is_finished: bool
+# 	func _init(in_period) -> void:
+# 		internal_timer=Timer.new()
+# 		internal_timer.timeout.connect(on_timeout)
+# 		Global.game.add_child(internal_timer)
+# 		is_finished=false
+# 		period=in_period
+# 		reset()
+# 	func on_timeout():
+# 		is_finished=true
+# 	func reset():
+# 		is_finished=false
+# 		internal_timer.start(period)
 
 
 
-class building:
-	var liquid=preload("res://Scenes/free_thinking_juice.tscn")
-	var id : int
-	var classification_id : int
-	var name : String
-	var tool_tip : String
-	var object : Node2D
-	var direction : int
-	var storage: Dictionary
-	var item_timers : Array
-	var direction_vector : Vector2
-	#stores as position/16
-	var pos : Vector2
-	var can_intake_liquid : bool
-	var inputs=[]
-	var _parent
-	var max_storage: int
-	var total_storage: int
-	var tags=[]
-	var takes_up=[[0,0]]
-	var custom_size=false
-	func _init(in_buildings_id, in_direction, parent, position, more_data={}) -> void:
-		id = Global.getNewId()
-		classification_id = in_buildings_id
-		if classification_id==10:
-			#Assembler
-			takes_up=[[0,0],[1,0],[1,-1]]
-			custom_size=true	
-		name = Global.buildings[in_buildings_id]["Name"]
-		tool_tip = Global.buildings[in_buildings_id]["ToolTip"]
-		object = load(Global.buildings[in_buildings_id]["ModelPath"]).instantiate()
+# class building:
+# 	var liquid=preload("res://Scenes/free_thinking_juice.tscn")
+# 	var id : int
+# 	var classification_id : int
+# 	var name : String
+# 	var tool_tip : String
+# 	var object : Node2D
+# 	var direction : int
+# 	var storage: Dictionary
+# 	var item_timers : Array
+# 	var direction_vector : Vector2
+# 	#stores as position/16
+# 	var pos : Vector2
+# 	var can_intake_liquid : bool
+# 	var inputs=[]
+# 	var _parent
+# 	var max_storage: int
+# 	var total_storage: int
+# 	var tags=[]
+# 	var takes_up=[[0,0]]
+# 	var custom_size=false
+# 	func _init(in_buildings_id, in_direction, parent, position, more_data={}) -> void:
+# 		id = Global.getNewId()
+# 		classification_id = in_buildings_id
+# 		if classification_id==10:
+# 			#Assembler
+# 			takes_up=[[0,0],[1,0],[1,-1]]
+# 			custom_size=true	
+# 		name = Global.buildings[in_buildings_id]["Name"]
+# 		tool_tip = Global.buildings[in_buildings_id]["ToolTip"]
+# 		object = load(Global.buildings[in_buildings_id]["ModelPath"]).instantiate()
 		
-		direction=in_direction
-		direction_vector=[Vector2(-1,0),Vector2(0,-1),Vector2(1,0),Vector2(0,1)][in_direction]	
-		object.direction=in_direction
-		object.direction_vector=direction_vector
-		object.building=self
-		parent.add_child(object)
-		rotate(in_direction)
-		storage={}
-		pos=position
-		_parent=parent
-		object.position = Global.game.ghost_building.position
+# 		direction=in_direction
+# 		direction_vector=[Vector2(-1,0),Vector2(0,-1),Vector2(1,0),Vector2(0,1)][in_direction]	
+# 		object.direction=in_direction
+# 		object.direction_vector=direction_vector
+# 		object.building=self
+# 		parent.add_child(object)
+# 		rotate(in_direction)
+# 		storage={}
+# 		pos=position
+# 		_parent=parent
+# 		object.position = Global.game.ghost_building.position
 		
-		object.get_node("Sprite2D").position=Global.game.ghost_building.get_node("Sprite2D").position
-		if object.has_node("AnimatedSprite2D"):
-			object.get_node("AnimatedSprite2D").position=Global.game.ghost_building.get_node("Sprite2D").position
-		if not position in Global.taken_squares:
-			Global.taken_squares[position]=self
-		item_timers=[Local_Timer.new(1.5),Local_Timer.new(1)]
-		Global.buildings_2.append(self)
-		if classification_id in [1,5,6]:
-			can_intake_liquid=true
-		if classification_id==1:
-			max_storage=100
-			tags=["Unstable"]
-		if classification_id==5: 
-			inputs=[2]
-			max_storage=50
-		if classification_id==6: 
-			inputs=[2]
-			max_storage=1000
-		for i in more_data:
-			if i=="Storage":
-				storage=more_data["Storage"]
-	func rotate(in_direction) -> void:
-		direction = in_direction % 4
-		if object.has_node("Sprite2D"):
-			object.get_node("Sprite2D").rotation_degrees=direction*90
-		if object.has_node("AnimatedSprite2D"):
-			object.get_node("AnimatedSprite2D").rotation_degrees=direction*90
+# 		object.get_node("Sprite2D").position=Global.game.ghost_building.get_node("Sprite2D").position
+# 		if object.has_node("AnimatedSprite2D"):
+# 			object.get_node("AnimatedSprite2D").position=Global.game.ghost_building.get_node("Sprite2D").position
+# 		if not position in Global.taken_squares:
+# 			Global.taken_squares[position]=self
+# 		item_timers=[Local_Timer.new(1.5),Local_Timer.new(1)]
+# 		Global.buildings_2.append(self)
+# 		if classification_id in [1,5,6]:
+# 			can_intake_liquid=true
+# 		if classification_id==1:
+# 			max_storage=100
+# 			tags=["Unstable"]
+# 		if classification_id==5: 
+# 			inputs=[2]
+# 			max_storage=50
+# 		if classification_id==6: 
+# 			inputs=[2]
+# 			max_storage=1000
+# 		for i in more_data:
+# 			if i=="Storage":
+# 				storage=more_data["Storage"]
+# 	func rotate(in_direction) -> void:
+# 		direction = in_direction % 4
+# 		if object.has_node("Sprite2D"):
+# 			object.get_node("Sprite2D").rotation_degrees=direction*90
+# 		if object.has_node("AnimatedSprite2D"):
+# 			object.get_node("AnimatedSprite2D").rotation_degrees=direction*90
 		
-		#Don't question this line it is perfect and shouldn't be tuched (mkaestexture right dir)
-		#MUHAHAHAHA, ! I TOUCHED IT AND IT WORKS!!!
-			#object.get_node("Sprite2D").region_rect = Rect2(direction*16,object.get_node("Sprite2D").region_rect.position.y,object.get_node("Sprite2D").region_rect.size.x,object.get_node("Sprite2D").region_rect.size.y)
-	func per_frame(delta):
-		if classification_id == 3: #Emitter 
-			if item_timers[0].is_finished:
-				create_liquid(0)
-				item_timers[0].reset()
-		if classification_id==5:
-			if item_timers[0].is_finished:
-				slow_Update()
-				item_timers[0].reset()
-	#func get_adjacent_building(to_direction):
-	#
-	func create_liquid(liquid_ID):
-		var new_particle=liquid.instantiate()
-		Global.game.add_child(new_particle)
-		new_particle.assign(liquid_ID)
-		new_particle.position=object.position+Vector2(randi_range(-3,3),randi_range(-3,3))
-		new_particle.apply_force(direction_vector*1000+Vector2(randi_range(-7,7),randi_range(-7,7))*25)
-	func add_to_storage(item,quantity):
-		if not item in storage:
-			storage[item]=quantity
-		else:
-			storage[item]+=quantity
-	func die():
-		if self in Global.buildings_2:
-			Global.buildings_2.erase(self)
-		if pos in Global.taken_squares:
-			Global.taken_squares.erase(pos)
-		self.object.queue_free()
-	func has_building(_direction):
-		return pos+Global.directional_vectors[_direction] in Global.taken_squares
-	func get_building(_direction):
-		return Global.taken_squares[pos+Global.directional_vectors[_direction]]
-	func slow_Update():
-		if classification_id == 5: #Merger
-			var did_something=false
-			for i in Global.crafting_tree:
-				if not did_something:
-					var can_do=true
-					for requirement in i["Req"]:
-						if can_do:
-							if not requirement in storage:
-								can_do=false
-								continue
-							elif storage[requirement]<i["Req"][requirement]:
-								can_do=false
-								continue
-					if can_do:
-						for requirement in i["Req"]:
-							storage[requirement]-=i["Req"][requirement]
-							total_storage-=i["Req"][requirement]
-						for result in i["Result"]:
-							for ii in range(i["Result"][result]):
-								create_liquid(result)
-						did_something=true
-	func Update():
-		pass
-		#print(storage)
-		#if classification_id ==6:
-		#	
-		#	for i in storage:
-		#		if not i in Global.in_storage_items:
-		#			Global.in_storage_items[i]=storage[i]
-		#		else:
-		#			Global.in_storage_items[i]+=storage[i]
-		#	total_storage=0
-		#	storage={}
-			#print(Global.in_storage_items)
-	func explode(force_mult=1.):
-		Global.camera_shake+=force_mult*6
-		for liquid_name in storage:
-			#print(liquid_name)
-			for liquid_instance in range(storage[liquid_name]):
-				var new_particle=liquid.instantiate()
+# 		#Don't question this line it is perfect and shouldn't be tuched (mkaestexture right dir)
+# 		#MUHAHAHAHA, ! I TOUCHED IT AND IT WORKS!!!
+# 			#object.get_node("Sprite2D").region_rect = Rect2(direction*16,object.get_node("Sprite2D").region_rect.position.y,object.get_node("Sprite2D").region_rect.size.x,object.get_node("Sprite2D").region_rect.size.y)
+# 	func per_frame(delta):
+# 		if classification_id == 3: #Emitter 
+# 			if item_timers[0].is_finished:
+# 				create_liquid(0)
+# 				item_timers[0].reset()
+# 		if classification_id==5:
+# 			if item_timers[0].is_finished:
+# 				slow_Update()
+# 				item_timers[0].reset()
+# 	#func get_adjacent_building(to_direction):
+# 	#
+# 	func create_liquid(liquid_ID):
+# 		var new_particle=liquid.instantiate()
+# 		Global.game.add_child(new_particle)
+# 		new_particle.assign(liquid_ID)
+# 		new_particle.position=object.position+Vector2(randi_range(-3,3),randi_range(-3,3))
+# 		new_particle.apply_force(direction_vector*1000+Vector2(randi_range(-7,7),randi_range(-7,7))*25)
+# 	func add_to_storage(item,quantity):
+# 		if not item in storage:
+# 			storage[item]=quantity
+# 		else:
+# 			storage[item]+=quantity
+# 	func die():
+# 		if self in Global.buildings_2:
+# 			Global.buildings_2.erase(self)
+# 		if pos in Global.taken_squares:
+# 			Global.taken_squares.erase(pos)
+# 		self.object.queue_free()
+# 	func has_building(_direction):
+# 		return pos+Global.directional_vectors[_direction] in Global.taken_squares
+# 	func get_building(_direction):
+# 		return Global.taken_squares[pos+Global.directional_vectors[_direction]]
+# 	func slow_Update():
+# 		if classification_id == 5: #Merger
+# 			var did_something=false
+# 			for i in Global.crafting_tree:
+# 				if not did_something:
+# 					var can_do=true
+# 					for requirement in i["Req"]:
+# 						if can_do:
+# 							if not requirement in storage:
+# 								can_do=false
+# 								continue
+# 							elif storage[requirement]<i["Req"][requirement]:
+# 								can_do=false
+# 								continue
+# 					if can_do:
+# 						for requirement in i["Req"]:
+# 							storage[requirement]-=i["Req"][requirement]
+# 							total_storage-=i["Req"][requirement]
+# 						for result in i["Result"]:
+# 							for ii in range(i["Result"][result]):
+# 								create_liquid(result)
+# 						did_something=true
+# 	func Update():
+# 		pass
+# 		#print(storage)
+# 		#if classification_id ==6:
+# 		#	
+# 		#	for i in storage:
+# 		#		if not i in Global.in_storage_items:
+# 		#			Global.in_storage_items[i]=storage[i]
+# 		#		else:
+# 		#			Global.in_storage_items[i]+=storage[i]
+# 		#	total_storage=0
+# 		#	storage={}
+# 			#print(Global.in_storage_items)
+# 	func explode(force_mult=1.):
+# 		Global.camera_shake+=force_mult*6
+# 		for liquid_name in storage:
+# 			#print(liquid_name)
+# 			for liquid_instance in range(storage[liquid_name]):
+# 				var new_particle=liquid.instantiate()
 				
-				_parent.add_child(new_particle)
-				new_particle.assign(Global.liquid_map_name_to_id[liquid_name])
-				new_particle.position=object.position
-				var aangle=randf_range(0,PI*2)
-				new_particle.linear_velocity.x=cos(aangle)*25*force_mult
-				new_particle.linear_velocity.y=sin(aangle)*25*force_mult
-				if randi_range(1,20)==1:
-					new_particle=liquid.instantiate()
-					_parent.add_child(new_particle)
-					new_particle.assign(29)
-					new_particle.position=object.position
-					aangle=randf_range(0,PI*2)
-					new_particle.linear_velocity.x=cos(aangle)*25*force_mult
-					new_particle.linear_velocity.y=sin(aangle)*25*force_mult
+# 				_parent.add_child(new_particle)
+# 				new_particle.assign(Global.liquid_map_name_to_id[liquid_name])
+# 				new_particle.position=object.position
+# 				var aangle=randf_range(0,PI*2)
+# 				new_particle.linear_velocity.x=cos(aangle)*25*force_mult
+# 				new_particle.linear_velocity.y=sin(aangle)*25*force_mult
+# 				if randi_range(1,20)==1:
+# 					new_particle=liquid.instantiate()
+# 					_parent.add_child(new_particle)
+# 					new_particle.assign(29)
+# 					new_particle.position=object.position
+# 					aangle=randf_range(0,PI*2)
+# 					new_particle.linear_velocity.x=cos(aangle)*25*force_mult
+# 					new_particle.linear_velocity.y=sin(aangle)*25*force_mult
 					
 					
-		die()
-		var new_building=building.new(7,direction,_parent,pos)
-		Global.buildings_2.append(new_building)
-		Global.taken_squares[pos]=new_building
-	func release_liquid(force_mult=0.2):
-		for liquid_name in storage:
-			#print(liquid_name)
-			for liquid_instance in range(storage[liquid_name]):
-				var new_particle=liquid.instantiate()
+# 		die()
+# 		var new_building=building.new(7,direction,_parent,pos)
+# 		Global.buildings_2.append(new_building)
+# 		Global.taken_squares[pos]=new_building
+# 	func release_liquid(force_mult=0.2):
+# 		for liquid_name in storage:
+# 			#print(liquid_name)
+# 			for liquid_instance in range(storage[liquid_name]):
+# 				var new_particle=liquid.instantiate()
 				
-				_parent.add_child(new_particle)
-				new_particle.assign(Global.liquid_map_name_to_id[liquid_name])
-				new_particle.position=object.position
-				var aangle=randf_range(0,PI*2)
-				new_particle.linear_velocity.x=cos(aangle)*25*force_mult
-				new_particle.linear_velocity.y=sin(aangle)*25*force_mult
+# 				_parent.add_child(new_particle)
+# 				new_particle.assign(Global.liquid_map_name_to_id[liquid_name])
+# 				new_particle.position=object.position
+# 				var aangle=randf_range(0,PI*2)
+# 				new_particle.linear_velocity.x=cos(aangle)*25*force_mult
+# 				new_particle.linear_velocity.y=sin(aangle)*25*force_mult
 
 
 
@@ -217,12 +218,14 @@ func _ready() -> void:
 	add_child(new_particle)
 	new_particle.assign(8)
 	new_particle.position=Vector2(0,0)
+
 var delay = 0
 var inspect_open = false
 var inspect_gotten_building = null
 var inspect_last_storage_keys = {}
 var inspector_global_pos = Vector2.ZERO
 var mouse_on_inspect_menu=false
+
 func check_if_you_can_place_a_building_there(building_map,new_rotation,new_position):
 	for i in building_map:
 		var new_tile_position=Vector2(0,0)
@@ -237,39 +240,23 @@ func check_if_you_can_place_a_building_there(building_map,new_rotation,new_posit
 		if new_tile_position+new_position in Global.taken_squares:
 			return false
 	return true
+
 var last_placing_building_position=Vector2(0,0)
 var last_placing_building_rotation=0
 var last_item_held=null
 var can_i_place_a_building_there=false
 var last_buildings_length=0
-func recheck_if_you_can_place_a_building_there():
-	if last_placing_building_position!=(GUI.global_mouse_pos/16).floor() or last_placing_building_rotation!=GUI.selected_rotation or last_buildings_length!=Global.buildings_2.size():
-		can_i_place_a_building_there=check_if_you_can_place_a_building_there(GUI.Tbutton.item.building_map,GUI.selected_rotation,(GUI.global_mouse_pos/16).floor())
-	last_placing_building_position=(GUI.global_mouse_pos/16).floor()
-	last_placing_building_rotation=GUI.selected_rotation
-	last_buildings_length=Global.buildings_2.size()
-	if GUI.Tbutton.item!=last_item_held:
-		var last_item_held=GUI.Tbutton.item
-		$Buildings/GhostBuilding.get_child(0).texture=load(GUI.Tbutton.item.placement_texture)
+
+
 func _process(delta: float) -> void:
 	Global.speedrun_timer+=delta
+	#If cursor has selected some building
 	if GUI.Tbutton.visible:
-		if not GUI.Tbutton.item.ID==4:
-			$Buildings/GhostBuilding.visible=GUI.Tbutton.visible
-			if GUI.Tbutton.visible:
-				recheck_if_you_can_place_a_building_there()
-			$Buildings/GhostBuilding.position=last_placing_building_position*16+GUI.Tbutton.item.rotation_offsets[last_placing_building_rotation]*16+Vector2(GUI.Tbutton.item.x_size,GUI.Tbutton.item.y_size)*8
-			$Buildings/GhostBuilding.get_child(0).rotation_degrees=last_placing_building_rotation*90
-			if not can_i_place_a_building_there:
-				$Buildings/GhostBuilding.modulate=Color(1.0, 0.461, 0.393, 0.343)
-			else:
-				$Buildings/GhostBuilding.modulate=Color(0.0, 0.788, 0.06, 0.343)
-		else:
-			$Buildings/GhostBuilding.visible=false
-	else:
-		$Buildings/GhostBuilding.visible=false
-	for i in Global.buildings_2:
-		i.per_frame(delta)
+		pass
+	#iterates over buildings
+	for i_building in BuildingsId.buildings:
+		i_building.per_frame(delta)
+	#Preview of building inv aswell the stuff inside
 	if inspect_open:
 		GUI.can_place_buildings=false
 		if mouse_on_inspect_menu and Global.hands_free:
@@ -300,13 +287,13 @@ func _process(delta: float) -> void:
 		if get_viewport().get_mouse_position()[1]<=296:
 			if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 				if Global.hands_free and not Global.selecting_hotbar:
-					var gotten_building = Global.getBuildingFromPos(get_global_mouse_position())
+					var gotten_building = Buildings.GetBuildingFromPos(get_global_mouse_position())
 					if gotten_building:
 						mouse_on_inspect_menu=true
 						$Camera2D/Inspector.visible = true
 						$Camera2D/Inspector.position = $Camera2D.get_local_mouse_position()+Vector2(-10,-10)
 						inspector_global_pos = $Camera2D/Inspector.global_position
-						$Camera2D/Inspector/Panel/Label.text = gotten_building.name
+						$Camera2D/Inspector/Panel/Label.text = gotten_building.NAME
 						var finalText = ""
 						for iter_storage in gotten_building.storage.keys():
 							finalText += iter_storage + " (" + str(gotten_building.storage[iter_storage]) + ")\n"

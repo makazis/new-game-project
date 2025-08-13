@@ -127,10 +127,11 @@ func demiload():
 		$HBoxContainer.get_child(i).button.clear_item()
 		if Global.Player_hotbar[i]==null:
 			continue
-		
+
 		$HBoxContainer.get_child(i).button.update_item(Global.Player_hotbar[i])
 	var deletor_item=item_class.instantiate()
-	deletor_item.assign(4)
+	deletor_item.initilise_slot("deletor")
 	deletor.update_item(deletor_item)
+
 func _ready() -> void:
 	demiload()

@@ -7,56 +7,6 @@ func getNewId() -> int:
 	bigest_id += 1
 	return bigest_id - 1
 
-var buildings = [
-	{
-		"Name" = "Conveyor",
-		"ToolTip" = "Transports Items",
-		"ModelPath" = "res://Assets/Models/Conveyor.tscn",
-	},
-	{
-		"Name" = "Collector",
-		"ToolTip" = "Collects Items",
-		"ModelPath" = "res://Assets/Models/Collector.tscn",
-	},
-	{
-		"Name" = "Turn",
-		"ToolTip" = "Transports Items to another direction",
-		"ModelPath" = "res://Assets/Models/Turn.tscn",
-	},
-	{
-		"Name" = "Emmiter",
-		"ToolTip" = "Emmits Extractium",
-		"ModelPath" = "res://Assets/Models/Emiter.tscn",
-	},{}, #Saved for the delete item
-	{
-		"Name" = "Fuser",
-		"ToolTip" = "Fuses liquids together into new ones",
-		"ModelPath" = "res://Assets/Models/Merger.tscn",
-	},
-	{
-		"Name" = "Storer",
-		"ToolTip" = "Puts Liquids into production",
-		"ModelPath" = "res://Assets/Models/Storer.tscn",
-	},
-	{
-		"Name" = "Rubble",
-		"ToolTip" = "Does absolutely nothing and dies",
-		"ModelPath" = "res://Assets/Models/Rubble.tscn",
-	},{
-		"Name" = "Barrel",
-		"ToolTip" = "Stores Certain items",
-		"ModelPath" = "res://Assets/Models/Barrel.tscn",
-	},{
-		"Name" = "Extractor",
-		"ToolTip" = "Takes items out",
-		"ModelPath" = "res://Assets/Models/Splitter.tscn",
-	},{
-		"Name" = "Assembler",
-		"ToolTip" = "Makes cooler shit",
-		"ModelPath" = "res://Assets/Models/Assembler.tscn",
-	}
-	
-]
 var crafting_tree=[
 	{ #This is cursed, but oh well
 		"Req":{
@@ -283,7 +233,6 @@ var crafting_tree=[
 var camera_zoom=1
 var camera_pos=Vector2(0,0)
 var taken_squares={}
-var buildings_2=[]
 var directional_vectors=[Vector2(-1,0),Vector2(0,-1),Vector2(1,0),Vector2(0,1)]
 var game=null 
 var transition_instance = null
@@ -293,7 +242,7 @@ var liquid_created_map={}
 var liquid_makes_map={}
 
 var known_liquids=["Water"]
-@onready var item_loaded=preload("res://Scenes/inventory_item.tscn")
+@onready var item_loaded = preload("res://Scenes/inventory_item.tscn")
 
 var menu_open = false
 var Player_Inventory = []
@@ -333,114 +282,96 @@ func getBuildingFromPos(in_position):
 	return null
 
 var selecting_hotbar = false
-func create_and_add_item(id):
-	var new_item= item_loaded.instantiate()
-	new_item.assign(id)
-	add_item_to_inv(new_item)
+func create_and_add_item(i_building_type, count):
+	if has_item_in_inventory(i_building_type):
+		get_item_in_inventory(i_building_type).item_stack += count
+	else:
+		var new_item = item_loaded.instantiate()
+		new_item.item_stack = count
+		new_item.initilise_slot(i_building_type)
+		add_item_to_inv(new_item)
+
 func setup_player_inventory():
 	#initilises inv slots
 	for i in range(27):
 		Player_Inventory.append(null)
 		if i<8:
 			Player_hotbar.append(null)
-
 	#10 items each row, useful for adding items to inventory later
+	#Bro, u will go insane after while creating these systems XD
 	var starting_items=[]
 	if Dev.mode=="Normal":
 		starting_items=[
-			5,2,0,1,0,0,1,0,0,0,
-			0
+			["conveyor", 5],
+			["collector", 2],
+			["emmiter", 1],
+			["storer", 1]
 		]
 	if Dev.mode=="Sandbox":
 		starting_items=[
-			1,1,0,1,0,1,1,0,0,1,
-			1
+			["conveyor", 1],
+			["collector", 1],
+			["emmiter", 1],
+			["fuser", 1],
+			["storer", 1],
+			["rubble", 1]
+			#TODO -> buildings.gd
+			# ["barrel", 1],
+			# ["extractor", 1],
+			# ["assembler", 1]
 		]
-	for i in starting_items.size():
-		for ii in range(starting_items[i]):
-			create_and_add_item(i)
+	for i in starting_items:
+		create_and_add_item(i[0],i[1])
+
+
 func add_item_to_inv(added_item):
-	var item_is_in_hotbar=false
-	var item_is_in_inventory=false
-	#check if item exists
-	if added_item.storage.size()==0:
-		for iter_item_key in Player_hotbar.size():
-			var iter_item=Player_hotbar[iter_item_key]
-			#Checks if item exists
-			if iter_item==null:
-				continue
-			if iter_item.storage.size()>0:
-				continue
-			#Stacks items
-			if iter_item.ID==added_item.ID:
-				iter_item.item_count+=added_item.item_count
-				item_is_in_hotbar=true
-				return
-		
-		#check if item exists
-		for iter_item_key in Player_Inventory.size():
-			var iter_item=Player_Inventory[iter_item_key]
-			#Checks if item exists
-			if iter_item==null:
-				continue
-			if iter_item.storage.size()>0:
-				continue
-			#Stacks items
-			if iter_item.ID==added_item.ID:
-				iter_item.item_count+=added_item.item_count
-				item_is_in_inventory=true
-				return
-	if not item_is_in_hotbar:
-		for iter_item_key in Player_hotbar.size():
-			if Player_hotbar[iter_item_key]==null:
-				Player_hotbar[iter_item_key]=added_item
-				return
-	#Adds item to inventory
-	if not item_is_in_inventory:
-		
-		for iter_item_key in Player_Inventory.size():
-			if Player_Inventory[iter_item_key]==null:
-				Player_Inventory[iter_item_key]=added_item
-				return
-func remove_singleton_from_inventory(item):
-	for iter_item_key in Player_hotbar.size():
-		if Player_hotbar[iter_item_key]==item:
-			Player_hotbar[iter_item_key]=null
-			return
-	for iter_item_key in Player_Inventory.size():
-		if Player_Inventory[iter_item_key]==item:
-			Player_Inventory[iter_item_key]=null
-			return
-func remove_from_inventory(item_ID,count):
-	for iter_item_key in Player_hotbar.size():
-		if Player_hotbar[iter_item_key]==null:
-			continue
-		if Player_hotbar[iter_item_key].ID==item_ID:
-			Player_hotbar[iter_item_key].item_count-=count
-			if Player_hotbar[iter_item_key].item_count<=0:
-				Player_hotbar[iter_item_key]=null
-			return
-	for iter_item_key in Player_Inventory.size():
-		if Player_Inventory[iter_item_key]==null:
-			continue
-		if Player_Inventory[iter_item_key].ID==item_ID:
-			Player_Inventory[iter_item_key].item_count-=count
-			if Player_Inventory[iter_item_key].item_count<=0:
-				Player_Inventory[iter_item_key]=null
-			return
+	for slot in Player_hotbar.size():
+		if Player_hotbar[slot]: continue
+		Player_hotbar[slot] = added_item
+		added_item.hotbar_spot = slot
+		return
+	for slot in Player_Inventory.size():
+		if Player_Inventory[slot]: continue
+		Player_Inventory[slot] = added_item
+		added_item.hotbar_spot = slot
+		return
+
+func remove_singleton_type_from_inventory(i_item_type):
+	remove_singleton_from_inventory(get_item_in_inventory(i_item_type))
+
+func remove_singleton_from_inventory(i_item):
+	i_item.i_item_stack -= 1
+	if i_item.i_item_stack <= 0:
+		if i_item.inventory_sopt != -1: Player_Inventory[i_item.inventory_sopt] = null
+		if i_item.hotbar_spot != -1: Player_hotbar[i_item.hotbar_spot] = null
+		i_item.queue_free()
+
+func remove_from_inventory(i_item_type,i_count):
+	while i_count > 0:
+		var t_item = get_item_in_inventory(i_item_type)
+		if not t_item: return
+		var t_count = t_item.item_stack
+		i_count -= t_item.item_stack - t_count
+		t_item.item_stack = t_count
+
 	print("Fuck, something's wrong if you see this")
-func has_item_in_inventory(item_ID):
-	for iter_item_key in Player_hotbar.size():
-		if Player_hotbar[iter_item_key]==null:
-			continue
-		if Player_hotbar[iter_item_key].ID==item_ID:
-			return true
-	for iter_item_key in Player_Inventory.size():
-		if Player_Inventory[iter_item_key]==null:
-			continue
-		if Player_Inventory[iter_item_key].ID==item_ID:
-			return true
-	return false
+
+func get_item_in_inventory(i_item_type):
+	for slot in Player_hotbar:
+		if not slot: continue
+		if slot.item_type == i_item_type:
+			return slot
+	for slot in Player_Inventory:
+		if not slot: continue
+		if slot.item_type == i_item_type:
+			return slot
+	return null
+
+func has_item_in_inventory(i_item_type) -> bool:
+	if get_item_in_inventory(i_item_type):
+		return true
+	else:
+		return false
 	
 
 var first_animator=null

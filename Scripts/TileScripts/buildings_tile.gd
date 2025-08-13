@@ -4,7 +4,9 @@ extends Node2D
 var ID : int
 
 #Set on init
+var NAME : String
 var CELLS : Array #Occupied cells pre rot
+var STORAGE : Dictionary
 var POSITION : Vector2 #In building coords
 var ROTATION : int #In 0123 where 0 is right 
 
@@ -12,6 +14,7 @@ var ROTATION : int #In 0123 where 0 is right
 var CELL_POS : Array #Occupied cells after rotation and position
 
 func init(i_params, i_position, i_rotation) -> void:
-	CELLS = i_params["Occupied_cells"]
-	POSITION = i_position
-	ROTATION = i_rotation
+    NAME = i_params["Name"]
+    CELLS = i_params["Occupied_cells"]
+    POSITION = i_position
+    ROTATION = i_rotation
