@@ -309,11 +309,10 @@ func setup_player_inventory():
 			["emmiter", 1],
 			["fuser", 1],
 			["storer", 1],
-			["rubble", 1]
-			#TODO -> buildings.gd
-			# ["barrel", 1],
-			# ["extractor", 1],
-			# ["assembler", 1]
+			["barrel", 1],
+			["extractor", 1],
+			["assembler", 1],
+			["blood_barrel",1]
 		]
 	for i in starting_items:
 		create_and_add_item(i[0],i[1])

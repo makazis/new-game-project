@@ -17,7 +17,11 @@ func _init() -> void:
 				var tBuilding = BUILDINGS[BUILDINGS[iBuilding]["Inheretance"]]
 				for key in tBuilding:
 					if key == "Inheretance":
-						BUILDINGS[iBuilding]["Inheretance"] = tBuilding["Inheretance"]
+						if iBuilding == tBuilding["Inheretance"]:
+							print("OH GOD, " + iBuilding + " Inherits from itself XD")
+							BUILDINGS[iBuilding]["Inheretance"] = ""
+						else:
+							BUILDINGS[iBuilding]["Inheretance"] = tBuilding["Inheretance"]
 					else:
 						if not BUILDINGS[iBuilding].has(key):
 							BUILDINGS[iBuilding][key] = tBuilding[key]
@@ -31,7 +35,6 @@ func PlaceBuilding(i_type : String, i_position : Vector2, i_rotation : int) -> b
 	var tPos = BuildingPosition.convert_global_to_building_position(i_position)
 	t_building.init(BUILDINGS[i_type], tPos, i_rotation)
 	BuildingPosition.Place(t_building)
-	BUILDING_NODE.print_tree_pretty()
 	return true
 
 func has_building_in_position(pType : String, pPos : Vector2, pRot : int) -> bool:
@@ -262,6 +265,12 @@ var BUILDINGS = {
 				"Params" : {
 					"Outputs" : [0]
 				}
+			},
+			{
+				"Name" : "Delete_relese",
+				"Params" : {
+					"Ouputs" : [2]
+				}
 			}
 		],
 		"Outputs" : [
@@ -274,6 +283,11 @@ var BUILDINGS = {
 				"Position" : Vector2(0,0),
 				"Size" : Vector2(1,1),
 				"Velocity" : Vector2(10,0)
+			},
+			{
+				"Position" : Vector2(0,0),
+				"Size" : Vector2(1,1),
+				"Velocity" : Vector2(0,0)
 			}
 		]
 	},
@@ -355,6 +369,12 @@ var BUILDINGS = {
 					"Anim_Default" : 0,
 					"Anim_loop" : [1,2]
 				}
+			},
+			{
+				"Name" : "Delete_relese",
+				"Params" : {
+					"Ouputs" : [1]
+				}
 			}
 		],
 		"Outputs" : [
@@ -362,6 +382,11 @@ var BUILDINGS = {
 				"Position" : Vector2(0.4,0),
 				"Size" : Vector2(0.2,0.8),
 				"Velocity" : Vector2(1,0)
+			},
+			{
+				"Position" : Vector2(0,0),
+				"Size" : Vector2(1,1),
+				"Velocity" : Vector2(0,0)
 			}
 		]
 	},
@@ -382,9 +407,28 @@ var BUILDINGS = {
 				"Position" : Vector2(0,0),
 				"Rotation" : 0,
 				"Type" : 0
+			},
+			{
+				"Name" : "Delete_relese",
+				"Params" : {
+					"Ouputs" : [0]
+				}
+			},
+			{
+				"Name" : "Delete_relese",
+				"Params" : {
+					"Ouputs" : [0]
+				}
 			}
 		], 
-		"Storage" : 1000
+		"Storage" : 1000,
+		"Outputs" : [
+			{
+				"Position" : Vector2(0,0),
+				"Size" : Vector2(1,1),
+				"Velocity" : Vector2(0,0)
+			}
+		]
 	},
 	"barrel" : {
 		"Inheretance" : "EMPTY",
@@ -412,6 +456,12 @@ var BUILDINGS = {
 				"Params" : {
 					"Outputs" : [0]
 				}
+			},
+			{
+				"Name" : "Delete_relese",
+				"Params" : {
+					"Ouputs" : [1]
+				}
 			}
 		],
 		"Outputs" : [
@@ -419,6 +469,11 @@ var BUILDINGS = {
 				"Position" : Vector2(0,0),
 				"Size" : Vector2(1,1),
 				"Velocity" : Vector2(10,0)
+			},
+			{
+				"Position" : Vector2(0,0),
+				"Size" : Vector2(1,1),
+				"Velocity" : Vector2(0,0)
 			}
 		]
 	},
@@ -428,9 +483,65 @@ var BUILDINGS = {
 		"Stored" : {
 			"Human Blood" : 10
 		}
-	}
+	},
 	#TODO
-	# "rubble"
-	# "extractor"
-	# "assembler"
+	"rubble" : {
+		"Inheretance" : "EMPTY",
+		"Name" : "rubble",
+		"Occupied_cells" : [
+			Vector2(0,0)
+		],
+		"Textures" : [
+			{
+				"Path" : "res://Assets/newTiles.png",
+				"Offset" : Rect2(32,48,16,16)
+			}
+		]
+	},
+	"extractor": {
+		"Inheretance" : "EMPTY",
+		"Name" : "extractor",
+		"Occupied_cells" : [
+			Vector2(0,0)
+		],
+		"Textures" : [
+			{
+				"Path" : "res://Assets/newTiles.png",
+				"Offset" : Rect2(0, 64, 16, 16)
+			},
+			{
+				"Path" : "res://Assets/newTiles.png",
+				"Offset" : Rect2(16, 64, 16, 16)
+			},
+			{
+				"Path" : "res://Assets/newTiles.png",
+				"Offset" : Rect2(32, 64, 16, 16)
+			},
+			{
+				"Path" : "res://Assets/newTiles.png",
+				"Offset" : Rect2(48, 64, 16, 16)
+			}
+		],
+		"Functions" : [ 
+			{
+				"Name" : "Push_decide",
+				"Params" : {}
+			}
+		]
+	},
+	"assembler" : {
+		"Inheretance" : "EMPTY",
+		"Name" : "assembler",
+		"Occupied_cells" : [
+			Vector2(0,0),
+			Vector2(0,1),
+			Vector2(1,1)
+		],
+		"Textures" : [
+			{
+				"Path" : "res://Assets/newTiles.png",
+				"Offset" : Rect2(0, 80, 32, 32)
+			}
+		],
+	}
 }

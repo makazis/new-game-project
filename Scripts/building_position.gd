@@ -34,10 +34,8 @@ func convert_global_to_building_position(pPos : Vector2) -> Vector2:
 	return floor(pPos/16)
 
 func fRemove_cells(pBuilding):
-	print(buildings_position)
 	for iCell in pBuilding.CELL_POS:
 		buildings_position.erase(iCell)
-	print(buildings_position)
 
 #Returns position rotated 0 beeing nno rotation and 3 beeing 270
 func PossitionRotation(i_position : Vector2, i_rotation : int) -> Vector2:
@@ -54,3 +52,4 @@ func PossitionRotation(i_position : Vector2, i_rotation : int) -> Vector2:
 		_:
 			print("WARNING INCORECT ROTATION : " + str(i_rotation))
 			return Vector2(0,0)
+
