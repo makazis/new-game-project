@@ -2,6 +2,25 @@ extends Node
 
 var BUILDING_TEMPLATE = preload("res://Scenes/buildings.tscn")
 
+func _init() -> void:
+	#resolve all buildings inheretance
+	var unresolved = true
+	var inheretances_resolved = 0
+	while unresolved:
+		unresolved = false
+		for iBuilding in BUILDINGS:
+			if BUILDINGS[iBuilding]["Inheretance"] != "":
+				unresolved = true
+				inheretances_resolved += 1
+				var tBuilding = BUILDINGS[BUILDINGS[iBuilding]["Inheretance"]]
+				for key in tBuilding:
+					if key == "Inheretance":
+						BUILDINGS[iBuilding]["Inheretance"] = tBuilding["Inheretance"]
+					else:
+						if not BUILDINGS[iBuilding].has(key):
+							BUILDINGS[iBuilding][key] = tBuilding[key]
+	print(inheretances_resolved)
+
 func PlaceBuilding(i_type : String, i_position : Vector2, i_rotation : int, parent : Node2D) -> bool:
 	if not BuildingPosition.CheckPlacable(i_type, i_position, i_rotation): return false
 	var t_building = BUILDING_TEMPLATE.instantiate()
@@ -38,7 +57,7 @@ var BUILDINGS = {
 	# 	],
 	# 	"Intake" : [], #this is which cells accept input and wath type also the direction
 	# 	"Storage" : 0,
-    #     "Stored" : {}, #Already present liquids like blood barrel
+	#     "Stored" : {}, #Already present liquids like blood barrel
 	# 	"Functions" : [ #these are the functions that get run by class like [dunction name]_init and [function_name]_update and [function_name]_destroy
 	# 		{
 	# 			"Name" : "Animation",
@@ -87,7 +106,7 @@ var BUILDINGS = {
 	# 		}
 	# 	], 
 	# 	"Storage" : 50, #Size of container
-    #     "Stored" : {}, #Already present liquids like blood barrel
+	#     "Stored" : {}, #Already present liquids like blood barrel
 	# 	"Functions" : [ 
 	# 		{
 	# 			"Name" : "Explosion", #Explodes function wich dosn't yet exist but imagine, also functions can add custom velocity, well will be able to
@@ -122,8 +141,29 @@ var BUILDINGS = {
 	# 		}
 	# 	]
 	# }
-
+	"EMPTY" : {
+		"Inheretance" : "",
+		"Name" : "deletor",
+		"Occupied_cells" : [],
+		"Textures" : [],
+		"Intake" : [], 
+		"Storage" : 0,
+		"Stored" : {},
+		"Functions" : [],
+		"Outputs" : []
+	},
+	"deletor" : {
+		"Name" : "deletor",
+		"Inheretance" : "EMPTY",
+		"Textures" : [
+			{
+				"Path" : "res://Assets/Icons/Delete.png",
+				"Offset" : Rect2(0,0,16,16)
+			}
+		]
+	},
 	"conveyor": {
+		"Inheretance" : "EMPTY",
 		"Name" : "conveyor",
 		"Occupied_cells" : [
 			Vector2(0,0)
@@ -146,9 +186,6 @@ var BUILDINGS = {
 				"Offset" : Rect2(48, 0, 16, 16)
 			}
 		],
-		"Intake" : [], 
-		"Storage" : 0,
-        "Stored" : {},
 		"Functions" : [ 
 			{
 				"Name" : "Push",
@@ -161,10 +198,10 @@ var BUILDINGS = {
 					"Fps" : 1
 				}
 			}
-		],
-		"Outputs" : []
+		]
 	},
 	"collector" : {
+		"Inheretance" : "EMPTY",
 		"Name" : "collector",
 		"Occupied_cells" : [
 			Vector2(0,0)
@@ -187,9 +224,7 @@ var BUILDINGS = {
 				"Offset" : Rect2(48, 16, 16, 16)
 			}
 		],
-		"Intake" : [], 
 		"Storage" : 50,
-        "Stored" : {},
 		"Functions" : [ 
 			{
 				"Name" : "Collect",
@@ -233,6 +268,7 @@ var BUILDINGS = {
 		]
 	},
 	"emmiter" : {
+		"Inheretance" : "EMPTY",
 		"Name" : "emmiter",
 		"Occupied_cells" : [
 			Vector2(0,0)
@@ -247,9 +283,6 @@ var BUILDINGS = {
 				"Offset" : Rect2(16, 32, 16, 16)
 			}
 		],
-		"Intake" : [], 
-		"Storage" : 0,
-        "Stored" : {},
 		"Functions" : [
 			{
 				"Name" : "Animation_loop",
@@ -275,6 +308,7 @@ var BUILDINGS = {
 		]
 	},
 	"fuser" : {
+		"Inheretance" : "EMPTY",
 		"Name" : "fuser",
 		"Occupied_cells" : [
 			Vector2(0,0)
@@ -301,7 +335,6 @@ var BUILDINGS = {
 			}
 		], 
 		"Storage" : 50,
-        "Stored" : {},
 		"Functions" : [
 			{
 				"Name" : "Craft",
@@ -323,6 +356,7 @@ var BUILDINGS = {
 		]
 	},
 	"storer" : {
+		"Inheretance" : "EMPTY",
 		"Name" : "storer",
 		"Occupied_cells" : [
 			Vector2(0,0)
@@ -349,7 +383,6 @@ var BUILDINGS = {
 			}
 		], 
 		"Storage" : 50,
-        "Stored" : {},
 		"Functions" : [
 			{
 				"Name" : "Craft",
@@ -368,24 +401,51 @@ var BUILDINGS = {
 			}
 		]
 	},
-	"deletor" : {
-		"Name" : "deletor",
-		"Occupied_cells" : [],
-		"Textures" : [],
+	"barrel" : {
+		"Inheretance" : "EMPTY",
+		"Name" : "barrel",
+		"Occupied_cells" : [
+			Vector2(0,0)
+		],
+		"Textures" : [
+			{
+				"Path" : "res://Assets/newTiles.png",
+				"Offset" : Rect2(48,48,16,16)
+			}
+		],
 		"Intake" : [
 			{
-				"Path" : "res://Assets/Icons/Delete.png",
-				"Offset" : Rect2(0,0,16,16)
+				"Position" : Vector2(0,0),
+				"Rotation" : 0,
+				"Type" : 0
 			}
 		], 
-		"Storage" : 0,
-        "Stored" : {},
-		"Functions" : [],
-		"Outputs" : []
+		"Storage" : 1000,
+		"Functions" : [
+			{
+				"Name" : "Explosion",
+				"Params" : {
+					"Outputs" : [0]
+				}
+			}
+		],
+		"Outputs" : [
+			{
+				"Position" : Vector2(0,0),
+				"Size" : Vector2(1,1),
+				"Velocity" : Vector2(10,0)
+			}
+		]
+	},
+	"blood_barrel" :{
+		"Inheretance" : "barrel",
+		"Name" : "blood_barrel",
+		"Stored" : {
+			"Human Blood" : 10
+		}
 	}
 	#TODO
 	# "rubble"
-	# "barrel"
 	# "extractor"
 	# "assembler"
 }
