@@ -8,14 +8,15 @@ var hotbar_spot : int = -1
 func initilise_slot(i_type : String):
 	item_type = i_type
 	#loads texture XD
-	load_texture($TextureRect)
+	load_texture()
 
-func load_texture(i_node):
+func load_texture():
 	var t_texture = AtlasTexture.new()
 	t_texture.region = Buildings.BUILDINGS[item_type]["Textures"][0]["Offset"]
 	var t_compresed_texture = Image.load_from_file(Buildings.BUILDINGS[item_type]["Textures"][0]["Path"])
 	t_texture.atlas = t_compresed_texture
-	if i_node is TextureButton:
-		i_node.texture_normal = t_texture
-	else:
-		i_node.texture = t_texture
+	# $TextureRect.texture = t_texture
+
+func get_texture():
+	return Image.load_from_file(Buildings.BUILDINGS[item_type]["Textures"][0]["Path"])
+
