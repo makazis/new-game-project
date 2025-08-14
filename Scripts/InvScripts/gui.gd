@@ -93,7 +93,6 @@ func _process(delta):
 							if Dev.mode!="Sandbox":
 								Global.create_and_add_item(tBuilding.NAME, 1)
 							tBuilding.delete()
-							
 							demiload()
 					elif BuildingPosition.CheckPlacable(bSelector.item.type, global_mouse_pos, selected_rotation):
 						#print("Triggered")

@@ -21,7 +21,7 @@ func _init() -> void:
 					else:
 						if not BUILDINGS[iBuilding].has(key):
 							BUILDINGS[iBuilding][key] = tBuilding[key]
-	print(inheretances_resolved)
+	
 
 func PlaceBuilding(i_type : String, i_position : Vector2, i_rotation : int) -> bool:
 	if not BuildingPosition.CheckPlacable(i_type, i_position, i_rotation): return false
@@ -31,6 +31,7 @@ func PlaceBuilding(i_type : String, i_position : Vector2, i_rotation : int) -> b
 	var tPos = BuildingPosition.convert_global_to_building_position(i_position)
 	t_building.init(BUILDINGS[i_type], tPos, i_rotation)
 	BuildingPosition.Place(t_building)
+	BUILDING_NODE.print_tree_pretty()
 	return true
 
 func has_building_in_position(pType : String, pPos : Vector2, pRot : int) -> bool:

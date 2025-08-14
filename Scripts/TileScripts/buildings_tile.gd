@@ -14,6 +14,7 @@ var ROTATION : int #In 0123 where 0 is right
 #Set on place or later
 var CELL_POS : Array #Occupied cells after rotation and position
 
+
 func init(i_params, i_position, i_rotation) -> void:
 	NAME = i_params["Name"]
 	CELLS = i_params["Occupied_cells"]

@@ -8,7 +8,6 @@ func Place(in_building) -> void:
 		buildings_position[t_cell_position] = in_building.ID
 		in_building.CELL_POS.append(t_cell_position)
 	in_building.position = in_building.POSITION * 16
-	print(buildings_position)
 
 #Checks if building can be placed at the spot 
 func CheckPlacable(i_building_type : String, i_buildings_position : Vector2, i_building_rotation : int) -> bool:
@@ -36,7 +35,7 @@ func convert_global_to_building_position(pPos : Vector2) -> Vector2:
 
 func fRemove_cells(pBuilding):
 	print(buildings_position)
-	for iCell in pBuilding.CELLS:
+	for iCell in pBuilding.CELL_POS:
 		buildings_position.erase(iCell)
 	print(buildings_position)
 

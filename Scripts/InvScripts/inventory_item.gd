@@ -13,7 +13,3 @@ func get_texture():
 	t_texture.region = Buildings.BUILDINGS[type]["Textures"][0]["Offset"]
 	t_texture.atlas = load(Buildings.BUILDINGS[type]["Textures"][0]["Path"])
 	return t_texture
-
-func destroy():
-	print("DESTROY")
-	pass

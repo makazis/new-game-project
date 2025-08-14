@@ -254,7 +254,8 @@ func _process(delta: float) -> void:
 		pass
 	#iterates over buildings
 	for i_building in BuildingsId.buildings:
-		i_building.tick(delta)
+		if i_building:
+			i_building.tick(delta)
 	#Preview of building inv aswell the stuff inside
 	if inspect_open:
 		GUI.can_place_buildings=false
