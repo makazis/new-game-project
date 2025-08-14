@@ -1,6 +1,8 @@
 extends Node
 
 var BUILDING_TEMPLATE = preload("res://Scenes/buildings.tscn")
+#SET USING OTHER SCRIPTS
+var BUILDING_NODE = null
 
 func _init() -> void:
 	#resolve all buildings inheretance
@@ -21,21 +23,28 @@ func _init() -> void:
 							BUILDINGS[iBuilding][key] = tBuilding[key]
 	print(inheretances_resolved)
 
-func PlaceBuilding(i_type : String, i_position : Vector2, i_rotation : int, parent : Node2D) -> bool:
+func PlaceBuilding(i_type : String, i_position : Vector2, i_rotation : int) -> bool:
 	if not BuildingPosition.CheckPlacable(i_type, i_position, i_rotation): return false
 	var t_building = BUILDING_TEMPLATE.instantiate()
-	parent.add_child(t_building)
+	BUILDING_NODE.add_child(t_building)
 	BuildingsId.ReserveSpot(t_building)
-	t_building.init(BUILDINGS[i_type], i_position, i_rotation)
+	var tPos = BuildingPosition.convert_global_to_building_position(i_position)
+	t_building.init(BUILDINGS[i_type], tPos, i_rotation)
 	BuildingPosition.Place(t_building)
 	return true
 
-func GetBuildingFromPos(i_position):
-	if BuildingPosition.buildings_position.has(floor(i_position/16)):
-		var t_buildgins_id = BuildingPosition.buildings_position[floor(i_position/16)]
-		return BuildingsId.buildings[t_buildgins_id]
-	return null
+func has_building_in_position(pType : String, pPos : Vector2, pRot : int) -> bool:
+	return BuildingPosition.CheckPlacable(pType, pPos,  pRot)
 
+func get_building_from_position(i_position):
+	var tBuilding_id = BuildingPosition.get_building_id_from_position(i_position)
+	if tBuilding_id == -1:
+		return null
+	return BuildingsId.get_building_from_id(tBuilding_id)
+
+func fRemove_building(pBuilding):
+	BuildingPosition.fRemove_cells(pBuilding)
+	BuildingsId.ClearSpot(pBuilding.ID)
 #Defult rotation is right
 #List of all buildings
 var BUILDINGS = {
@@ -364,15 +373,7 @@ var BUILDINGS = {
 		"Textures" : [
 			{
 				"Path" : "res://Assets/newTiles.png",
-				"Offset" : Rect2(32, 32, 16, 16)
-			},
-			{
-				"Path" : "res://Assets/newTiles.png",
-				"Offset" : Rect2(48, 32, 16, 16)
-			},
-			{
-				"Path" : "res://Assets/newTiles.png",
-				"Offset" : Rect2(0, 48, 16, 16)
+				"Offset" : Rect2(16, 48, 16, 16)
 			}
 		],
 		"Intake" : [
@@ -382,24 +383,7 @@ var BUILDINGS = {
 				"Type" : 0
 			}
 		], 
-		"Storage" : 50,
-		"Functions" : [
-			{
-				"Name" : "Craft",
-				"Params" : {
-					"Craft_recepies" : 0,
-					"Speed" : 1,
-					"Outputs" : [0]
-				}
-			}
-		],
-		"Outputs" : [
-			{
-				"Position" : Vector2(0.4,0),
-				"Size" : Vector2(0.2,0.8),
-				"Velocity" : Vector2(1,0)
-			}
-		]
+		"Storage" : 1000
 	},
 	"barrel" : {
 		"Inheretance" : "EMPTY",

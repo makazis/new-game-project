@@ -6,3 +6,4 @@
 script = ExtResource("1_21q7u")
 
 [node name="Building" type="Sprite2D" parent="."]
+texture_filter = 1

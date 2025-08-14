@@ -232,7 +232,6 @@ var crafting_tree=[
 ]
 var camera_zoom=1
 var camera_pos=Vector2(0,0)
-var taken_squares={}
 var directional_vectors=[Vector2(-1,0),Vector2(0,-1),Vector2(1,0),Vector2(0,1)]
 var game=null 
 var transition_instance = null
@@ -276,20 +275,16 @@ func _process(delta: float) -> void:
 	else:
 		ctimer=0
 	click=ctimer==1
-func getBuildingFromPos(in_position):
-	if taken_squares.has(floor(in_position/16)):
-		return taken_squares[floor(in_position/16)]
-	return null
 
 var selecting_hotbar = false
 func create_and_add_item(i_building_type, count):
 	if has_item_in_inventory(i_building_type):
-		get_item_in_inventory(i_building_type).item_stack += count
+		get_item_in_inventory(i_building_type).stack += count
 	else:
 		var new_item = item_loaded.instantiate()
-		new_item.item_stack = count
+		new_item.stack = count
 		new_item.initilise_slot(i_building_type)
-		add_item_to_inv(new_item)
+		_add_item_to_inv(new_item)
 
 func setup_player_inventory():
 	#initilises inv slots
@@ -323,8 +318,9 @@ func setup_player_inventory():
 	for i in starting_items:
 		create_and_add_item(i[0],i[1])
 
-
-func add_item_to_inv(added_item):
+#DEPRICATED, and reused so i added _ so it breaks whenever it is called not in the new way
+#use create_and_add_item() instead :P
+func _add_item_to_inv(added_item):
 	for slot in Player_hotbar.size():
 		if Player_hotbar[slot]: continue
 		Player_hotbar[slot] = added_item
@@ -359,11 +355,11 @@ func remove_from_inventory(i_item_type,i_count):
 func get_item_in_inventory(i_item_type):
 	for slot in Player_hotbar:
 		if not slot: continue
-		if slot.item_type == i_item_type:
+		if slot.type == i_item_type:
 			return slot
 	for slot in Player_Inventory:
 		if not slot: continue
-		if slot.item_type == i_item_type:
+		if slot.type == i_item_type:
 			return slot
 	return null
 

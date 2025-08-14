@@ -213,7 +213,7 @@ var building_template = Buildings.BUILDING_TEMPLATE
 
 func _ready() -> void:
 	Global.game = self
-
+	Buildings.BUILDING_NODE = $Buildings
 	var new_particle=liquid.instantiate()
 	add_child(new_particle)
 	new_particle.assign(8)
@@ -244,37 +244,36 @@ func check_if_you_can_place_a_building_there(building_map,new_rotation,new_posit
 var last_placing_building_position=Vector2(0,0)
 var last_placing_building_rotation=0
 var last_item_held=null
-var can_i_place_a_building_there=false
 var last_buildings_length=0
 
 
 func _process(delta: float) -> void:
 	Global.speedrun_timer+=delta
 	#If cursor has selected some building
-	if GUI.Tbutton.visible:
+	if GUI.bSelector.visible:
 		pass
 	#iterates over buildings
 	for i_building in BuildingsId.buildings:
-		i_building.per_frame(delta)
+		i_building.tick(delta)
 	#Preview of building inv aswell the stuff inside
 	if inspect_open:
 		GUI.can_place_buildings=false
 		if mouse_on_inspect_menu and Global.hands_free:
-			$Camera2D/Inspector/Panel/Label.text = inspect_gotten_building.name
+			$Camera2D/Inspector/Panel/Label.text = inspect_gotten_building.NAME
 			var finalText = ""
-			for iter_storage in inspect_gotten_building.storage.keys():
-				finalText += iter_storage + " (" + str(inspect_gotten_building.storage[iter_storage]) + ")\n"
+			for iter_storage in inspect_gotten_building.STORAGE:
+				finalText += iter_storage + " (" + str(inspect_gotten_building.STORAGE[iter_storage]) + ")\n"
 			$Camera2D/Inspector/Panel/ScrollContainer/VBoxContainer/Label.text = finalText
 			$Camera2D/Inspector.global_position = inspector_global_pos
-			if Order.offered_requests[0].check_if_can_be_completed(inspect_gotten_building.storage):
+			if Order.offered_requests[0].check_if_can_be_completed(inspect_gotten_building.STORAGE):
 				$Camera2D/Inspector/Panel/HBoxContainer/Quest1.visible=true
 			else:
 				$Camera2D/Inspector/Panel/HBoxContainer/Quest1.visible=false
-			if Order.offered_requests[1].check_if_can_be_completed(inspect_gotten_building.storage):
+			if Order.offered_requests[1].check_if_can_be_completed(inspect_gotten_building.STORAGE):
 				$Camera2D/Inspector/Panel/HBoxContainer/Quest2.visible=true
 			else:
 				$Camera2D/Inspector/Panel/HBoxContainer/Quest2.visible=false
-			if Order.offered_requests[2].check_if_can_be_completed(inspect_gotten_building.storage):
+			if Order.offered_requests[2].check_if_can_be_completed(inspect_gotten_building.STORAGE):
 				$Camera2D/Inspector/Panel/HBoxContainer/Quest3.visible=true
 			else:
 				$Camera2D/Inspector/Panel/HBoxContainer/Quest3.visible=false
@@ -287,7 +286,7 @@ func _process(delta: float) -> void:
 		if get_viewport().get_mouse_position()[1]<=296:
 			if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 				if Global.hands_free and not Global.selecting_hotbar:
-					var gotten_building = Buildings.GetBuildingFromPos(get_global_mouse_position())
+					var gotten_building = Buildings.get_building_from_position(get_global_mouse_position())
 					if gotten_building:
 						mouse_on_inspect_menu=true
 						$Camera2D/Inspector.visible = true
@@ -295,13 +294,13 @@ func _process(delta: float) -> void:
 						inspector_global_pos = $Camera2D/Inspector.global_position
 						$Camera2D/Inspector/Panel/Label.text = gotten_building.NAME
 						var finalText = ""
-						for iter_storage in gotten_building.storage.keys():
-							finalText += iter_storage + " (" + str(gotten_building.storage[iter_storage]) + ")\n"
+						for iter_storage in gotten_building.STORAGE:
+							finalText += iter_storage + " (" + str(gotten_building.STORAGE[iter_storage]) + ")\n"
 						$Camera2D/Inspector/Panel/ScrollContainer/VBoxContainer/Label.text = finalText
 						inspect_gotten_building = gotten_building
-						inspect_last_storage_keys = gotten_building.storage
+						inspect_last_storage_keys = gotten_building.STORAGE
 						inspect_open = true
-						if gotten_building.classification_id==6:
+						if gotten_building.NAME=="storer":
 							$Camera2D/Inspector/Panel/HBoxContainer.visible=true
 						else:
 							$Camera2D/Inspector/Panel/HBoxContainer.visible=false

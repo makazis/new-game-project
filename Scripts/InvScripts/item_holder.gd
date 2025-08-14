@@ -8,7 +8,7 @@ func update_item(new_item):
 		clear_item()
 		return
 	texture_normal = item.get_texture()
-	label.text=str(item.item_stack)
+	label.text=str(item.stack)
 
 func clear_item():
 	item=null
